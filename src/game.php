@@ -16,9 +16,19 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once('modules/GoF/src/exceptions.php');
-include_once('modules/GoF/src/decks.php');
-include_once('modules/GoF/src/hand.php');
+if (!defined('__DIR__')) {
+  class __FILE_CLASS__ {
+    function  __toString() {
+      $X = debug_backtrace();
+      return dirname($X[1]['file']);
+    }
+  }
+  define('__DIR__', new __FILE_CLASS__);
+} 
+
+require_once(__DIR__.'/exceptions.php');
+require_once(__DIR__.'/decks.php');
+require_once(__DIR__.'/hand.php');
 
 class   GoF
 {
