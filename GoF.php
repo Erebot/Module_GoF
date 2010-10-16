@@ -16,8 +16,6 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once('src/styling.php');
-
 class   ErebotModule_GoF
 extends ErebotModuleBase
 {
