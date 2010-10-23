@@ -16,8 +16,17 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+if (!defined('__DIR__')) {
+  class __FILE_CLASS__ {
+    function  __toString() {
+      $X = debug_backtrace();
+      return dirname($X[1]['file']);
+    }
+  }
+  define('__DIR__', new __FILE_CLASS__);
+} 
+
 /*
-include_once(dirname(__FILE__).'/utils.php');
 
 class   GoFGameFlowTest
 extends PHPUnit_Framework_TestCase
@@ -84,5 +93,5 @@ extends PHPUnit_Framework_TestCase
         $this->assertEquals(8, $player->getCardsCount());
     }
 }
+
 */
-?>

@@ -18,70 +18,69 @@
 
 class   GoFHand
 {
-    protected $player;
-    protected $cards;
-    protected $deck;
+    protected $_player;
+    protected $_cards;
 
-    public function __construct(&$player, &$deck)
+    public function __construct(&$player)
     {
-        $this->player   =&  $player;
-        $this->cards    =   array();
-        $this->deck     =&  $deck;
-
-        // The deck contains 64 cards,
-        // each player is dealt 16 cards.
-        for ($i = 0; $i < 16; $i++)
-            $this->draw();
+        $this->_player  =&  $player;
+        $this->_cards   =   array();
+        $this->_deck    =&  $deck;
     }
 
     public function & getPlayer()
     {
-        return $this->player;
+        return $this->_player;
     }
 
-    public function getCards()
+    public function & getCards()
     {
-        return $this->cards;
+        return $this->_cards;
     }
 
     public function getCardsCount()
     {
-        return count($this->cards);
+        return count($this->_cards);
     }
 
-    public function draw()
+#    public function findCard($card)
+#    {
+#        if (!is_string())
+#    }
+
+    public function addCard(GoFCard &$card)
     {
-        $card = $this->deck->draw();
-        $this->cards[] = $card;
+        if (in_array($card, $this->_cards, TRUE))
+            throw new EGoFInvalidCard();
+        $this->_cards[] = $card;
+    }
+
+    public function & removeCard($card)
+    {
+        $key = array_search($card, $this->_cards, TRUE);
+        if ($key === FALSE)
+            throw new EGoFNoSuchCard();
+        unset($this->_cards[$key]);
         return $card;
     }
 
-    public function discard($combo)
+    public function discard(GoFCombo &$combo)
     {
-        $combo  = $this->deck->extractCombination($combo);
-        $key    = array_search($card['card'], $this->cards);
-        if ($key === FALSE)
-            throw new Exception();
-
-        unset($this->cards[$key]);
-        $this->deck->discard($combo);
+        if (!$this->hasCombination($combo))
+            throw new EGoFNoSuchCard();
+        foreach ($combo as &$card)
+            $this->removeCard($card);
     }
 
-    public function hasCard($card, $count)
+    public function hasCombination(GoFCombo &$combo)
     {
-        if (is_array($card)) {
-            if (!isset($card['card']))
-                throw new Exception();
-            $card = $card['card'];
-        }
-
-        $found  = array_keys($this->cards, $card);
-        return (count($found) >= $count);
+#        foreach ($combo as &$card)
+            
     }
 
     public function getScore()
     {
-        $count      = $this->getCardsCount();
+        $count      = count($this->_cards);
         $factors    = array(
                         16  => 5,
                         14  => 4,

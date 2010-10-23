@@ -39,10 +39,13 @@ class   GoF
     protected $creator;
     protected $leader;
 
-    public function __construct($creator)
+    const DIR_COUNTERCLOCKWISE      = FALSE;
+    const DIR_CLOCKWISE             = TRUE;
+
+    public function __construct($creator, GoFDeck &$deck)
     {
         $this->creator      =&  $creator;
-        $this->deck         =   new GoFDeckReal();
+        $this->deck         =   $deck;
         $this->players      =   array();
         $this->startTime    =   NULL;
         $this->leader       =   NULL;

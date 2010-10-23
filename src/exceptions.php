@@ -57,7 +57,8 @@ extends EGoF        {}
 // leading one. The $allowed parameter may contain
 // an array of valid combos which could be played.
 class   EGoFInferiorCombo
-extends EGoF        {
+extends EGoF
+{
     protected $allowed;
 
     public function __construct($message = NULL, $code = 0, Exception $previous = NULL, $allowed = NULL)
@@ -72,6 +73,12 @@ extends EGoF        {
     }
 }
 
+class   EGoFInvalidCard
+extends EGoF
+{
+}
 
-
-?>
+class   EGoFNoSuchCard
+extends EGoF
+{
+}
