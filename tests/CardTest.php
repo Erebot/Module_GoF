@@ -101,5 +101,34 @@ extends PHPUnit_Framework_TestCase
         $this->assertEquals($value, $card->getValue());
         $this->assertEquals($label, (string) $card);
     }
+
+    public function cardsForComparison()
+    {
+        return array(
+            array('g1', 'g1', NULL),
+            array('y1', 'g1', TRUE),
+            array('r1', 'y1', TRUE),
+            array('m1', 'r1', TRUE),
+            array('g2', 'm1', TRUE),
+            array('gp', 'r10', TRUE),
+            array('yp', 'gp', TRUE),
+            array('rd', 'yp', TRUE),
+        );
+    }
+
+    /**
+     * @dataProvider cardsForComparison
+     */
+    public function testCardComparison($c1, $c2, $result)
+    {
+        $card1 = new GoFCard($c1);
+        $card2 = new GoFCard($c2);
+        if ($result === NULL)
+            $this->assertEquals(0, GoFCard::compareCards($card1, $card2));
+        else if ($result === TRUE)
+            $this->assertGreaterThan(0, GoFCard::compareCards($card1, $card2));
+        else
+            $this->assertLessThan(0, GoFCard::compareCards($card1, $card2));
+    }
 }
 

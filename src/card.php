@@ -101,7 +101,7 @@ class GoFCard
         return $this->_label;
     }
 
-    static public function compareCard(GoFCard &$card1, GofCard &$card2)
+    static public function compareCards(GoFCard &$card1, GofCard &$card2)
     {
         if ($card1->_value != $card2->_value)
             return $card1->_value - $card2->_value;
