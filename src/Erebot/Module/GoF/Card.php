@@ -1,6 +1,6 @@
 <?php
 
-class GoFCard
+class Erebot_Module_GoF_Card
 {
     protected $_value;
     protected $_color;
@@ -32,7 +32,7 @@ class GoFCard
     protected function _parseCard($card)
     {
         if (!is_string($card))
-            throw new EGoFInvalidCard($card);
+            throw new Erebot_Module_GoF_InvalidCardException($card);
 
         $colors = array(
             'g' => self::COLOR_GREEN,
@@ -52,16 +52,16 @@ class GoFCard
         }
 
         if (!in_array($card[0], array('g', 'y', 'r')))
-            throw new EGoFInvalidCard($card);
+            throw new Erebot_Module_GoF_InvalidCardException($card);
 
         if (!ctype_digit(substr($card, 1)))
-            throw new EGoFInvalidCard($card);
+            throw new Erebot_Module_GoF_InvalidCardException($card);
 
         $value = (int) substr($card, 1);
         if ($value >= 1 && $value <= 10)
             return array($value, $colors[$card[0]]);
 
-        throw new EGoFInvalidCard($card);
+        throw new Erebot_Module_GoF_InvalidCardException($card);
     }
 
     public function getLabel()
@@ -101,7 +101,10 @@ class GoFCard
         return $this->_label;
     }
 
-    static public function compareCards(GoFCard &$card1, GofCard &$card2)
+    static public function compareCards(
+        Erebot_Module_GoF_Card &$card1,
+        Erebot_Module_GoF_Card &$card2
+    )
     {
         if ($card1->_value != $card2->_value)
             return $card1->_value - $card2->_value;

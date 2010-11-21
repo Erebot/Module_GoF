@@ -16,21 +16,7 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-if (!defined('__DIR__')) {
-  class __FILE_CLASS__ {
-    function  __toString() {
-      $X = debug_backtrace();
-      return dirname($X[1]['file']);
-    }
-  }
-  define('__DIR__', new __FILE_CLASS__);
-} 
-
-require_once(__DIR__.'/exceptions.php');
-require_once(__DIR__.'/decks.php');
-require_once(__DIR__.'/hand.php');
-
-class   GoF
+class Erebot_Module_GoF_Game
 {
     protected $deck;
     protected $order;
@@ -42,7 +28,7 @@ class   GoF
     const DIR_COUNTERCLOCKWISE      = FALSE;
     const DIR_CLOCKWISE             = TRUE;
 
-    public function __construct($creator, GoFDeck &$deck)
+    public function __construct($creator, Erebot_Module_GoF_Deck_Abstract &$deck)
     {
         $this->creator      =&  $creator;
         $this->deck         =   $deck;
@@ -60,9 +46,9 @@ class   GoF
     {
         $nbPlayers = count($this->players);
         if ($nbPlayers >= 4)
-            throw new EGoFEnoughPlayersAlready();
+            throw new Erebot_Module_GoF_EnoughPlayersException();
 
-        $this->players[]    = new GoFHand($token, $this->deck);
+        $this->players[]    = new Erebot_Module_GoF_Hand($token, $this->deck);
         $player             = end($this->players);
         if (count($this->players) == 3) {
             $this->startTime = time();

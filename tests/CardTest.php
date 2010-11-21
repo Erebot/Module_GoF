@@ -16,20 +16,7 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-if (!defined('__DIR__')) {
-  class __FILE_CLASS__ {
-    function  __toString() {
-      $X = debug_backtrace();
-      return dirname($X[1]['file']);
-    }
-  }
-  define('__DIR__', new __FILE_CLASS__);
-} 
-
-include_once(__DIR__.'/../src/exceptions.php');
-include_once(__DIR__.'/../src/card.php');
-
-class   GoFCardTest
+class   Erebot_Module_GoF_CardTest
 extends PHPUnit_Framework_TestCase
 {
     public function testRejectInvalidCards()
@@ -62,10 +49,10 @@ extends PHPUnit_Framework_TestCase
         );
         foreach ($cards as $card) {
             try {
-                new GoFCard($card);
+                new Erebot_Module_GoF_Card($card);
                 $this->fail("Expected an EGoFInvalidCard exception.");
             }
-            catch (EGoFInvalidCard $e) {
+            catch (Erebot_Module_GoF_InvalidCardException $e) {
                 // Okay.
             }
         }
@@ -75,19 +62,59 @@ extends PHPUnit_Framework_TestCase
     {
         return array(
             // Red serie
-            array('r1', GoFCard::COLOR_RED, GoFCard::VALUE_1),
-            array('r10', GoFCard::COLOR_RED, GoFCard::VALUE_10),
-            array('rd', GoFCard::COLOR_RED, GoFCard::VALUE_DRAGON),
+            array(
+                'r1',
+                Erebot_Module_GoF_Card::COLOR_RED,
+                Erebot_Module_GoF_Card::VALUE_1
+            ),
+            array(
+                'r10',
+                Erebot_Module_GoF_Card::COLOR_RED,
+                Erebot_Module_GoF_Card::VALUE_10
+            ),
+            array(
+                'rd',
+                Erebot_Module_GoF_Card::COLOR_RED,
+                Erebot_Module_GoF_Card::VALUE_DRAGON
+            ),
             // Green serie
-            array('g1', GoFCard::COLOR_GREEN, GoFCard::VALUE_1),
-            array('g10', GoFCard::COLOR_GREEN, GoFCard::VALUE_10),
-            array('gp', GoFCard::COLOR_GREEN, GoFCard::VALUE_PHOENIX),
+            array(
+                'g1',
+                Erebot_Module_GoF_Card::COLOR_GREEN,
+                Erebot_Module_GoF_Card::VALUE_1
+            ),
+            array(
+                'g10',
+                Erebot_Module_GoF_Card::COLOR_GREEN,
+                Erebot_Module_GoF_Card::VALUE_10
+            ),
+            array(
+                'gp',
+                Erebot_Module_GoF_Card::COLOR_GREEN,
+                Erebot_Module_GoF_Card::VALUE_PHOENIX
+            ),
             // Yellow serie
-            array('y1', GoFCard::COLOR_YELLOW, GoFCard::VALUE_1),
-            array('y10', GoFCard::COLOR_YELLOW, GoFCard::VALUE_10),
-            array('yp', GoFCard::COLOR_YELLOW, GoFCard::VALUE_PHOENIX),
+            array(
+                'y1',
+                Erebot_Module_GoF_Card::COLOR_YELLOW,
+                Erebot_Module_GoF_Card::VALUE_1
+            ),
+            array(
+                'y10',
+                Erebot_Module_GoF_Card::COLOR_YELLOW,
+                Erebot_Module_GoF_Card::VALUE_10
+            ),
+            array(
+                'yp',
+                Erebot_Module_GoF_Card::COLOR_YELLOW,
+                Erebot_Module_GoF_Card::VALUE_PHOENIX
+            ),
             // Multicolor serie
-            array('m1', GoFCard::COLOR_MULTI, GoFCard::VALUE_1),
+            array(
+                'm1',
+                Erebot_Module_GoF_Card::COLOR_MULTI,
+                Erebot_Module_GoF_Card::VALUE_1
+            ),
         );
     }
 
@@ -96,7 +123,7 @@ extends PHPUnit_Framework_TestCase
      */
     public function testAcceptValidCards($label, $color, $value)
     {
-        $card = new GoFCard($label);
+        $card = new Erebot_Module_GoF_Card($label);
         $this->assertEquals($color, $card->getColor());
         $this->assertEquals($value, $card->getValue());
         $this->assertEquals($label, (string) $card);
@@ -121,14 +148,14 @@ extends PHPUnit_Framework_TestCase
      */
     public function testCardComparison($c1, $c2, $result)
     {
-        $card1 = new GoFCard($c1);
-        $card2 = new GoFCard($c2);
+        $card1 = new Erebot_Module_GoF_Card($c1);
+        $card2 = new Erebot_Module_GoF_Card($c2);
         if ($result === NULL)
-            $this->assertEquals(0, GoFCard::compareCards($card1, $card2));
+            $this->assertEquals(0, Erebot_Module_GoF_Card::compareCards($card1, $card2));
         else if ($result === TRUE)
-            $this->assertGreaterThan(0, GoFCard::compareCards($card1, $card2));
+            $this->assertGreaterThan(0, Erebot_Module_GoF_Card::compareCards($card1, $card2));
         else
-            $this->assertLessThan(0, GoFCard::compareCards($card1, $card2));
+            $this->assertLessThan(0, Erebot_Module_GoF_Card::compareCards($card1, $card2));
     }
 }
 

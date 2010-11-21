@@ -16,7 +16,7 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class   GoFHand
+class Erebot_Module_GoF_Hand
 {
     protected $_player;
     protected $_cards;
@@ -48,10 +48,10 @@ class   GoFHand
 #        if (!is_string())
 #    }
 
-    public function addCard(GoFCard &$card)
+    public function addCard(Erebot_Module_GoF_Card &$card)
     {
         if (in_array($card, $this->_cards, TRUE))
-            throw new EGoFInvalidCard();
+            throw new Erebot_Module_GoF_InvalidCardException();
         $this->_cards[] = $card;
     }
 
@@ -59,20 +59,20 @@ class   GoFHand
     {
         $key = array_search($card, $this->_cards, TRUE);
         if ($key === FALSE)
-            throw new EGoFNoSuchCard();
+            throw new Erebot_Module_GoF_NoSuchCardException();
         unset($this->_cards[$key]);
         return $card;
     }
 
-    public function discard(GoFCombo &$combo)
+    public function discard(Erebot_Module_GoF_Combo &$combo)
     {
         if (!$this->hasCombination($combo))
-            throw new EGoFNoSuchCard();
+            throw new Erebot_Module_GoF_NoSuchCardException();
         foreach ($combo as &$card)
             $this->removeCard($card);
     }
 
-    public function hasCombination(GoFCombo &$combo)
+    public function hasCombination(Erebot_Module_GoF_Combo &$combo)
     {
 #        foreach ($combo as &$card)
             

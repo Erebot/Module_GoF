@@ -16,22 +16,8 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-abstract class  GoFDeck
-{
-    final public function isValidColor($color)
-    {
-        return  (strlen($color) == 1 &&
-                strpos('gyr', $color) !== FALSE);
-    }
-
-    abstract public function draw();
-    abstract public function shuffle();
-    abstract public function getLastDiscardedCombo();
-    abstract public function discard($card);
-}
-
-class   GoFDeckReal
-extends GoFDeck
+class   Erebot_Module_GoF_Deck_Official
+extends Erebot_Module_GoF_Deck_Abstract
 {
     protected $cards;
     protected $discarded;
@@ -45,7 +31,7 @@ extends GoFDeck
     public function draw()
     {
         if (!count($this->cards))
-            throw new EGoFInternalError();
+            throw new Erebot_Module_GoF_InternalErrorException();
         return array_shift($this->cards);
     }
 
@@ -83,4 +69,3 @@ extends GoFDeck
     }
 }
 
-?>
