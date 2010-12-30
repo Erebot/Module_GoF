@@ -19,8 +19,8 @@
 class   Erebot_Module_GoF_Deck_Official
 extends Erebot_Module_GoF_Deck_Abstract
 {
-    protected $cards;
-    protected $discarded;
+    protected $_cards;
+    protected $_discarded;
 
     public function __construct()
     {
@@ -30,42 +30,42 @@ extends Erebot_Module_GoF_Deck_Abstract
 
     public function draw()
     {
-        if (!count($this->cards))
+        if (!count($this->_cards))
             throw new Erebot_Module_GoF_InternalErrorException();
-        return array_shift($this->cards);
+        return array_shift($this->_cards);
     }
 
     public function discard($combo)
     {
-        $this->discarded = $combo;
+        $this->_discarded = $combo;
     }
 
     public function shuffle()
     {
-        $this->discarded    = NULL;
-        $this->cards        = array();
+        $this->_discarded   = NULL;
+        $this->_cards       = array();
         $colors             = str_split('gyr');
 
         // Add colored cards.
         foreach ($colors as $color) {
             for ($i = 0; $i < 2; $i++) {
                 for ($j = 1; $j <= 10; $j++)
-                    $this->cards[] = $color.$j;
+                    $this->_cards[] = $color.$j;
             }
         }
 
         // Add special cards.
-        $this->cards[] = 'm1';  // Multi-colored 1
-        $this->cards[] = 'gp';  // Green phoenix
-        $this->cards[] = 'yp';  // Yellow phoenix
-        $this->cards[] = 'rd';  // Red dragon
+        $this->_cards[] = 'm1'; // Multi-colored 1
+        $this->_cards[] = 'gp'; // Green phoenix
+        $this->_cards[] = 'yp'; // Yellow phoenix
+        $this->_cards[] = 'rd'; // Red dragon
 
-        shuffle($this->cards);
+        shuffle($this->_cards);
     }
 
     public function getLastDiscardedCombo()
     {
-        return $this->discarded;
+        return $this->_discarded;
     }
 }
 

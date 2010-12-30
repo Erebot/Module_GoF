@@ -18,23 +18,26 @@
 
 class Erebot_Module_GoF_Game
 {
-    protected $deck;
-    protected $order;
-    protected $players;
-    protected $startTime;
-    protected $creator;
-    protected $leader;
+    protected $_deck;
+    protected $_order;
+    protected $_players;
+    protected $_startTime;
+    protected $_creator;
+    protected $_leader;
 
     const DIR_COUNTERCLOCKWISE      = FALSE;
     const DIR_CLOCKWISE             = TRUE;
 
-    public function __construct($creator, Erebot_Module_GoF_Deck_Abstract &$deck)
+    public function __construct(
+                                            $creator,
+        Erebot_Module_GoF_Deck_Abstract    &$deck
+    )
     {
-        $this->creator      =&  $creator;
-        $this->deck         =   $deck;
-        $this->players      =   array();
-        $this->startTime    =   NULL;
-        $this->leader       =   NULL;
+        $this->_creator     =&  $creator;
+        $this->_deck        =   $deck;
+        $this->_players     =   array();
+        $this->_startTime   =   NULL;
+        $this->_leader      =   NULL;
     }
 
     public function __destruct()
@@ -44,15 +47,15 @@ class Erebot_Module_GoF_Game
 
     public function & join($token)
     {
-        $nbPlayers = count($this->players);
+        $nbPlayers = count($this->_players);
         if ($nbPlayers >= 4)
             throw new Erebot_Module_GoF_EnoughPlayersException();
 
-        $this->players[]    = new Erebot_Module_GoF_Hand($token, $this->deck);
-        $player             = end($this->players);
-        if (count($this->players) == 3) {
-            $this->startTime = time();
-            shuffle($this->players);
+        $this->_players[]   = new Erebot_Module_GoF_Hand($token, $this->_deck);
+        $player             = end($this->_players);
+        if (count($this->_players) == 3) {
+            $this->_startTime = time();
+            shuffle($this->_players);
         }
         return $player;
     }
@@ -74,35 +77,35 @@ class Erebot_Module_GoF_Game
 
     public function getCurrentPlayer()
     {
-        return reset($this->players);
+        return reset($this->_players);
     }
 
     public function & getLeadingPlayer()
     {
-        return $this->leader;
+        return $this->_leader;
     }
 
     public function & getCreator()
     {
-        return $this->creator;
+        return $this->_creator;
     }
 
     public function getElapsedTime()
     {
-        if ($this->startTime === NULL)
+        if ($this->_startTime === NULL)
             return NULL;
 
-        return time() - $this->startTime;
+        return time() - $this->_startTime;
     }
 
     public function getLastPlayedCombo()
     {
-        return $this->deck->getLastDiscardedCombo();
+        return $this->_deck->getLastDiscardedCombo();
     }
 
     public function & getPlayers()
     {
-        return $this->players;
+        return $this->_players;
     }
 }
 

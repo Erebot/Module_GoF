@@ -22,17 +22,17 @@
 class   Erebot_Module_GoF_InferiorComboException
 extends Erebot_Module_GoF_Exception
 {
-    protected $allowed;
+    protected $_allowed;
 
     public function __construct($message = NULL, $code = 0, $allowed = NULL)
     {
         parent::__construct($message, $code, $previous);
-        $this->allowed = $allowed;
+        $this->allowed = $_allowed;
     }
 
     public function getAllowedCombo()
     {
-        return $this->allowed;
+        return $this->_allowed;
     }
 }
 

@@ -102,13 +102,13 @@ class Erebot_Module_GoF_Card
     }
 
     static public function compareCards(
-        Erebot_Module_GoF_Card &$card1,
-        Erebot_Module_GoF_Card &$card2
+        Erebot_Module_GoF_Card &$cardA,
+        Erebot_Module_GoF_Card &$cardB
     )
     {
-        if ($card1->_value != $card2->_value)
-            return $card1->_value - $card2->_value;
-        return $card1->_color - $card2->_color;
+        if ($cardA->_value != $cardB->_value)
+            return $cardA->_value - $cardB->_value;
+        return $cardA->_color - $cardB->_color;
     }
 }
 

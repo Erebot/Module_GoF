@@ -95,4 +95,3 @@ class Erebot_Module_GoF_Hand
     }
 }
 
-?>
