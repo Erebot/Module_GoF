@@ -70,12 +70,12 @@ extends Erebot_Module_Base
                     'Could not register Gang of Four creation trigger'));
             }
 
-            $filter     = new Erebot_TextFilter($this->_mainCfg);
-            $filter->addPattern(Erebot_TextFilter::TYPE_STATIC, $trigger_create, TRUE);
             $this->_creator['handler']  =   new Erebot_EventHandler(
-                                                array($this, 'handleCreate'),
-                                                'Erebot_Event_ChanText',
-                                                NULL, $filter);
+                array($this, 'handleCreate'),
+                'Erebot_Event_ChanText',
+                NULL,
+                new Erebot_TextFilter_Static($trigger_create, TRUE)
+            );
             $this->_connection->addEventHandler($this->_creator['handler']);
         }
     }
@@ -327,75 +327,75 @@ extends Erebot_Module_Base
         $this->_chans[$chan]['triggers']        =&  $triggers;
         $infos                                  =&  $this->_chans[$chan];
 
-        $filter     = new Erebot_TextFilter($this->_mainCfg);
-        $filter->addPattern(Erebot_TextFilter::TYPE_WILDCARD,    $infos['triggers']['choose'].' *', NULL);
         $infos['handlers']['choose']        =   new Erebot_EventHandler(
-                                                array($this, 'handleChoose'),
-                                                'Erebot_Event_ChanText',
-                                                NULL, $filter);
+            array($this, 'handleChoose'),
+            'Erebot_Event_ChanText',
+            NULL,
+            new Erebot_TextFilter_Wildcard($infos['triggers']['choose'].' *', NULL)
+        );
 
-        $filter     = new Erebot_TextFilter($this->_mainCfg);
-        $filter->addPattern(Erebot_TextFilter::TYPE_STATIC,      $infos['triggers']['join'], NULL);
         $infos['handlers']['join']          =   new Erebot_EventHandler(
-                                                    array($this, 'handleJoin'),
-                                                    'Erebot_Event_ChanText',
-                                                    NULL, $filter);
+            array($this, 'handleJoin'),
+            'Erebot_Event_ChanText',
+            NULL,
+            new Erebot_TextFilter_Static($infos['triggers']['join'], NULL)
+        );
 
-        $filter     = new Erebot_TextFilter($this->_mainCfg);
-        $filter->addPattern(Erebot_TextFilter::TYPE_STATIC,      $infos['triggers']['pass'], NULL);
         $infos['handlers']['pass']          =   new Erebot_EventHandler(
-                                                    array($this, 'handlePass'),
-                                                    'Erebot_Event_ChanText',
-                                                    NULL, $filter);
+            array($this, 'handlePass'),
+            'Erebot_Event_ChanText',
+            NULL,
+            new Erebot_TextFilter_Static($infos['triggers']['pass'], NULL)
+        );
 
-        $filter     = new Erebot_TextFilter($this->_mainCfg);
-        $filter->addPattern(Erebot_TextFilter::TYPE_WILDCARD,    $infos['triggers']['play'].' *', NULL);
         $infos['handlers']['play']          =   new Erebot_EventHandler(
-                                                    array($this, 'handlePlay'),
-                                                    'Erebot_Event_ChanText',
-                                                    NULL, $filter);
+            array($this, 'handlePlay'),
+            'Erebot_Event_ChanText',
+            NULL,
+            new Erebot_TextFilter_Wildcard($infos['triggers']['play'].' *', NULL)
+        );
 
-        $filter     = new Erebot_TextFilter($this->_mainCfg);
-        $filter->addPattern(Erebot_TextFilter::TYPE_STATIC,      $infos['triggers']['show_cards'], NULL);
         $infos['handlers']['show_cards']    =   new Erebot_EventHandler(
-                                                    array($this, 'handleShowCardsCount'),
-                                                    'Erebot_Event_ChanText',
-                                                    NULL, $filter);
+            array($this, 'handleShowCardsCount'),
+            'Erebot_Event_ChanText',
+            NULL,
+            new Erebot_TextFilter_Static($infos['triggers']['show_cards'], NULL)
+        );
 
-        $filter     = new Erebot_TextFilter($this->_mainCfg);
-        $filter->addPattern(Erebot_TextFilter::TYPE_STATIC,      $infos['triggers']['show_discard'], NULL);
         $infos['handlers']['show_discard']  =   new Erebot_EventHandler(
-                                                    array($this, 'handleShowDiscard'),
-                                                    'Erebot_Event_ChanText',
-                                                    NULL, $filter);
+            array($this, 'handleShowDiscard'),
+            'Erebot_Event_ChanText',
+            NULL,
+            new Erebot_TextFilter_Static($infos['triggers']['show_discard'], NULL)
+        );
 
-        $filter     = new Erebot_TextFilter($this->_mainCfg);
-        $filter->addPattern(Erebot_TextFilter::TYPE_STATIC,      $infos['triggers']['show_order'], NULL);
         $infos['handlers']['show_order']    =   new Erebot_EventHandler(
-                                                    array($this, 'handleShowOrder'),
-                                                    'Erebot_Event_ChanText',
-                                                    NULL, $filter);
+            array($this, 'handleShowOrder'),
+            'Erebot_Event_ChanText',
+            NULL,
+            new Erebot_TextFilter_Static($infos['triggers']['show_order'], NULL)
+        );
 
-        $filter     = new Erebot_TextFilter($this->_mainCfg);
-        $filter->addPattern(Erebot_TextFilter::TYPE_STATIC,      $infos['triggers']['show_scores'], NULL);
         $infos['handlers']['show_scores']   =   new Erebot_EventHandler(
-                                                    array($this, 'handleShowScores'),
-                                                    'Erebot_Event_ChanText',
-                                                    NULL, $filter);
+            array($this, 'handleShowScores'),
+            'Erebot_Event_ChanText',
+            NULL,
+            new Erebot_TextFilter_Static($infos['triggers']['show_scores'], NULL)
+        );
 
-        $filter     = new Erebot_TextFilter($this->_mainCfg);
-        $filter->addPattern(Erebot_TextFilter::TYPE_STATIC,      $infos['triggers']['show_time'], NULL);
         $infos['handlers']['show_time']     =   new Erebot_EventHandler(
-                                                    array($this, 'handleShowTime'),
-                                                    'Erebot_Event_ChanText',
-                                                    NULL, $filter);
+            array($this, 'handleShowTime'),
+            'Erebot_Event_ChanText',
+            NULL,
+            new Erebot_TextFilter_Static($infos['triggers']['show_time'], NULL)
+        );
 
-        $filter     = new Erebot_TextFilter($this->_mainCfg);
-        $filter->addPattern(Erebot_TextFilter::TYPE_STATIC,      $infos['triggers']['show_turn'], NULL);
         $infos['handlers']['show_turn'] =   new Erebot_EventHandler(
-                                                array($this, 'handleShowTurn'),
-                                                'Erebot_Event_ChanText',
-                                                NULL, $filter);
+            array($this, 'handleShowTurn'),
+            'Erebot_Event_ChanText',
+            NULL,
+            new Erebot_TextFilter_Static($infos['triggers']['show_turn'], NULL)
+        );
 
         foreach ($infos['handlers'] as &$handler)
             $this->_connection->addEventHandler($handler);
