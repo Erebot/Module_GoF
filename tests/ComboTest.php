@@ -171,65 +171,45 @@ extends PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @expectedException Erebot_Module_GoF_InvalidComboException
-     */
-    public function testDoublePair()
+    public function invalidCombos()
     {
-        new Erebot_Module_GoF_Combo(
-            Erebot_Module_GoF_Card::fromLabel('g1'),
-            Erebot_Module_GoF_Card::fromLabel('g1'),
-            Erebot_Module_GoF_Card::fromLabel('g2'),
-            Erebot_Module_GoF_Card::fromLabel('g2')
+        return array(
+            // Too many cards
+            array('g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7'),
+
+            // Still too much
+            array('g1', 'g2', 'g3', 'g4', 'g5', 'g6'),
+
+            // Double-pair
+            array('g1', 'g1', 'g2', 'g2'),
+
+            // A pair and a single
+            array('g1', 'g1', 'g2'),
+
+            // Two singles
+            array('g1', 'g2'),
+
+            // Three singles
+            array('g1', 'g2', 'g3'),
+
+            // Four singles
+            array('g1', 'g2', 'g3', 'g4'),
+
+            // Some random WTF
+            array('g1', 'g2', 'g3', 'g5', 'r6'),
         );
     }
 
     /**
+     * @dataProvider invalidCombos
      * @expectedException Erebot_Module_GoF_InvalidComboException
      */
-    public function testAPairAndASingle()
+    public function testInvalidCombos()
     {
-        new Erebot_Module_GoF_Combo(
-            Erebot_Module_GoF_Card::fromLabel('g1'),
-            Erebot_Module_GoF_Card::fromLabel('g1'),
-            Erebot_Module_GoF_Card::fromLabel('g2')
-        );
-    }
-
-    /**
-     * @expectedException Erebot_Module_GoF_InvalidComboException
-     */
-    public function testTwoSingles()
-    {
-        new Erebot_Module_GoF_Combo(
-            Erebot_Module_GoF_Card::fromLabel('g1'),
-            Erebot_Module_GoF_Card::fromLabel('g2')
-        );
-    }
-
-    /**
-     * @expectedException Erebot_Module_GoF_InvalidComboException
-     */
-    public function testThreeSingles()
-    {
-        new Erebot_Module_GoF_Combo(
-            Erebot_Module_GoF_Card::fromLabel('g1'),
-            Erebot_Module_GoF_Card::fromLabel('g2'),
-            Erebot_Module_GoF_Card::fromLabel('g3')
-        );
-    }
-
-    /**
-     * @expectedException Erebot_Module_GoF_InvalidComboException
-     */
-    public function testFourSingles()
-    {
-        new Erebot_Module_GoF_Combo(
-            Erebot_Module_GoF_Card::fromLabel('g1'),
-            Erebot_Module_GoF_Card::fromLabel('g2'),
-            Erebot_Module_GoF_Card::fromLabel('g3'),
-            Erebot_Module_GoF_Card::fromLabel('g4')
-        );
+        $args = func_get_args();
+        $reflector = new ReflectionClass('Erebot_Module_GoF_Combo');
+        $cards = array_map(array('Erebot_Module_GoF_Card', 'fromLabel'), $args);
+        $reflector->newInstanceArgs($cards);
     }
 
     public function testFullHouse()
@@ -258,6 +238,243 @@ extends PHPUnit_Framework_TestCase
             Erebot_Module_GoF_Combo::COMBO_FULL_HOUSE,
             $combo->getType()
         );
+    }
+
+    public function testInterfaces()
+    {
+        $combo = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g5'),
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('g4'),
+            Erebot_Module_GoF_Card::fromLabel('g3'),
+            Erebot_Module_GoF_Card::fromLabel('g1')
+        );
+        // Failsafe test.
+        $this->assertEquals(
+            Erebot_Module_GoF_Combo::COMBO_STRAIGHT_FLUSH,
+            $combo->getType()
+        );
+        $expected = array('g5', 'g4', 'g3', 'g2', 'g1');
+
+        // Iterator interface.
+        foreach ($combo as $key => $value) {
+            $this->assertTrue(isset($expected[$key]));
+            $this->assertEquals($expected[$key], $value->getLabel());
+        }
+
+        // ArrayAccess interface.
+        for ($i = 0; $i < 5; $i++) {
+            // offsetExists
+            $this->assertTrue(isset($combo[$i]));
+            // offsetGet
+            $this->assertEquals($expected[$i], $combo[$i]->getLabel());
+
+            try {
+                // offsetSet
+                $combo[$i] = 42;
+            }
+            catch (Exception $e) {
+            }
+
+            try {
+                // offsetUnset
+                unset($combo[$i]);
+            }
+            catch (Exception $e) {
+            }
+        }
+    }
+
+    public function testComparisonForSinglesAndGangs()
+    {
+        // This compares singles and gangs.
+        $comboA = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1')
+        );
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1')
+        );
+        // The two combos are the same.
+        $this->assertEquals(
+            0, Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB)
+        );
+
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g2')
+        );
+        // $comboA < $comboB (inferior value).
+        $this->assertLessThan(
+            0, Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB)
+        );
+
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('y1')
+        );
+        // $comboA < $comboB (inferior color).
+        $this->assertLessThan(
+            0, Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB)
+        );
+
+        $comboA = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('r2')
+        );
+        // $comboA > $comboB.
+        $this->assertGreaterThan(
+            0, Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB)
+        );
+
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('r2')
+        );
+        // $comboA = $comboB.
+        $this->assertEquals(
+            0, Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB)
+        );
+
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1'),
+            Erebot_Module_GoF_Card::fromLabel('g1'),
+            Erebot_Module_GoF_Card::fromLabel('y1'),
+            Erebot_Module_GoF_Card::fromLabel('y1')
+        );
+        // $comboA < $comboB (gang of four).
+        $this->assertLessThan(
+            0, Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB)
+        );
+
+        $comboA = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('y10'),
+            Erebot_Module_GoF_Card::fromLabel('y10'),
+            Erebot_Module_GoF_Card::fromLabel('r10'),
+            Erebot_Module_GoF_Card::fromLabel('r10')
+        );
+        // $comboA > $comboB (higher gang of four).
+        $this->assertGreaterThan(
+            0, Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB)
+        );
+
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g9'),
+            Erebot_Module_GoF_Card::fromLabel('g9'),
+            Erebot_Module_GoF_Card::fromLabel('y9'),
+            Erebot_Module_GoF_Card::fromLabel('y9'),
+            Erebot_Module_GoF_Card::fromLabel('r9')
+        );
+        // $comboA < $comboB (gang of five).
+        $this->assertLessThan(
+            0, Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB)
+        );
+
+        $comboA = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('y2'),
+            Erebot_Module_GoF_Card::fromLabel('y2'),
+            Erebot_Module_GoF_Card::fromLabel('r2'),
+            Erebot_Module_GoF_Card::fromLabel('r2')
+        );
+        // $comboA > $comboB (gang of six).
+        $this->assertGreaterThan(
+            0, Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB)
+        );
+
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1'),
+            Erebot_Module_GoF_Card::fromLabel('g1'),
+            Erebot_Module_GoF_Card::fromLabel('y1'),
+            Erebot_Module_GoF_Card::fromLabel('y1'),
+            Erebot_Module_GoF_Card::fromLabel('r1'),
+            Erebot_Module_GoF_Card::fromLabel('r1'),
+            Erebot_Module_GoF_Card::fromLabel('m1')
+        );
+        // $comboA < $comboB (gang of seven).
+        $this->assertLessThan(
+            0, Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB)
+        );
+    }
+
+    /**
+     * @expectedException Erebot_Module_GoF_NotComparableException
+     */
+    public function testNotComparable()
+    {
+        $comboA = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1')
+        );
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('g2')
+        );
+        Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB);
+    }
+
+    /**
+     * @expectedException Erebot_Module_GoF_NotComparableException
+     */
+    public function testNotComparable2()
+    {
+        $comboA = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1')
+        );
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('y2')
+        );
+        Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB);
+    }
+
+    /**
+     * @expectedException Erebot_Module_GoF_NotComparableException
+     */
+    public function testNotComparable3()
+    {
+        $comboA = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1'),
+            Erebot_Module_GoF_Card::fromLabel('g1')
+        );
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('y2')
+        );
+        Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB);
+    }
+
+    /**
+     * @expectedException Erebot_Module_GoF_NotComparableException
+     */
+    public function testNotComparable4()
+    {
+        $comboA = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1')
+        );
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1'),
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('g3'),
+            Erebot_Module_GoF_Card::fromLabel('g4'),
+            Erebot_Module_GoF_Card::fromLabel('g5')
+        );
+        Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB);
+    }
+
+    /**
+     * @expectedException Erebot_Module_GoF_NotComparableException
+     */
+    public function testNotComparable5()
+    {
+        $comboA = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1')
+        );
+        $comboB = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('g2'),
+            Erebot_Module_GoF_Card::fromLabel('y3'),
+            Erebot_Module_GoF_Card::fromLabel('g3'),
+            Erebot_Module_GoF_Card::fromLabel('g3')
+        );
+        Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB);
     }
 }
 

@@ -143,11 +143,30 @@ implements  ArrayAccess,
         Erebot_Module_GoF_Combo &$comboB
     )
     {
-        if ($comboA->_type != $comboB->_type)
+        if ($comboA->_type != $comboB->_type) {
+            $specials = array(
+                self::COMBO_SINGLE,
+                self::COMBO_PAIR,
+                self::COMBO_TRIO,
+            );
+            if ((
+                    in_array($comboA->_type, $specials) &&
+                    $comboB->_type != self::COMBO_GANG
+                ) || (
+                    in_array($comboB->_type, $specials) &&
+                    $comboA->_type != self::COMBO_GANG
+                ))
+                throw new Erebot_Module_GoF_NotComparableException();
             return $comboA->_type - $comboB->_type;
+        }
 
-        $nbCards = count($comboA->_cards);
-        assert($nbCards == count($comboB->_cards));
+        $nbCardsA = count($comboA->_cards);
+        $nbCardsB = count($comboA->_cards);
+        if ($comboA->_type == self::COMBO_GANG &&
+            $nbCardsA != $nbCardsB)
+            return $nbCardsA - $nbCardsB;
+
+        assert($nbCardsA == $nbCardsB);
         for ($i = 0; $i < $nbCards; $i++) {
             $cmp = Erebot_Module_GoF_Card::compareCards(
                 $comboA->_cards[$i],
