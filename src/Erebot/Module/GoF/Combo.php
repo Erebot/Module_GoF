@@ -81,10 +81,13 @@ implements  ArrayAccess,
         if ((!$nbValues != 1 && $nbCards <= 3) || $nbCards != 5)
             throw new Erebot_Module_GoF_InvalidComboException("WTF is that?");
 
-        // Restricted cards for multi-cards combos.
-        if (isset($values[Erebot_Module_GoF_Card::VALUE_PHOENIX]) ||
-            isset($values[Erebot_Module_GoF_Card::VALUE_DRAGON]))
-            throw new Erebot_Module_GoF_InvalidComboException("Restricted card");
+        foreach ($values as $val) {
+            // At this point, it's impossible to have more than three times
+            // the same value (which would be a gang but this was already
+            // handled above). This prevents combos such as 4 X & 1 single Y. 
+            if (count($val) > 3)
+                throw new Erebot_Module_GoF_InvalidComboException("WTF is that?");
+        }
 
         // Full houses.
         if ($nbValues == 2) {
@@ -103,12 +106,20 @@ implements  ArrayAccess,
             return;
         }
 
+        // Restricted cards for multi-cards combos.
+        if (isset($values[Erebot_Module_GoF_Card::VALUE_PHOENIX]) ||
+            isset($values[Erebot_Module_GoF_Card::VALUE_DRAGON]))
+            throw new Erebot_Module_GoF_InvalidComboException("Restricted card");
+
         // Other types.
-        $nbColors = count($colors);
         $this->_type = 0;
 
+        // For (straight) flushes, m1 can assume any color.
+        // We hence remove it from the equation.
+        unset($colors[Erebot_Module_GoF_Card::COLOR_MULTI]);
+
         // Flush or straight flush.
-        if ($nbColors == 1)
+        if (count($colors) == 1)
             $this->_type |= self::COMBO_FLUSH;
 
         // Straight or straight flush.
@@ -161,13 +172,14 @@ implements  ArrayAccess,
         }
 
         $nbCardsA = count($comboA->_cards);
-        $nbCardsB = count($comboA->_cards);
+        $nbCardsB = count($comboB->_cards);
         if ($comboA->_type == self::COMBO_GANG &&
-            $nbCardsA != $nbCardsB)
+            $nbCardsA != $nbCardsB) {
             return $nbCardsA - $nbCardsB;
+        }
 
         assert($nbCardsA == $nbCardsB);
-        for ($i = 0; $i < $nbCards; $i++) {
+        for ($i = 0; $i < $nbCardsA; $i++) {
             $cmp = Erebot_Module_GoF_Card::compareCards(
                 $comboA->_cards[$i],
                 $comboB->_cards[$i]

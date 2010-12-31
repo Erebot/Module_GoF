@@ -150,10 +150,11 @@ extends PHPUnit_Framework_TestCase
                 // this is a straight flush.
                 // Otherwise, it's an ordinary straight.
                 $type = (
-                        $colorA == $colorB &&
+                        ($colorA == 'm' || $colorA == $colorB) &&
                         $colorB == $colorC &&
                         $colorC == $colorD &&
-                        $colorD == $colorE)
+                        $colorD == $colorE
+                    )
                     ? Erebot_Module_GoF_Combo::COMBO_STRAIGHT_FLUSH
                     : Erebot_Module_GoF_Combo::COMBO_STRAIGHT;
                 $this->assertEquals(
@@ -171,45 +172,28 @@ extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function invalidCombos()
+    public function testFlushesWithMultiColored1()
     {
-        return array(
-            // Too many cards
-            array('g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7'),
-
-            // Still too much
-            array('g1', 'g2', 'g3', 'g4', 'g5', 'g6'),
-
-            // Double-pair
-            array('g1', 'g1', 'g2', 'g2'),
-
-            // A pair and a single
-            array('g1', 'g1', 'g2'),
-
-            // Two singles
-            array('g1', 'g2'),
-
-            // Three singles
-            array('g1', 'g2', 'g3'),
-
-            // Four singles
-            array('g1', 'g2', 'g3', 'g4'),
-
-            // Some random WTF
-            array('g1', 'g2', 'g3', 'g5', 'r6'),
-        );
-    }
-
-    /**
-     * @dataProvider invalidCombos
-     * @expectedException Erebot_Module_GoF_InvalidComboException
-     */
-    public function testInvalidCombos()
-    {
-        $args = func_get_args();
-        $reflector = new ReflectionClass('Erebot_Module_GoF_Combo');
-        $cards = array_map(array('Erebot_Module_GoF_Card', 'fromLabel'), $args);
-        $reflector->newInstanceArgs($cards);
+        foreach (array('r', 'y', 'g') as $color) {
+            $combo = new Erebot_Module_GoF_Combo(
+                Erebot_Module_GoF_Card::fromLabel('m1'),
+                Erebot_Module_GoF_Card::fromLabel($color.'3'),
+                Erebot_Module_GoF_Card::fromLabel($color.'5'),
+                Erebot_Module_GoF_Card::fromLabel($color.'7'),
+                Erebot_Module_GoF_Card::fromLabel($color.'9')
+            );
+            $this->assertEquals(
+                Erebot_Module_GoF_Combo::COMBO_FLUSH,
+                $combo->getType(),
+                print_r(array(
+                    'm1',
+                    $color.'3',
+                    $color.'5',
+                    $color.'7',
+                    $color.'9'
+                ), TRUE)
+            );
+        }
     }
 
     public function testFullHouse()
@@ -233,6 +217,19 @@ extends PHPUnit_Framework_TestCase
             Erebot_Module_GoF_Card::fromLabel('y1'),
             Erebot_Module_GoF_Card::fromLabel('g2'),
             Erebot_Module_GoF_Card::fromLabel('g2')
+        );
+        $this->assertEquals(
+            Erebot_Module_GoF_Combo::COMBO_FULL_HOUSE,
+            $combo->getType()
+        );
+
+        // Using the pair of phoenixes.
+        $combo = new Erebot_Module_GoF_Combo(
+            Erebot_Module_GoF_Card::fromLabel('g1'),
+            Erebot_Module_GoF_Card::fromLabel('g1'),
+            Erebot_Module_GoF_Card::fromLabel('y1'),
+            Erebot_Module_GoF_Card::fromLabel('gp'),
+            Erebot_Module_GoF_Card::fromLabel('yp')
         );
         $this->assertEquals(
             Erebot_Module_GoF_Combo::COMBO_FULL_HOUSE,
@@ -475,6 +472,66 @@ extends PHPUnit_Framework_TestCase
             Erebot_Module_GoF_Card::fromLabel('g3')
         );
         Erebot_Module_GoF_Combo::compareCombos($comboA, $comboB);
+    }
+}
+
+class   Erebot_Module_GoF_InvalidCombosTest
+extends PHPUnit_Framework_TestCase
+{
+    public function invalidCombos()
+    {
+        return array(
+            // Too many cards
+            array('g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7'),
+
+            // Still too much
+            array('g1', 'g2', 'g3', 'g4', 'g5', 'g6'),
+
+            // Double-pair
+            array('g1', 'g1', 'g2', 'g2'),
+
+            // A pair and a single
+            array('g1', 'g1', 'g2'),
+
+            // Two singles
+            array('g1', 'g2'),
+
+            // Three singles
+            array('g1', 'g2', 'g3'),
+
+            // Four singles
+            array('g1', 'g2', 'g3', 'g4'),
+
+            // Some random WTF
+            array('g1', 'g2', 'g3', 'g5', 'r6'),
+
+            // Gang + random card
+            array('g1', 'g1', 'y1', 'y1', 'r6'),
+
+            // The dragon cannot be used with other cards.
+            array('r1', 'r3', 'r5', 'r7', 'rd'),    // Tentative Flush
+
+            // The phoenixes cannot be used in a straight+flush.
+            array('g7', 'y8', 'r9', 'g10', 'gp'),   // Tentative Straight
+            array('g7', 'y8', 'r9', 'g10', 'yp'),   // Tentative Straight
+            array('g1', 'g3', 'g5', 'g7', 'gp'),    // Tentative Flush
+            array('y1', 'y3', 'y5', 'y7', 'yp'),    // Tentative Flush
+            array('g7', 'g8', 'g9', 'g10', 'gp'),   // Tentative Straight flush
+            array('y7', 'y8', 'y9', 'y10', 'yp'),   // Tentative Straight flush
+
+        );
+    }
+
+    /**
+     * @dataProvider invalidCombos
+     * @expectedException Erebot_Module_GoF_InvalidComboException
+     */
+    public function testInvalidCombos()
+    {
+        $args = func_get_args();
+        $reflector = new ReflectionClass('Erebot_Module_GoF_Combo');
+        $cards = array_map(array('Erebot_Module_GoF_Card', 'fromLabel'), $args);
+        $reflector->newInstanceArgs($cards);
     }
 }
 
