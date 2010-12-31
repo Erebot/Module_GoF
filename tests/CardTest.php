@@ -55,7 +55,7 @@ extends PHPUnit_Framework_TestCase
         );
         foreach ($cards as $card) {
             try {
-                new Erebot_Module_GoF_Card($card);
+                Erebot_Module_GoF_Card::fromLabel($card);
                 $this->fail("Expected an EGoFInvalidCard exception.");
             }
             catch (Erebot_Module_GoF_InvalidCardException $e) {
@@ -129,7 +129,7 @@ extends PHPUnit_Framework_TestCase
      */
     public function testAcceptValidCards($label, $color, $value)
     {
-        $card = new Erebot_Module_GoF_Card($label);
+        $card = Erebot_Module_GoF_Card::fromLabel($label);
         $this->assertEquals($color, $card->getColor());
         $this->assertEquals($value, $card->getValue());
         $this->assertEquals($label, (string) $card);
@@ -154,8 +154,8 @@ extends PHPUnit_Framework_TestCase
      */
     public function testCardComparison($c1, $c2, $result)
     {
-        $card1 = new Erebot_Module_GoF_Card($c1);
-        $card2 = new Erebot_Module_GoF_Card($c2);
+        $card1 = Erebot_Module_GoF_Card::fromLabel($c1);
+        $card2 = Erebot_Module_GoF_Card::fromLabel($c2);
         if ($result === NULL)
             $this->assertEquals(0, Erebot_Module_GoF_Card::compareCards($card1, $card2));
         else if ($result === TRUE)
