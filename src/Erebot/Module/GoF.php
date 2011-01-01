@@ -413,8 +413,8 @@ extends Erebot_Module_Base
 
         $infos      =&  $this->_chans[$chan];
         $current    =   $infos['game']->getCurrentPlayer();
-        if ($current === FALSE ||
-            $this->_casecmp($nick, (string) $current->getToken()))
+        if ($current === FALSE || $this->_connection->irccasecmp(
+            $nick, (string) $current->getToken()))
             return;
 
         $translator = $this->getTranslator($chan);
@@ -496,7 +496,8 @@ extends Erebot_Module_Base
         $translator =   $this->getTranslator($chan);
 
         foreach ($infos['game']->getPlayers() as $player) {
-            if (!$this->_casecmp($nick, (string) $player->getToken())) {
+            if (!$this->_connection->irccasecmp(
+                $nick, (string) $player->getToken())) {
                 $msg = $translator->gettext(
                     '<var name="logo"/> You are already part of that game '.
                     '<b><var name="nick"/></b>!'
@@ -565,8 +566,8 @@ extends Erebot_Module_Base
         $translator = $this->getTranslator($chan);
         $infos      =&  $this->_chans[$chan];
         $current    =   $infos['game']->getCurrentPlayer();
-        if ($current === FALSE ||
-            $this->_casecmp($nick, (string) $current->getToken()))
+        if ($current === FALSE || $this->_connection->irccasecmp(
+            $nick, (string) $current->getToken()))
             return;
 
         try {
@@ -619,8 +620,8 @@ extends Erebot_Module_Base
         $translator = $this->getTranslator($chan);
         $infos      =&  $this->_chans[$chan];
         $current    =   $infos['game']->getCurrentPlayer();
-        if ($current === FALSE ||
-            $this->_casecmp($nick, (string) $current->getToken()))
+        if ($current === FALSE || $this->_connection->irccasecmp(
+            $nick, (string) $current->getToken()))
             return;
 
         if (!preg_match('/^(?:[gyr][0-9]+|m1|gp|yp|rd)+$/', $move)) {
@@ -871,7 +872,7 @@ extends Erebot_Module_Base
         foreach ($infos['game']->getPlayers() as $player) {
             $playerNick = (string) $player->getToken();
             $hands[$playerNick] = count($player->getHand());
-            if (!$this->_casecmp($playerNick, $nick))
+            if (!$this->_connection->irccasecmp($playerNick, $nick))
                 $this->_sendCards($chan, $player);
         }
 
@@ -909,7 +910,7 @@ extends Erebot_Module_Base
         }
 
         $discardNick = (string) $lastDiscard['player']->getToken();
-        if (!$this->_casecmp($nick, $discardNick)) {
+        if (!$this->_connection->irccasecmp($nick, $discardNick)) {
             $msg = $translator->gettext(
                 '<var name="logo"/> '.
                 '<b><var name="nick"/></b> has got the upper hand '.
@@ -1023,7 +1024,8 @@ extends Erebot_Module_Base
 
         if (!$this->_checkStarted($chan)) return;
 
-        if ($from !== NULL && !$this->_casecmp($from, $currentNick)) {
+        if ($from !== NULL && !$this->_connection->irccasecmp(
+            $from, $currentNick)) {
             $msg = $translator->gettext(
                 '<var name="logo"/> <b><var name="nick"/></b>: '.
                 'it\'s your turn sleepyhead!'
@@ -1070,7 +1072,8 @@ extends Erebot_Module_Base
             $this->sendMessage($chan, $tpl->render());
         }
 
-        if ($from === NULL || !$this->_casecmp($from, $currentNick))
+        if ($from === NULL || !$this->_connection->irccasecmp(
+            $from, $currentNick))
             $this->_sendCards($chan, $current);
     }
 
@@ -1080,11 +1083,6 @@ extends Erebot_Module_Base
         if (!isset($this->_chans[$chan])) return;
         $this->_showTurn($chan, $event->getSource());
         $event->preventDefault(TRUE);
-    }
-
-    protected function _casecmp($a, $b)
-    {
-        return strcasecmp($a, $b);
     }
 
     protected function _sendCards($chan, Erebot_Module_GoF_Player &$player)
