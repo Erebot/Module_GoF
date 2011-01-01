@@ -401,18 +401,7 @@ extends Erebot_Module_Base
 
         foreach ($infos['game']->getPlayers() as $player) {
             if ($player == $lastLoser) continue;
-
-            $cards = array_map(
-                array($this, 'getCardText'),
-                $player->getHand()->getCards()
-            );
-            $msg = $translator->gettext(
-                'Your cards: <for from="cards" item="card" '.
-                'separator=" "><var name="card"/></for>'
-            );
-            $tpl = new Erebot_Styling($msg, $translator);
-            $tpl->assign('cards', $cards);
-            $this->sendMessage((string) $player->getToken(), $tpl->render());
+            $this->_sendCards($chan, $player);
         }
     }
 
@@ -489,27 +478,8 @@ extends Erebot_Module_Base
         $tpl->assign('given',       $this->getCardText($card));
         $this->sendMessage($chan, $tpl->render());
 
-        $msg = $translator->gettext(
-            'Your cards: <for from="cards" item="card" '.
-            'separator=" "><var name="card"/></for>'
-        );
-
-        $cards = array_map(
-            array($this, 'getCardText'),
-            $current->getHand()->getCards()
-        );
-        $tpl = new Erebot_Styling($msg, $translator);
-        $tpl->assign('cards', $cards);
-        $this->sendMessage($nick, $tpl->render());
-
-        $cards = array_map(
-            array($this, 'getCardText'),
-            $loser->getHand()->getCards()
-        );
-        $tpl = new Erebot_Styling($msg, $translator);
-        $tpl->assign('cards', $cards);
-        $this->sendMessage((string) $loser->getToken(), $tpl->render());
-
+        $this->_sendCards($chan, $current);
+        $this->_sendCards($chan, $loser);
         $event->preventDefault(TRUE);
     }
 
@@ -809,7 +779,7 @@ extends Erebot_Module_Base
             else
                 $msg = $translator->gettext(
                     '<var name="logo"/> '.
-                    '<b><var name="nick"/></b> wins this round! '
+                    '<b><var name="nick"/></b> wins this round!'
                 );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('logo',    $this->getLogo());
@@ -894,33 +864,15 @@ extends Erebot_Module_Base
         $infos =& $this->_chans[$chan];
         $translator = $this->getTranslator($chan);
 
-        if (!$infos['game']->getNbRounds()) {
-            $msg = $translator->gettext(
-                'The <var name="logo"/> game has not yet started!'
-            );
-            $tpl = new Erebot_Styling($msg, $translator);
-            $tpl->assign('logo', $this->getLogo());
-            $this->sendMessage($chan, $tpl->render());
+        if (!$this->_checkStarted($chan))
             return $event->preventDefault(TRUE);
-        }
 
         $hands = array();
         foreach ($infos['game']->getPlayers() as $player) {
             $playerNick = (string) $player->getToken();
             $hands[$playerNick] = count($player->getHand());
-            if (!$this->_casecmp($playerNick, $nick)) {
-                $cards = array_map(
-                    array($this, 'getCardText'),
-                    $player->getHand()->getCards()
-                );
-                $msg = $translator->gettext(
-                    'Your cards: <for from="cards" item="card" '.
-                    'separator=" "><var name="card"/></for>'
-                );
-                $tpl = new Erebot_Styling($msg, $translator);
-                $tpl->assign('cards', $cards);
-                $this->sendMessage($nick, $tpl->render());
-            }
+            if (!$this->_casecmp($playerNick, $nick))
+                $this->_sendCards($chan, $player);
         }
 
         $msg = $translator->gettext(
@@ -994,16 +946,8 @@ extends Erebot_Module_Base
         $infos =& $this->_chans[$chan];
 
         $translator = $this->getTranslator($chan);
-
-        if (!$infos['game']->getNbRounds()) {
-            $msg = $translator->gettext(
-                'The <var name="logo"/> game has not yet started!'
-            );
-            $tpl = new Erebot_Styling($msg, $translator);
-            $tpl->assign('logo', $this->getLogo());
-            $this->sendMessage($chan, $tpl->render());
+        if (!$this->_checkStarted($chan))
             return $event->preventDefault(TRUE);
-        }
 
         $nicks = array();
         foreach ($infos['game']->getPlayers() as $player)
@@ -1054,18 +998,11 @@ extends Erebot_Module_Base
         $chan = $event->getChan();
         if (!isset($this->_chans[$chan])) return;
         $translator = $this->getTranslator($chan);
-        $playtime = $this->_chans[$chan]['game']->getElapsedTime();
 
-        if ($playtime === NULL) {
-            $msg = $translator->gettext(
-                'The <var name="logo"/> game has not yet started!'
-            );
-            $tpl = new Erebot_Styling($msg, $translator);
-            $tpl->assign('logo', $this->getLogo());
-            $this->sendMessage($chan, $tpl->render());
+        if (!$this->_checkStarted($chan))
             return $event->preventDefault(TRUE);
-        }
 
+        $playtime = $this->_chans[$chan]['game']->getElapsedTime();
         $msg = $translator->gettext(
             'This <var name="logo"/> game has been running '.
             'for <var name="playtime"/>.'
@@ -1084,14 +1021,7 @@ extends Erebot_Module_Base
         $currentNick    =   (string) $current->getToken();
         $translator     =   $this->getTranslator($chan);
 
-        if (!$infos['game']->getNbRounds()) {
-            $msg = $translator->gettext(
-                'The <var name="logo"/> game has not yet started!'
-            );
-            $tpl = new Erebot_Styling($msg, $translator);
-            $tpl->assign('logo',        $this->getLogo());
-            return $this->sendMessage($chan, $tpl->render());
-        }
+        if (!$this->_checkStarted($chan)) return;
 
         if ($from !== NULL && !$this->_casecmp($from, $currentNick)) {
             $msg = $translator->gettext(
@@ -1140,24 +1070,8 @@ extends Erebot_Module_Base
             $this->sendMessage($chan, $tpl->render());
         }
 
-        if ($from === NULL || !$this->_casecmp($from, $currentNick)) {
-            $cards = array_map(
-                array($this, 'getCardText'),
-                $current->getHand()->getCards()
-            );
-            $msg = $translator->gettext(
-                'Your cards: <for from="cards" item="card" '.
-                'separator=" "><var name="card"/></for>'
-            );
-            $tpl = new Erebot_Styling($msg, $translator);
-            $tpl->assign('cards', $cards);
-            $this->sendMessage($currentNick, $tpl->render());
-        }
-    }
-
-    protected function _casecmp($a, $b)
-    {
-        return strcasecmp($a, $b);
+        if ($from === NULL || !$this->_casecmp($from, $currentNick))
+            $this->_sendCards($chan, $current);
     }
 
     public function handleShowTurn(Erebot_Interface_Event_Generic &$event)
@@ -1166,6 +1080,44 @@ extends Erebot_Module_Base
         if (!isset($this->_chans[$chan])) return;
         $this->_showTurn($chan, $event->getSource());
         $event->preventDefault(TRUE);
+    }
+
+    protected function _casecmp($a, $b)
+    {
+        return strcasecmp($a, $b);
+    }
+
+    protected function _sendCards($chan, Erebot_Module_GoF_Player &$player)
+    {
+        $translator = $this->getTranslator($chan);
+        $cards = array_map(
+            array($this, 'getCardText'),
+            $player->getHand()->getCards()
+        );
+        $msg = $translator->gettext(
+            'Your cards: <for from="cards" item="card" '.
+            'separator=" "><var name="card"/></for>'
+        );
+        $tpl = new Erebot_Styling($msg, $translator);
+        $tpl->assign('cards', $cards);
+        $this->sendMessage((string) $player->getToken(), $tpl->render());
+    }
+
+    protected function _checkStarted($chan)
+    {
+        $infos          =&  $this->_chans[$chan];
+        $translator     =   $this->getTranslator($chan);
+
+        if ($infos['game']->getNbRounds())
+            return TRUE;
+
+        $msg = $translator->gettext(
+            'The <var name="logo"/> game has not yet started!'
+        );
+        $tpl = new Erebot_Styling($msg, $translator);
+        $tpl->assign('logo',        $this->getLogo());
+        $this->sendMessage($chan, $tpl->render());
+        return FALSE
     }
 }
 
