@@ -47,8 +47,7 @@ implements  Countable
 
     public function & join($token)
     {
-        $nbPlayers = count($this->_players);
-        if ($nbPlayers >= 4)
+        if (count($this->_players) >= 4 || $this->_nbRounds)
             throw new Erebot_Module_GoF_EnoughPlayersException();
 
         $player             = new Erebot_Module_GoF_Player($token);
@@ -60,22 +59,22 @@ implements  Countable
 
     public function start()
     {
-        if ($nbPlayers < 3)
+        if (count($this->_players) < 3 || $this->_nbRounds)
             throw new Erebot_Module_GoF_InternalErrorException();
 
         $this->_startTime = time();
         shuffle($this->_players);
-        $this->nbRounds++;
-        $multiOne = new Erebot_Module_GoF_Card::fromLabel('m1');
+        $this->_nbRounds++;
+        $multiOne = Erebot_Module_GoF_Card::fromLabel('m1');
         foreach ($this->_players as &$player) {
             if ($player->getHand()->hasCard($multiOne)) {
-                while (reset($this->_players) !== $player)
+                while ($this->getCurrentPlayer() !== $player)
                     $this->_shiftPlayer();
                 return $player;
             }
         }
         unset($player);
-        return reset($this->_players);
+        return $this->getCurrentPlayer();
     }
 
     public function play(Erebot_Module_GoF_Combo &$combo)
@@ -86,23 +85,41 @@ implements  Countable
         if ($this->_lastLoser !== NULL)
             throw new Erebot_Module_GoF_WaitingForCardException();
 
+        /// @TODO: implement this rule.
+#        if (count($infos['players'][$next]['cards']) == 1) {
+#            if (count($cards) == 1 && reset($cards) != end($infos['players'][$token]['cards'])) {
+#                $msg = $translator->gettext(
+#                    '<b><var name="nick"/></b>, '.
+#                    '<b><var name="next_player"/></b> has only 1 card left. '.
+#                    'You <b>MUST</b> play your best card or a combination '.
+#                    'on this turn!'
+#                );
+#                $tpl = new Erebot_Styling($msg, $translator);
+#                $tpl->assign('nick', $nick);
+#                $tpl->assign('next_player', $tracker->getNick($next));
+#                $this->sendMessage($chan, $tpl->render());
+#                return $event->preventDefault(TRUE);
+#            }
+#        }
+
+        $current = $this->getCurrentPlayer();
+
         // Check that the new combo is indeed
         // superior to the previous one.
         $lastDiscard = $this->_deck->getLastDiscard();
-        if ($lastDiscard !== NULL &&
+        if ($lastDiscard !== NULL && $lastDiscard['player'] !== $current &&
             Erebot_Module_GoF_Combo::compareCombos($combo, $lastDiscard['combo']) <= 0)
             throw new Erebot_Module_GoF_InferiorComboException();
 
-        $current = $this->getCurrentPlayer();
         $currentHand =& $current->getHand();
 
         // If the first player in the first round has
         // the multi-colored one, he or she MUST play it.
-        if ($this->nbRounds == 1) {
-            $multiOne = new Erebot_Module_GoF_Card::fromLabel('m1');
+        if ($this->_nbRounds == 1) {
+            $multiOne = Erebot_Module_GoF_Card::fromLabel('m1');
             if ($currentHand->hasCard($multiOne)) {
                 $playedMultiOne = FALSE;
-                foreach ($combo as &$card) {
+                foreach ($combo as $card) {
                     if ($card->getLabel() == 'm1') {
                         $playedMultiOne = TRUE;
                         break;
@@ -162,11 +179,19 @@ implements  Countable
 
     public function pass()
     {
+        // Game not started yet.
         if (!$this->_nbRounds)
             throw new Erebot_Module_GoF_InternalErrorException();
 
+        // The card exchange has not been done yet.
         if ($this->_lastLoser !== NULL)
             throw new Erebot_Module_GoF_WaitingForCardException();
+
+        // No combo has been played yet.
+        // The current player MUST play one.
+        if ($this->_deck->getLastDiscard() === NULL)
+            throw new Erebot_Module_GoF_InternalErrorException();
+
         $this->_shiftPlayer();
     }
 
@@ -181,11 +206,13 @@ implements  Countable
         if ($this->_lastLoser === NULL)
             throw new Erebot_Module_GoF_InternalErrorException();
 
-        $loserHand  =&  $this->_lastLoser->getHand();
-        $best       =   $loserHand->removeCard($loserHand->getBestCard());
         $winner     =   $this->getCurrentPlayer();
         $winnerHand =&  $winner->getHand();
         $chosen     =   $winnerHand->removeCard($card);
+
+        $loserHand  =&  $this->_lastLoser->getHand();
+        $best       =   $loserHand->getBestCard();
+        $loserHand->removeCard($best);
         $winnerHand->addCard($best);
         $loserHand->addCard($chosen);
 
@@ -201,14 +228,6 @@ implements  Countable
     public function getLastLoser()
     {
         return $this->_lastLoser;
-    }
-
-    public function getLeadingPlayer()
-    {
-        $discard = $this->_deck->getLastDiscard();
-        if ($discard === NULL)
-            return NULL;
-        return $discard['player'];
     }
 
     public function getCreator()

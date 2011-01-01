@@ -32,7 +32,7 @@ implements  Erebot_Module_GoF_Deck_Abstract
     {
         if (!count($this->_cards))
             throw new Erebot_Module_GoF_InternalErrorException();
-        return array_shift($this->_cards);
+        return Erebot_Module_GoF_Card::fromLabel(array_shift($this->_cards));
     }
 
     public function discard(

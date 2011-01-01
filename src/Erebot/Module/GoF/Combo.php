@@ -18,7 +18,7 @@
 
 class       Erebot_Module_GoF_Combo
 implements  ArrayAccess,
-            Iterator,
+            SeekableIterator,
             Countable
 {
     const COMBO_SINGLE          = 1;
@@ -212,7 +212,12 @@ implements  ArrayAccess,
         throw new Exception('Write-access forbidden');
     }
 
-    // Iterator interface.
+    // SeekableIterator interface.
+    public function seek($position)
+    {
+        $this->_position = $position;
+    }
+
     public function current()
     {
         return $this->_cards[$this->_position];

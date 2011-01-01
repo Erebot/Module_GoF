@@ -47,6 +47,11 @@ implements  Countable
         return count($this->_cards);
     }
 
+    public function getCards()
+    {
+        return array_reverse($this->_cards);
+    }
+
     public function addCard(Erebot_Module_GoF_Card &$card)
     {
         $this->_cards[] = $card;
@@ -61,6 +66,7 @@ implements  Countable
             if ($c->getLabel() == $label)
                 return TRUE;
         }
+        unset($c);
         return FALSE;
     }
 
@@ -81,10 +87,8 @@ implements  Countable
     {
         $removedCards = array();
         try {
-            foreach ($combo as &$card) {
-                $removedCards[] = $this->removeCard($card)->getLabel();
-            }
-            unset($card);
+            foreach ($combo as $card)
+                $removedCards[] = $this->removeCard($card);
         }
         catch (Erebot_Module_GoF_NoSuchCardException $e) {
             // Restore the cards as they were before.
@@ -117,7 +121,7 @@ implements  Countable
         $best = reset($this->_cards);
         if ($best === FALSE)
             return NULL;
-        return Erebot_Module_GoF_Card::fromLabel($best);
+        return $best;
     }
 }
 
