@@ -18,7 +18,8 @@
 
 class       Erebot_Module_GoF_Combo
 implements  ArrayAccess,
-            Iterator
+            Iterator,
+            Countable
 {
     const COMBO_SINGLE          = 1;
     const COMBO_PAIR            = 2;
@@ -235,6 +236,12 @@ implements  ArrayAccess,
     public function valid()
     {
         return ($this->_position < count($this->_cards));
+    }
+
+    // Countable interface.
+    public function count()
+    {
+        return count($this->_cards);
     }
 }
 

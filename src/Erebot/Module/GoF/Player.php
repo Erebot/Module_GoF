@@ -16,14 +16,42 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-interface Erebot_Module_GoF_Deck_Abstract
+class Erebot_Module_GoF_Player
 {
-    public function draw();
-    public function shuffle();
-    public function getLastDiscard();
-    public function discard(
-        Erebot_Module_GoF_Player   &$player,
-        Erebot_Module_GoF_Combo    &$card
-    );
+    protected $_token;
+    protected $_hand;
+    protected $_score;
+
+    public function __construct(&$token)
+    {
+        $this->_token   =&  $token;
+        $this->_score   =   0;
+    }
+
+    public function & getToken()
+    {
+        return $this->_token;
+    }
+
+    public function setHand(Erebot_Module_GoF_Hand &$hand)
+    {
+        $this->_hand =& $hand;
+    }
+
+    public function & getHand()
+    {
+        return $this->_hand;
+    }
+
+    public function getScore()
+    {
+        return $this->_score;
+    }
+
+    public function computeScore()
+    {
+        $this->_score += $this->_hand->getScore();
+        return $this->_score;
+    }
 }
 

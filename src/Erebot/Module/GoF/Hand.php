@@ -16,16 +16,25 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class Erebot_Module_GoF_Hand
+class       Erebot_Module_GoF_Hand
+implements  Countable
 {
-    protected $_player;
     protected $_cards;
+    protected $_deck;
+    protected $_player;
 
-    public function __construct(&$player)
+    public function __construct(
+        Erebot_Module_GoF_Deck_Abstract    &$deck,
+        Erebot_Module_GoF_Player           &$player
+    )
     {
+        $this->_deck    =&  $deck;
         $this->_player  =&  $player;
         $this->_cards   =   array();
-        $this->_deck    =&  $deck;
+        for ($i = 0; $i < 16; $i++)
+            $this->_cards[] = $deck->draw();
+        usort($this->_cards, array('Erebot_Module_GoF_Card', 'compareCards'));
+        $this->_cards = array_reverse($this->_cards);
     }
 
     public function & getPlayer()
@@ -33,49 +42,58 @@ class Erebot_Module_GoF_Hand
         return $this->_player;
     }
 
-    public function & getCards()
-    {
-        return $this->_cards;
-    }
-
-    public function getCardsCount()
+    public function count()
     {
         return count($this->_cards);
     }
 
-#    public function findCard($card)
-#    {
-#        if (!is_string())
-#    }
-
     public function addCard(Erebot_Module_GoF_Card &$card)
     {
-        if (in_array($card, $this->_cards, TRUE))
-            throw new Erebot_Module_GoF_InvalidCardException();
         $this->_cards[] = $card;
+        usort($this->_cards, array('Erebot_Module_GoF_Card', 'compareCards'));
+        $this->_cards = array_reverse($this->_cards);
     }
 
-    public function & removeCard($card)
+    public function hasCard(Erebot_Module_GoF_Card &$card)
     {
-        $key = array_search($card, $this->_cards, TRUE);
-        if ($key === FALSE)
-            throw new Erebot_Module_GoF_NoSuchCardException();
-        unset($this->_cards[$key]);
-        return $card;
+        $label = $card->getLabel();
+        foreach ($this->_cards as $key => &$c) {
+            if ($c->getLabel() == $label)
+                return TRUE;
+        }
+        return FALSE;
     }
 
-    public function discard(Erebot_Module_GoF_Combo &$combo)
+    public function & removeCard(Erebot_Module_GoF_Card &$card)
     {
-        if (!$this->hasCombination($combo))
-            throw new Erebot_Module_GoF_NoSuchCardException();
-        foreach ($combo as &$card)
-            $this->removeCard($card);
+        $label = $card->getLabel();
+        foreach ($this->_cards as $key => &$c) {
+            if ($c->getLabel() == $label) {
+                unset($this->_cards[$key]);
+                return $card;
+            }
+        }
+        unset($c);
+        throw new Erebot_Module_GoF_NoSuchCardException();
     }
 
-    public function hasCombination(Erebot_Module_GoF_Combo &$combo)
+    public function discardCombo(Erebot_Module_GoF_Combo &$combo)
     {
-#        foreach ($combo as &$card)
-            
+        $removedCards = array();
+        try {
+            foreach ($combo as &$card) {
+                $removedCards[] = $this->removeCard($card)->getLabel();
+            }
+            unset($card);
+        }
+        catch (Erebot_Module_GoF_NoSuchCardException $e) {
+            // Restore the cards as they were before.
+            $this->_cards = array_merge($this->_cards, $removedCards);
+            usort($this->_cards, array('Erebot_Module_GoF_Card', 'compareCards'));
+            $this->_cards = array_reverse($this->_cards);
+            throw $e;
+        }
+        $this->_deck->discard($this->_player, $combo);
     }
 
     public function getScore()
@@ -92,6 +110,14 @@ class Erebot_Module_GoF_Hand
             if ($count >= $threshold)
                 return $count * $factor;
         return 0;
+    }
+
+    public function getBestCard()
+    {
+        $best = reset($this->_cards);
+        if ($best === FALSE)
+            return NULL;
+        return Erebot_Module_GoF_Card::fromLabel($best);
     }
 }
 

@@ -16,17 +16,21 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class Erebot_Module_GoF_Game
+class       Erebot_Module_GoF_Game
+implements  Countable
 {
+    /// 
     protected $_deck;
     protected $_order;
     protected $_players;
     protected $_startTime;
     protected $_creator;
     protected $_leader;
+    protected $_lastLoser;
+    protected $_nbRounds;
 
-    const DIR_COUNTERCLOCKWISE      = FALSE;
-    const DIR_CLOCKWISE             = TRUE;
+    const DIR_COUNTERCLOCKWISE      = 1;
+    const DIR_CLOCKWISE             = 0;
 
     public function __construct(
                                             $creator,
@@ -37,12 +41,8 @@ class Erebot_Module_GoF_Game
         $this->_deck        =   $deck;
         $this->_players     =   array();
         $this->_startTime   =   NULL;
-        $this->_leader      =   NULL;
-    }
-
-    public function __destruct()
-    {
-        
+        $this->_lastLoser   =   NULL;
+        $this->_nbRounds    =   0;
     }
 
     public function & join($token)
@@ -51,28 +51,146 @@ class Erebot_Module_GoF_Game
         if ($nbPlayers >= 4)
             throw new Erebot_Module_GoF_EnoughPlayersException();
 
-        $this->_players[]   = new Erebot_Module_GoF_Hand($token, $this->_deck);
-        $player             = end($this->_players);
-        if (count($this->_players) == 3) {
-            $this->_startTime = time();
-            shuffle($this->_players);
-        }
+        $player             = new Erebot_Module_GoF_Player($token);
+        $this->_players[]   = $player;
+        $hand               = new Erebot_Module_GoF_Hand($this->_deck, $player);
+        $player->setHand($hand);
         return $player;
     }
 
-    public function play($combo)
+    public function start()
     {
-        
+        if ($nbPlayers < 3)
+            throw new Erebot_Module_GoF_InternalErrorException();
+
+        $this->_startTime = time();
+        shuffle($this->_players);
+        $this->nbRounds++;
+        $multiOne = new Erebot_Module_GoF_Card::fromLabel('m1');
+        foreach ($this->_players as &$player) {
+            if ($player->getHand()->hasCard($multiOne)) {
+                while (reset($this->_players) !== $player)
+                    $this->_shiftPlayer();
+                return $player;
+            }
+        }
+        unset($player);
+        return reset($this->_players);
+    }
+
+    public function play(Erebot_Module_GoF_Combo &$combo)
+    {
+        if (!$this->_nbRounds)
+            throw new Erebot_Module_GoF_InternalErrorException();
+
+        if ($this->_lastLoser !== NULL)
+            throw new Erebot_Module_GoF_WaitingForCardException();
+
+        // Check that the new combo is indeed
+        // superior to the previous one.
+        $lastDiscard = $this->_deck->getLastDiscard();
+        if ($lastDiscard !== NULL &&
+            Erebot_Module_GoF_Combo::compareCombos($combo, $lastDiscard['combo']) <= 0)
+            throw new Erebot_Module_GoF_InferiorComboException();
+
+        $current = $this->getCurrentPlayer();
+        $currentHand =& $current->getHand();
+
+        // If the first player in the first round has
+        // the multi-colored one, he or she MUST play it.
+        if ($this->nbRounds == 1) {
+            $multiOne = new Erebot_Module_GoF_Card::fromLabel('m1');
+            if ($currentHand->hasCard($multiOne)) {
+                $playedMultiOne = FALSE;
+                foreach ($combo as &$card) {
+                    if ($card->getLabel() == 'm1') {
+                        $playedMultiOne = TRUE;
+                        break;
+                    }
+                }
+                if (!$playedMultiOne)
+                    throw new Erebot_Module_GoF_StartWithMulti1Exception();
+            }
+        }
+
+        $currentHand->discardCombo($combo);
+        $this->_shiftPlayer();
+
+        if (!count($currentHand)) {
+            $maxScore   = 0;
+            $nbCards    = array();
+            foreach ($this->_players as $index => &$player) {
+                $nbCards[$index] = count($player->getHand());
+                $maxScore = max($player->computeScore(), $maxScore);
+            }
+            unset($player);
+
+            $losers = array_keys($nbCards, max($nbCards));
+            if (count($losers) > 1) {
+                $losers = array_combine($losers, $losers);
+                $getTotalScore = create_function(
+                    '&$v,$k,$p',
+                    'return $p[$k]->getScore();'
+                );
+                array_walk($losers, $getTotalScore, $this->_players);
+                $losers = array_keys($losers, max($losers));
+
+                if (count($losers) > 1) {
+                    if ($this->getDirection() == self::DIR_COUNTERCLOCKWISE)
+                        $losers = array(min($losers));
+                    else
+                        $losers = array(max($losers));
+                }
+            }
+
+            // Get ready for the next round.
+            // Reverse direction, increment rounds counter, etc.
+            assert(count($losers) == 1);
+            $this->_lastLoser = $this->_players[reset($losers)];
+            $this->_players = array_reverse($this->_players);
+            $this->_nbRounds++;
+            $this->_deck->shuffle();
+            foreach ($this->_players as &$player) {
+                $hand = new Erebot_Module_GoF_Hand($this->_deck, $player);
+                $player->setHand($hand);
+            }
+            unset($player);
+            return $maxScore;
+        }
+        return FALSE;
     }
 
     public function pass()
     {
-        
+        if (!$this->_nbRounds)
+            throw new Erebot_Module_GoF_InternalErrorException();
+
+        if ($this->_lastLoser !== NULL)
+            throw new Erebot_Module_GoF_WaitingForCardException();
+        $this->_shiftPlayer();
     }
 
-    public function chooseCard($card)
+    protected function _shiftPlayer()
     {
-        
+        $last = array_shift($this->_players);
+        $this->_players[] =& $last;
+    }
+
+    public function & chooseCard(Erebot_Module_GoF_Card &$card)
+    {
+        if ($this->_lastLoser === NULL)
+            throw new Erebot_Module_GoF_InternalErrorException();
+
+        $loserHand  =&  $this->_lastLoser->getHand();
+        $best       =   $loserHand->removeCard($loserHand->getBestCard());
+        $winner     =   $this->getCurrentPlayer();
+        $winnerHand =&  $winner->getHand();
+        $chosen     =   $winnerHand->removeCard($card);
+        $winnerHand->addCard($best);
+        $loserHand->addCard($chosen);
+
+        $this->_lastLoser = NULL;
+        return $best;
     }
 
     public function getCurrentPlayer()
@@ -80,12 +198,20 @@ class Erebot_Module_GoF_Game
         return reset($this->_players);
     }
 
-    public function & getLeadingPlayer()
+    public function getLastLoser()
     {
-        return $this->_leader;
+        return $this->_lastLoser;
     }
 
-    public function & getCreator()
+    public function getLeadingPlayer()
+    {
+        $discard = $this->_deck->getLastDiscard();
+        if ($discard === NULL)
+            return NULL;
+        return $discard['player'];
+    }
+
+    public function getCreator()
     {
         return $this->_creator;
     }
@@ -98,14 +224,29 @@ class Erebot_Module_GoF_Game
         return time() - $this->_startTime;
     }
 
-    public function getLastPlayedCombo()
+    public function count()
     {
-        return $this->_deck->getLastDiscardedCombo();
+        return count($this->_players);
     }
 
-    public function & getPlayers()
+    public function getPlayers()
     {
         return $this->_players;
+    }
+
+    public function getNbRounds()
+    {
+        return $this->_nbRounds;
+    }
+
+    public function getDirection()
+    {
+        return ($this->_nbRounds & 1);
+    }
+
+    public function & getDeck()
+    {
+        return $this->_deck;
     }
 }
 

@@ -16,8 +16,8 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class   Erebot_Module_GoF_Deck_Official
-extends Erebot_Module_GoF_Deck_Abstract
+class       Erebot_Module_GoF_Deck_Official
+implements  Erebot_Module_GoF_Deck_Abstract
 {
     protected $_cards;
     protected $_discarded;
@@ -35,9 +35,15 @@ extends Erebot_Module_GoF_Deck_Abstract
         return array_shift($this->_cards);
     }
 
-    public function discard($combo)
+    public function discard(
+        Erebot_Module_GoF_Player   &$player,
+        Erebot_Module_GoF_Combo    &$combo
+    )
     {
-        $this->_discarded = $combo;
+        $this->_discarded = array(
+            'player'    => $player,
+            'combo'     => $combo,
+        );
     }
 
     public function shuffle()
@@ -63,7 +69,7 @@ extends Erebot_Module_GoF_Deck_Abstract
         shuffle($this->_cards);
     }
 
-    public function getLastDiscardedCombo()
+    public function getLastDiscard()
     {
         return $this->_discarded;
     }

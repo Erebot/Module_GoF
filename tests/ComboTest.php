@@ -253,6 +253,9 @@ extends PHPUnit_Framework_TestCase
         );
         $expected = array('g5', 'g4', 'g3', 'g2', 'g1');
 
+        // Countable interface.
+        $this->assertEquals(5, count($combo));
+
         // Iterator interface.
         foreach ($combo as $key => $value) {
             $this->assertTrue(isset($expected[$key]));
