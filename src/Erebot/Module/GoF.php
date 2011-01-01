@@ -1115,7 +1115,7 @@ extends Erebot_Module_Base
         $tpl = new Erebot_Styling($msg, $translator);
         $tpl->assign('logo',        $this->getLogo());
         $this->sendMessage($chan, $tpl->render());
-        return FALSE
+        return FALSE;
     }
 }
 
