@@ -194,6 +194,19 @@ extends Erebot_Module_Base
             return $event->preventDefault(TRUE);
         }
 
+        $limit = $this->parseInt('limit', 100);
+        if ($limit < 10) {
+            $msg = $translator->gettext(
+                'Bad limit in the configuration file (<var name="limit"/>). '.
+                'The <var name="logo"/> game cannot start.'
+            );
+            $tpl = new Erebot_Styling($msg, $translator);
+            $tpl->assign('limit',   $limit);
+            $tpl->assign('logo',    $this->getLogo());
+            $this->sendMessage($chan, $tpl->render());
+            return $event->preventDefault(TRUE);
+        }
+
         $registry   =   $this->_connection->getModule(
             'Erebot_Module_TriggerRegistry'
         );
@@ -318,15 +331,19 @@ extends Erebot_Module_Base
         $infos['triggers']          =&  $triggers;
         $infos['game']              =   new Erebot_Module_GoF_Game($creator, $deck);
         $infos['timer']             =   NULL;
+        $infos['limit']             =   $limit;
 
         $msg = $translator->gettext(
             'Ok! A new <var name="logo"/> game has '.
-            'been created in <var name="chan"/>. Say "<var name="trigger"/>" '.
-            'to join it.'
+            'been created in <var name="chan"/>. '.
+            'It will not stop until someone gets '.
+            'at least <b><var name="limit"/></b> points. '.
+            'Say "<b><var name="trigger"/></b>" to join it.'
         );
         $tpl = new Erebot_Styling($msg, $translator);
-        $tpl->assign('logo', $this->getLogo());
-        $tpl->assign('chan', $chan);
+        $tpl->assign('logo',    $this->getLogo());
+        $tpl->assign('chan',    $chan);
+        $tpl->assign('limit',   $limit);
         $tpl->assign('trigger', $infos['triggers']['join']);
         $this->sendMessage($chan, $tpl->render());
         $event->preventDefault(TRUE);
@@ -775,8 +792,7 @@ extends Erebot_Module_Base
 
         // We have a winner.
         if ($endOfRound !== FALSE) {
-            /// @TODO: make it customizable.
-            $end = ($endOfRound >= 50);
+            $end = ($endOfRound >= $infos['limit']);
 
             $pauseDelay = $this->parseInt('pause_delay', 5);
             if ($pauseDelay < 0)
