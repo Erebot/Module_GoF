@@ -46,7 +46,10 @@ extends Erebot_Module_Base
 
             if (!($flags & self::RELOAD_INIT)) {
                 $this->_connection->removeEventHandler(
-                    $this->_creator['handler']
+                    $this->_creator['handlerCreate']
+                );
+                $this->_connection->removeEventHandler(
+                    $this->_creator['handlerStop']
                 );
                 $registry->freeTriggers($this->_creator['trigger'], $matchAny);
             }
@@ -62,14 +65,24 @@ extends Erebot_Module_Base
                 ));
             }
 
-            $this->_creator['handler']  =   new Erebot_EventHandler(
+            $this->_creator['handlerCreate'] = new Erebot_EventHandler(
                 array($this, 'handleCreate'),
                 new Erebot_Event_Match_All(
                     new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
                     new Erebot_Event_Match_TextStatic($triggerCreate, TRUE)
                 )
             );
-            $this->_connection->addEventHandler($this->_creator['handler']);
+
+            $this->_creator['handlerStop'] = new Erebot_EventHandler(
+                array($this, 'handleStop'),
+                new Erebot_Event_Match_All(
+                    new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                    new Erebot_Event_Match_TextWildcard($triggerCreate.' &', TRUE)
+                )
+            );
+
+            $this->_connection->addEventHandler($this->_creator['handlerCreate']);
+            $this->_connection->addEventHandler($this->_creator['handlerStop']);
         }
     }
 
@@ -175,9 +188,9 @@ extends Erebot_Module_Base
 
     public function handleCreate(Erebot_Interface_Event_Generic &$event)
     {
-        $nick       =   $event->getSource();
-        $chan       =   $event->getChan();
-        $translator =   $this->getTranslator($chan);
+        $nick       = $event->getSource();
+        $chan       = $event->getChan();
+        $translator = $this->getTranslator($chan);
 
         if (isset($this->_chans[$chan])) {
             $creator = (string) $this->_chans[$chan]['game']->getCreator();
@@ -347,6 +360,57 @@ extends Erebot_Module_Base
         $tpl->assign('trigger', $infos['triggers']['join']);
         $this->sendMessage($chan, $tpl->render());
         $event->preventDefault(TRUE);
+    }
+
+    public function handleStop(Erebot_Interface_Event_Generic &$event)
+    {
+        $nick       = $event->getSource();
+        $chan       = $event->getChan();
+        $translator = $this->getTranslator($chan);
+        $end        = in_array(
+            $event->getText()->getTokens(1),
+            array('end', 'off', 'stop', 'cancel')
+        );
+
+        if (!$end) return;
+
+        if (!isset($this->_chans[$chan])) {
+            $msg = $translator->gettext(
+                '<var name="logo"/> No game has been started '.
+                'in <var name="chan"/> yet! Nothing to stop.'
+            );
+            $tpl = new Erebot_Styling($msg, $translator);
+            $tpl->assign('logo',    $this->getLogo());
+            $tpl->assign('chan',    $chan);
+            $this->sendMessage($chan, $tpl->render());
+            return $event->preventDefault(TRUE);
+        }
+
+        $creator = (string) $this->_chans[$chan]['game']->getCreator();
+        if (!$this->_connection->irccmp($creator, $nick)) {
+            $msg = $translator->gettext(
+                '<var name="admin"/> stopped '.
+                'this <var name="logo"/> game!'
+            );
+            $tpl = new Erebot_Styling($msg, $translator);
+            $tpl->assign('logo',    $this->getLogo());
+            $tpl->assign('admin',   $nick);
+            $this->sendMessage($chan, $tpl->render());
+            $this->cleanup($chan);
+            return $event->preventDefault(TRUE);
+        }
+
+        $msg = $translator->gettext(
+            'Well tried <var name="nick"/>! '.
+            'But only <var name="admin"/> can stop '.
+            'this <var name="logo"/> game!'
+        );
+        $tpl = new Erebot_Styling($msg, $translator);
+        $tpl->assign('logo',    $this->getLogo());
+        $tpl->assign('nick',    $nick);
+        $tpl->assign('admin',   $creator);
+        $this->sendMessage($chan, $tpl->render());
+        return $event->preventDefault(TRUE);
     }
 
     protected function compareCards($a, $b)
