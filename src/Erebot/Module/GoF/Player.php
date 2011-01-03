@@ -33,9 +33,9 @@ class Erebot_Module_GoF_Player
         return $this->_token;
     }
 
-    public function setHand(Erebot_Module_GoF_Hand &$hand)
+    public function setHand(Erebot_Module_GoF_Hand $hand)
     {
-        $this->_hand =& $hand;
+        $this->_hand = $hand;
     }
 
     public function & getHand()

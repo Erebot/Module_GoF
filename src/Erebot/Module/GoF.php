@@ -114,27 +114,6 @@ extends Erebot_Module_Base
                 Erebot_Styling::CODE_COLOR;
     }
 
-    protected function wildify($text)
-    {
-        $order  =   array(
-                        self::COLOR_RED,
-                        self::COLOR_GREEN,
-                        self::COLOR_YELLOW,
-                    );
-        $text   = ' '.$text.' ';
-        $len    = strlen($text);
-        $output = Erebot_Styling::CODE_BOLD;
-        $nbCol  = count($order);
-
-        for ($i = 0; $i < $len; $i++)
-            $output .=  Erebot_Styling::CODE_COLOR.
-                        $order[$i % $nbCol].
-                        $text[$i];
-        $output .=  Erebot_Styling::CODE_COLOR.
-                    Erebot_Styling::CODE_BOLD;
-        return $output;
-    }
-
     protected function cleanup($chan)
     {
         $registry   =&  $this->_connection->getModule(
@@ -172,7 +151,16 @@ extends Erebot_Module_Base
         );
 
         if ($card == 'm1')
-            return $this->wildify('Multi 1');
+            return
+                Erebot_Styling::CODE_BOLD.
+                Erebot_Styling::CODE_COLOR.
+                self::COLOR_GREEN.' Mu'.
+                Erebot_Styling::CODE_COLOR.
+                self::COLOR_YELLOW.'lti'.
+                Erebot_Styling::CODE_COLOR.
+                self::COLOR_RED.' 1 '.
+                Erebot_Styling::CODE_COLOR.
+                Erebot_Styling::CODE_BOLD;
 
         if (isset($texts[$card[1]]))
             return $this->getColoredCard(
@@ -197,7 +185,7 @@ extends Erebot_Module_Base
             $msg = $translator->gettext(
                 'A <var name="logo"/> managed '.
                 'by <b><var name="admin"/></b> is already running. '.
-                'Say "<var name="trigger"/>" to join it.'
+                'Say "<b><var name="trigger"/></b>" to join it.'
             );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('logo',    $this->getLogo());
@@ -464,8 +452,8 @@ extends Erebot_Module_Base
                 'after <var name="playtime"/>. '.
                 '<b><var name="last_winner"/></b>, you must now choose '.
                 'a card to give to <b><var name="last_loser"/></b>. '.
-                'You will receive <var name="card"/>. '.
-                'Please choose with: <var name="trigger"/> &lt;card&gt;.'
+                'You will receive <var name="card"/>. Please choose '.
+                'with: "<b><var name="trigger"/></b> &lt;card&gt;".'
             );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('logo',        $this->getLogo());
@@ -894,13 +882,14 @@ extends Erebot_Module_Base
                 foreach ($infos['game']->getPlayers() as $player) {
                     $scores[(string) $player->getToken()] = $player->getScore();
                 }
-                $winners    = array_keys($scores, min($scores));
-                $playetime  = $translator->formatDuration(
+                $minScore   = min($scores);
+                $winners    = array_keys($scores, $minScore);
+                $playtime   = $translator->formatDuration(
                     $infos['game']->getElapsedTime()
                 );
                 $tpl = new Erebot_Styling($msg, $translator);
                 $tpl->assign('logo',        $this->getLogo());
-                $tpl->assign('score',       $nick);
+                $tpl->assign('score',       $minScore);
                 $tpl->assign('winners',     $winners);
                 $tpl->assign('playtime',    $playtime);
                 $tpl->assign('rounds',      $infos['game']->getNbRounds());

@@ -52,8 +52,7 @@ implements  Countable
 
         $player             = new Erebot_Module_GoF_Player($token);
         $this->_players[]   = $player;
-        $hand               = new Erebot_Module_GoF_Hand($this->_deck, $player);
-        $player->setHand($hand);
+        $player->setHand(new Erebot_Module_GoF_Hand($this->_deck, $player));
         return $player;
     }
 
@@ -63,7 +62,7 @@ implements  Countable
             throw new Erebot_Module_GoF_InternalErrorException();
 
         $this->_startTime = time();
-        shuffle($this->_players);
+        $this->_shuffle();
         $this->_nbRounds++;
         $multiOne = Erebot_Module_GoF_Card::fromLabel('m1');
         foreach ($this->_players as &$player) {
@@ -77,7 +76,12 @@ implements  Countable
         return $this->getCurrentPlayer();
     }
 
-    public function play(Erebot_Module_GoF_Combo &$combo)
+    protected function _shuffle()
+    {
+        shuffle($this->_players);
+    }
+
+    public function play(Erebot_Module_GoF_Combo $combo)
     {
         if (!$this->_nbRounds)
             throw new Erebot_Module_GoF_InternalErrorException();
@@ -167,11 +171,11 @@ implements  Countable
             $this->_players = array_reverse($this->_players);
             $this->_nbRounds++;
             $this->_deck->shuffle();
-            foreach ($this->_players as &$player) {
-                $hand = new Erebot_Module_GoF_Hand($this->_deck, $player);
-                $player->setHand($hand);
+            foreach ($this->_players as $player) {
+                $player->setHand(
+                    new Erebot_Module_GoF_Hand($this->_deck, $player)
+                );
             }
-            unset($player);
             return $maxScore;
         }
         return FALSE;

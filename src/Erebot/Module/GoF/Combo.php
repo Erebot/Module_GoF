@@ -39,7 +39,7 @@ implements  ArrayAccess,
         $cards = func_get_args();
         $values = array();
         $colors = array();
-        foreach ($cards as &$card) {
+        foreach ($cards as $card) {
             if (!is_object($card) || !($card instanceof Erebot_Module_GoF_Card))
                 throw new Erebot_Module_GoF_InvalidComboException("Not a card");
             $value = $card->getValue();
@@ -52,7 +52,6 @@ implements  ArrayAccess,
                 $colors[$color] = array();
             $colors[$color][] = $card;
         }
-        unset($card);
 
         $nbCards = count($cards);
         if ($nbCards < 1 || $nbCards > 7)
