@@ -205,7 +205,7 @@ implements  Countable
         $this->_players[] =& $last;
     }
 
-    public function & chooseCard(Erebot_Module_GoF_Card &$card)
+    public function chooseCard(Erebot_Module_GoF_Card $card)
     {
         if ($this->_lastLoser === NULL)
             throw new Erebot_Module_GoF_InternalErrorException();

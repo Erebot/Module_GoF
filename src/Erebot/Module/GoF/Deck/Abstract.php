@@ -22,8 +22,8 @@ interface Erebot_Module_GoF_Deck_Abstract
     public function shuffle();
     public function getLastDiscard();
     public function discard(
-        Erebot_Module_GoF_Player   &$player,
-        Erebot_Module_GoF_Combo    &$card
+        Erebot_Module_GoF_Player   $player,
+        Erebot_Module_GoF_Combo    $card
     );
 }
 

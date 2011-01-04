@@ -36,8 +36,8 @@ implements  Erebot_Module_GoF_Deck_Abstract
     }
 
     public function discard(
-        Erebot_Module_GoF_Player   &$player,
-        Erebot_Module_GoF_Combo    &$combo
+        Erebot_Module_GoF_Player   $player,
+        Erebot_Module_GoF_Combo    $combo
     )
     {
         $this->_discarded = array(

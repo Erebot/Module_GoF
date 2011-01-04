@@ -150,8 +150,8 @@ implements  ArrayAccess,
     }
 
     static public function compareCombos(
-        Erebot_Module_GoF_Combo &$comboA,
-        Erebot_Module_GoF_Combo &$comboB
+        Erebot_Module_GoF_Combo $comboA,
+        Erebot_Module_GoF_Combo $comboB
     )
     {
         if ($comboA->_type != $comboB->_type) {

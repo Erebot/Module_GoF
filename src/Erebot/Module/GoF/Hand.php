@@ -24,13 +24,13 @@ implements  Countable
     protected $_player;
 
     public function __construct(
-        Erebot_Module_GoF_Deck_Abstract    &$deck,
-        Erebot_Module_GoF_Player           &$player
+        Erebot_Module_GoF_Deck_Abstract    $deck,
+        Erebot_Module_GoF_Player           $player
     )
     {
-        $this->_deck    =&  $deck;
-        $this->_player  =&  $player;
-        $this->_cards   =   array();
+        $this->_deck    = $deck;
+        $this->_player  = $player;
+        $this->_cards   = array();
         for ($i = 0; $i < 16; $i++)
             $this->_cards[] = $deck->draw();
         usort($this->_cards, array('Erebot_Module_GoF_Card', 'compareCards'));
@@ -52,14 +52,14 @@ implements  Countable
         return array_reverse($this->_cards);
     }
 
-    public function addCard(Erebot_Module_GoF_Card &$card)
+    public function addCard(Erebot_Module_GoF_Card $card)
     {
         $this->_cards[] = $card;
         usort($this->_cards, array('Erebot_Module_GoF_Card', 'compareCards'));
         $this->_cards = array_reverse($this->_cards);
     }
 
-    public function hasCard(Erebot_Module_GoF_Card &$card)
+    public function hasCard(Erebot_Module_GoF_Card $card)
     {
         $label = $card->getLabel();
         foreach ($this->_cards as $key => &$c) {
@@ -70,7 +70,7 @@ implements  Countable
         return FALSE;
     }
 
-    public function & removeCard(Erebot_Module_GoF_Card &$card)
+    public function & removeCard(Erebot_Module_GoF_Card $card)
     {
         $label = $card->getLabel();
         foreach ($this->_cards as $key => &$c) {
@@ -83,7 +83,7 @@ implements  Countable
         throw new Erebot_Module_GoF_NoSuchCardException();
     }
 
-    public function discardCombo(Erebot_Module_GoF_Combo &$combo)
+    public function discardCombo(Erebot_Module_GoF_Combo $combo)
     {
         $removedCards = array();
         try {

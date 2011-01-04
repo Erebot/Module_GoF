@@ -26,8 +26,8 @@ extends Erebot_Module_GoF_Exception
 
     public function __construct($message = NULL, $code = 0, $allowed = NULL)
     {
-        parent::__construct($message, $code, $previous);
-        $this->allowed = $_allowed;
+        parent::__construct($message, $code);
+        $this->_allowed = $allowed;
     }
 
     public function getAllowedCombo()
