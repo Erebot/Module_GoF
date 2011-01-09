@@ -22,7 +22,7 @@ extends Erebot_Module_Base
     static protected $_metadata = array(
         'requires'  =>  array(
             'Erebot_Module_TriggerRegistry',
-            'Erebot_Module_NickTracker',
+            'Erebot_Module_IrcTracker',
         ),
     );
     protected $_chans;
@@ -324,7 +324,7 @@ extends Erebot_Module_Base
             $this->_connection->addEventHandler($handler);
         unset($handler);
 
-        $tracker    = $this->_connection->getModule('Erebot_Module_NickTracker');
+        $tracker    = $this->_connection->getModule('Erebot_Module_IrcTracker');
         $deck       = new Erebot_Module_GoF_Deck_Official();
         $creator    = $tracker->startTracking($nick);
 
@@ -566,7 +566,7 @@ extends Erebot_Module_Base
     public function handleJoin(Erebot_Interface_Event_Generic &$event)
     {
         $tracker    = $this->_connection->getModule(
-            'Erebot_Module_NickTracker'
+            'Erebot_Module_IrcTracker'
         );
         $nick       = $event->getSource();
         $chan       = $event->getChan();
