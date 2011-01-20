@@ -591,7 +591,8 @@ extends Erebot_Module_Base
         }
 
         try {
-            $player = $infos['game']->join($tracker->startTracking($nick));
+            $token = $tracker->startTracking($nick);
+            $player = $infos['game']->join($token);
         }
         catch (Erebot_Module_GoF_EnoughPlayersException $e) {
             $msg = $translator->gettext(
