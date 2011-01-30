@@ -32,7 +32,7 @@ extends Erebot_Module_Base
     const COLOR_GREEN               = '00,03';
     const COLOR_YELLOW              = '01,08';
 
-    public function reload($flags)
+    public function _reload($flags)
     {
         if ($flags & self::RELOAD_MEMBERS) {
             $this->_chans    = array();
@@ -83,6 +83,14 @@ extends Erebot_Module_Base
 
             $this->_connection->addEventHandler($this->_creator['handlerCreate']);
             $this->_connection->addEventHandler($this->_creator['handlerStop']);
+        }
+    }
+
+    protected function _unload()
+    {
+        foreach ($this->_chans as $entry) {
+            if (isset($entry['timer']))
+                $this->removeTimer($entry['timer']);
         }
     }
 
