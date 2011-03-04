@@ -428,16 +428,10 @@ extends Erebot_Module_Base
         return $colors[$a[0]] - $colors[$b[0]];
     }
 
-    public function startGame(Erebot_Timer &$timer)
+    public function startGame(Erebot_Timer &$timer, $chan)
     {
-        $chan = NULL;
-        foreach ($this->_chans as $name => &$infos) {
-            if (isset($infos['timer']) && $infos['timer'] == $timer) {
-                $chan = $name;
-                break;
-            }
-        }
-        if ($chan === NULL) return;
+        if (!isset($this->_chans[$chan])) return;
+        $infos =& $this->_chans[$chan];
 
         $translator     = $this->getTranslator($chan);
         $infos['timer'] = NULL;
@@ -631,7 +625,8 @@ extends Erebot_Module_Base
             $infos['timer'] = new Erebot_Timer(
                 array($this, 'startGame'),
                 $startDelay,
-                FALSE
+                FALSE,
+                array($chan)
             );
             $this->addTimer($infos['timer']);
 
@@ -909,7 +904,8 @@ extends Erebot_Module_Base
                 $infos['timer'] = new Erebot_Timer(
                     array($this, 'startGame'),
                     $pauseDelay,
-                    FALSE
+                    FALSE,
+                    array($chan)
                 );
                 $this->addTimer($infos['timer']);
             }
