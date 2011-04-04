@@ -68,7 +68,7 @@ extends Erebot_Module_Base
             $this->_creator['handlerCreate'] = new Erebot_EventHandler(
                 array($this, 'handleCreate'),
                 new Erebot_Event_Match_All(
-                    new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                    new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                     new Erebot_Event_Match_TextStatic($triggerCreate, TRUE)
                 )
             );
@@ -76,7 +76,7 @@ extends Erebot_Module_Base
             $this->_creator['handlerStop'] = new Erebot_EventHandler(
                 array($this, 'handleStop'),
                 new Erebot_Event_Match_All(
-                    new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                    new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                     new Erebot_Event_Match_TextWildcard($triggerCreate.' &', TRUE)
                 )
             );
@@ -182,7 +182,7 @@ extends Erebot_Module_Base
         );
     }
 
-    public function handleCreate(Erebot_Interface_Event_Generic &$event)
+    public function handleCreate(Erebot_Interface_Event_ChanText $event)
     {
         $nick       = $event->getSource();
         $chan       = $event->getChan();
@@ -251,7 +251,7 @@ extends Erebot_Module_Base
         $infos['handlers']['choose']        =   new Erebot_EventHandler(
             array($this, 'handleChoose'),
             new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                 new Erebot_Event_Match_TextWildcard($infos['triggers']['choose'].' *', NULL)
             )
         );
@@ -259,7 +259,7 @@ extends Erebot_Module_Base
         $infos['handlers']['join']          =   new Erebot_EventHandler(
             array($this, 'handleJoin'),
             new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                 new Erebot_Event_Match_TextStatic($infos['triggers']['join'], NULL)
             )
         );
@@ -267,7 +267,7 @@ extends Erebot_Module_Base
         $infos['handlers']['pass']          =   new Erebot_EventHandler(
             array($this, 'handlePass'),
             new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                 new Erebot_Event_Match_TextStatic($infos['triggers']['pass'], NULL)
             )
         );
@@ -275,7 +275,7 @@ extends Erebot_Module_Base
         $infos['handlers']['play']          =   new Erebot_EventHandler(
             array($this, 'handlePlay'),
             new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                 new Erebot_Event_Match_TextWildcard($infos['triggers']['play'].' *', NULL)
             )
         );
@@ -283,7 +283,7 @@ extends Erebot_Module_Base
         $infos['handlers']['show_cards']    =   new Erebot_EventHandler(
             array($this, 'handleShowCardsCount'),
             new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                 new Erebot_Event_Match_TextStatic($infos['triggers']['show_cards'], NULL)
             )
         );
@@ -291,7 +291,7 @@ extends Erebot_Module_Base
         $infos['handlers']['show_discard']  =   new Erebot_EventHandler(
             array($this, 'handleShowDiscard'),
             new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                 new Erebot_Event_Match_TextStatic($infos['triggers']['show_discard'], NULL)
             )
         );
@@ -299,7 +299,7 @@ extends Erebot_Module_Base
         $infos['handlers']['show_order']    =   new Erebot_EventHandler(
             array($this, 'handleShowOrder'),
             new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                 new Erebot_Event_Match_TextStatic($infos['triggers']['show_order'], NULL)
             )
         );
@@ -307,7 +307,7 @@ extends Erebot_Module_Base
         $infos['handlers']['show_scores']   =   new Erebot_EventHandler(
             array($this, 'handleShowScores'),
             new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                 new Erebot_Event_Match_TextStatic($infos['triggers']['show_scores'], NULL)
             )
         );
@@ -315,7 +315,7 @@ extends Erebot_Module_Base
         $infos['handlers']['show_time']     =   new Erebot_EventHandler(
             array($this, 'handleShowTime'),
             new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                 new Erebot_Event_Match_TextStatic($infos['triggers']['show_time'], NULL)
             )
         );
@@ -323,14 +323,13 @@ extends Erebot_Module_Base
         $infos['handlers']['show_turn'] =   new Erebot_EventHandler(
             array($this, 'handleShowTurn'),
             new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
                 new Erebot_Event_Match_TextStatic($infos['triggers']['show_turn'], NULL)
             )
         );
 
-        foreach ($infos['handlers'] as &$handler)
+        foreach ($infos['handlers'] as $handler)
             $this->_connection->addEventHandler($handler);
-        unset($handler);
 
         $tracker    = $this->_connection->getModule('Erebot_Module_IrcTracker');
         $deck       = new Erebot_Module_GoF_Deck_Official();
@@ -358,7 +357,7 @@ extends Erebot_Module_Base
         $event->preventDefault(TRUE);
     }
 
-    public function handleStop(Erebot_Interface_Event_Generic &$event)
+    public function handleStop(Erebot_Interface_Event_ChanText $event)
     {
         $nick       = $event->getSource();
         $chan       = $event->getChan();
@@ -487,7 +486,7 @@ extends Erebot_Module_Base
         }
     }
 
-    public function handleChoose(Erebot_Interface_Event_Generic &$event)
+    public function handleChoose(Erebot_Interface_Event_ChanText $event)
     {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
@@ -565,7 +564,7 @@ extends Erebot_Module_Base
         $event->preventDefault(TRUE);
     }
 
-    public function handleJoin(Erebot_Interface_Event_Generic &$event)
+    public function handleJoin(Erebot_Interface_Event_ChanText $event)
     {
         $tracker    = $this->_connection->getModule(
             'Erebot_Module_IrcTracker'
@@ -641,7 +640,7 @@ extends Erebot_Module_Base
         $event->preventDefault(TRUE);
     }
 
-    public function handlePass(Erebot_Interface_Event_Generic &$event)
+    public function handlePass(Erebot_Interface_Event_ChanText $event)
     {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
@@ -692,7 +691,7 @@ extends Erebot_Module_Base
         $event->preventDefault(TRUE);
     }
 
-    public function handlePlay(Erebot_Interface_Event_Generic &$event)
+    public function handlePlay(Erebot_Interface_Event_ChanText $event)
     {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
@@ -942,7 +941,7 @@ extends Erebot_Module_Base
         return $translator->gettext($typeNames[$combo->getType()]);
     }
 
-    public function handleShowCardsCount(Erebot_Interface_Event_Generic &$event)
+    public function handleShowCardsCount(Erebot_Interface_Event_ChanText $event)
     {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
@@ -973,7 +972,7 @@ extends Erebot_Module_Base
         $event->preventDefault(TRUE);
     }
 
-    public function handleShowDiscard(Erebot_Interface_Event_Generic &$event)
+    public function handleShowDiscard(Erebot_Interface_Event_ChanText $event)
     {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
@@ -1025,7 +1024,7 @@ extends Erebot_Module_Base
         $event->preventDefault(TRUE);
     }
 
-    public function handleShowOrder(Erebot_Interface_Event_Generic &$event)
+    public function handleShowOrder(Erebot_Interface_Event_ChanText $event)
     {
         $chan = $event->getChan();
         if (!isset($this->_chans[$chan])) return;
@@ -1071,7 +1070,7 @@ extends Erebot_Module_Base
         $this->sendMessage($chan, $tpl->render());
     }
 
-    public function handleShowScores(Erebot_Interface_Event_Generic &$event)
+    public function handleShowScores(Erebot_Interface_Event_ChanText $event)
     {
         $chan = $event->getChan();
         if (!isset($this->_chans[$chan])) return;
@@ -1079,7 +1078,7 @@ extends Erebot_Module_Base
         $event->preventDefault(TRUE);
     }
 
-    public function handleShowTime(Erebot_Interface_Event_Generic &$event)
+    public function handleShowTime(Erebot_Interface_Event_ChanText $event)
     {
         $chan = $event->getChan();
         if (!isset($this->_chans[$chan])) return;
@@ -1162,7 +1161,7 @@ extends Erebot_Module_Base
             $this->_sendCards($chan, $current);
     }
 
-    public function handleShowTurn(Erebot_Interface_Event_Generic &$event)
+    public function handleShowTurn(Erebot_Interface_Event_ChanText $event)
     {
         $chan = $event->getChan();
         if (!isset($this->_chans[$chan])) return;
