@@ -124,14 +124,13 @@ extends Erebot_Module_Base
 
     protected function cleanup($chan)
     {
-        $registry   =&  $this->_connection->getModule(
+        $registry   = $this->_connection->getModule(
             'Erebot_Module_TriggerRegistry'
         );
 
         $infos      =&  $this->_chans[$chan];
-        foreach ($infos['handlers'] as &$handler)
+        foreach ($infos['handlers'] as $handler)
             $this->_connection->removeEventHandler($handler);
-        unset($handler);
 
         $registry->freeTriggers($infos['triggers_token'], $chan);
 
@@ -1111,7 +1110,7 @@ extends Erebot_Module_Base
         if ($from !== NULL && !$this->_connection->irccasecmp(
             $from, $currentNick)) {
             $msg = $translator->gettext(
-                '<var name="logo"/> <b><var name="nick"/></b>: '.
+                '<var name="logo"/>: <b><var name="nick"/></b>: '.
                 'it\'s your turn sleepyhead!'
             );
             $tpl = new Erebot_Styling($msg, $translator);
