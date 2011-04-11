@@ -720,10 +720,23 @@ extends Erebot_Module_Base
 
         // Build the corresponding cards.
         preg_match_all('/(?:[gyr][0-9]+|m1|gp|yp|rd)/', $move, $matches);
-        $cards = array_map(
-            array('Erebot_Module_GoF_Card', 'fromLabel'),
-            $matches[0]
-        );
+        try {
+            $cards = array_map(
+                array('Erebot_Module_GoF_Card', 'fromLabel'),
+                $matches[0]
+            );
+        }
+        catch (Erebot_Module_GoF_InvalidCardException $e) {
+            $msg = $translator->gettext(
+                '<var name="logo"/> Hmm? What card was that '.
+                '<b><var name="nick"/></b>?'
+            );
+            $tpl = new Erebot_Styling($msg, $translator);
+            $tpl->assign('logo',    $this->getLogo());
+            $tpl->assign('nick',    $nick);
+            $this->sendMessage($chan, $tpl->render());
+            return $event->preventDefault(TRUE);
+        }
 
         // Build a combo from those cards.
         $reflector = new ReflectionClass('Erebot_Module_GoF_Combo');
