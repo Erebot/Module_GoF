@@ -1,303 +1,220 @@
-#
-msgid   ""
-msgstr  "Project-Id-Version: PACKAGE VERSION\n"
-        "Last-Translator: Automatically generated\n"
-        "Language-Team: none\n"
-        "MIME-Version: 1.0\n"
-        "Content-Type: text/plain; charset=ASCII\n"
-        "Content-Transfer-Encoding: 8bit\n"
-        "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 527
-msgid   "<b><var name=\"nick\"/></b> joins this <var name=\"logo\"/> game."
-msgstr  "<b><var name=\"nick\"/></b> joins this <var name=\"logo\"/> game."
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 914
-msgid   "<var name=\"logo\"/> <b><var name=\"nick\"/></b> has got the upper "
-        "hand and may now start a new combination"
-msgstr  "<var name=\"logo\"/> <b><var name=\"nick\"/></b> has got the upper "
-        "hand and may now start a new combination"
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 600
-msgid   "<var name=\"logo\"/> <b><var name=\"nick\"/></b> passes turn."
-msgstr  "<var name=\"logo\"/> <b><var name=\"nick\"/></b> passes turn."
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 781
-msgid   "<var name=\"logo\"/> <b><var name=\"nick\"/></b> wins this round!"
-msgstr  "<var name=\"logo\"/> <b><var name=\"nick\"/></b> wins this round!"
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 775
-msgid   "<var name=\"logo\"/> <b><var name=\"nick\"/></b> wins this round! The "
-        "next round will start in <var name=\"delay\"/> seconds."
+msgid   "player.wins.normal"
 msgstr  "<var name=\"logo\"/> <b><var name=\"nick\"/></b> wins this round! The "
         "next round will start in <var name=\"delay\"/> seconds."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 726
-msgid   "<var name=\"logo\"/> <b><var name=\"nick\"/></b>, you cannot play "
-        "<b><var name=\"type\"/></b> right now!"
-msgstr  "<var name=\"logo\"/> <b><var name=\"nick\"/></b>, you cannot play "
-        "<b><var name=\"type\"/></b> right now!"
+msgid   "player.wins.final"
+msgstr  "<var name=\"logo\"/> <b><var name=\"nick\"/></b> wins this round!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 1028
-msgid   "<var name=\"logo\"/> <b><var name=\"nick\"/></b>: it's your turn "
-        "sleepyhead!"
+msgid   "player.upper-hand"
+msgstr  "<var name=\"logo\"/> <b><var name=\"nick\"/></b> has got the upper "
+        "hand and may now start a new combination"
+#
+msgid   "player.turn.self"
 msgstr  "<var name=\"logo\"/> <b><var name=\"nick\"/></b>: it's your turn "
         "sleepyhead!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 428
-msgid   "<var name=\"logo\"/> Hmm? What is that card <b><var name=\"nick\"/></"
-        "b>?"
-msgstr  "<var name=\"logo\"/> Hmm? What is that card <b><var name=\"nick\"/></"
-        "b>?"
+msgid   "player.turn.other"
+msgstr  "<var name=\"logo\"/>: It's <b><var name=\"nick\"/></b>'s turn."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 628
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 652
-msgid   "<var name=\"logo\"/> Hmm? What move was that <b><var name=\"nick\"/></"
-        "b>?"
-msgstr  "<var name=\"logo\"/> Hmm? What move was that <b><var name=\"nick\"/></"
-        "b>?"
+msgid   "player.plays"
+msgstr  "<var name=\"logo\"/>: <b><var name=\"nick\"/></b> plays <var name="
+        "\"type\"/>: <for from=\"cards\" item=\"card\" separator=\" \"><var "
+        "name=\"card\"/></for>"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 1040
-msgid   "<var name=\"logo\"/> No player dared to raise the heat! It's <b><var "
-        "name=\"nick\"/></b>'s turn to play a new combination."
+msgid   "player.passes"
+msgstr  "<var name=\"logo\"/> <b><var name=\"nick\"/></b> passes turn."
+#
+msgid   "player.new-combo"
 msgstr  "<var name=\"logo\"/> No player dared to raise the heat! It's <b><var "
         "name=\"nick\"/></b>'s turn to play a new combination."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 589
-msgid   "<var name=\"logo\"/> Now is not the time to pass <b><var name=\"nick"
-        "\"/></b>!"
-msgstr  "<var name=\"logo\"/> Now is not the time to pass <b><var name=\"nick"
-        "\"/></b>!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 668
-msgid   "<var name=\"logo\"/> Now is not the time to play <b><var name=\"nick"
-        "\"/></b>!"
-msgstr  "<var name=\"logo\"/> Now is not the time to play <b><var name=\"nick"
-        "\"/></b>!"
+msgid   "player.last-card"
+msgstr  "<var name=\"logo\"/>: <b><var name=\"nick\"/></b> plays <var name="
+        "\"type\"/>: <for from=\"cards\" item=\"card\" separator=\" \"><var "
+        "name=\"card\"/></for> - This is <b><var name=\"nick\"/></b>'s last "
+        "card!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 577
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 679
-msgid   "<var name=\"logo\"/> Proceed with the card exchange first. Use "
-        "<b><var name=\"trigger\"/> &lt;card&gt;</b> to select the &lt;"
-        "card&gt; to give away."
-msgstr  "<var name=\"logo\"/> Proceed with the card exchange first. Use "
-        "<b><var name=\"trigger\"/> &lt;card&gt;</b> to select the &lt;"
-        "card&gt; to give away."
+msgid   "player.joins"
+msgstr  "<b><var name=\"nick\"/></b> joins this <var name=\"logo\"/> game."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 691
-msgid   "<var name=\"logo\"/> Sorry <b><var name=\"nick\"/></b>, but this is "
-        "not enough to take the leadership!"
-msgstr  "<var name=\"logo\"/> Sorry <b><var name=\"nick\"/></b>, but this is "
-        "not enough to take the leadership!"
+msgid   "player.cards"
+msgstr  "Your cards: <for from=\"cards\" item=\"card\" separator=\" \"><var "
+        "name=\"card\"/></for>"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 456
-msgid   "<var name=\"logo\"/> Sorry <b><var name=\"nick\"/></b>, you do not "
-        "have that card! (<var name=\"card\"/>)"
-msgstr  "<var name=\"logo\"/> Sorry <b><var name=\"nick\"/></b>, you do not "
-        "have that card! (<var name=\"card\"/>)"
+msgid   "player.best-card"
+msgstr  "<var name=\"logo\"/>: <b><var name=\"nick\"/></b>, since there is "
+        "only 1 card left in <b><var name=\"next_player\"/></b>'s hand, you "
+        "MUST play your best card or a combination on this turn!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 794
-msgid   "<var name=\"logo\"/> The game was won by <for from=\"winners\" item="
-        "\"winner\"><b><var name=\"winner\"/></b></for> with only <b><var name="
-        "\"score\"/></b> points after <var name=\"playtime\"/> and <var name="
-        "\"rounds\"/> rounds."
+msgid   "game.winner"
 msgstr  "<var name=\"logo\"/> The game was won by <for from=\"winners\" item="
         "\"winner\"><b><var name=\"winner\"/></b></for> with only <b><var name="
         "\"score\"/></b> points after <var name=\"playtime\"/> and <var name="
         "\"rounds\"/> rounds."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 517
-msgid   "<var name=\"logo\"/> This game may only be played by 3-4 players and "
-        "you cannot join it once it started."
-msgstr  "<var name=\"logo\"/> This game may only be played by 3-4 players and "
-        "you cannot join it once it started."
+msgid   "game.starting"
+msgstr  "<var name=\"logo\"/>: The game starts now. <b><var name=\"starter\"/"
+        "></b>, you must start this game. If you have the <var name=\"m1\"/>, "
+        "you MUST play it (alone or in a combination)."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 370
-msgid   "<var name=\"logo\"/> This is round #<b><var name=\"round\"/></b>, "
-        "starting after <var name=\"playtime\"/>. <b><var name=\"last_winner\"/"
-        "></b>, you must now choose a card to give to <b><var name=\"last_loser"
-        "\"/></b>. You will receive <var name=\"card\"/>. Please choose with: "
-        "<var name=\"trigger\"/> &lt;card&gt;."
+msgid   "game.start-delay"
+msgstr  "The game will start in <var name=\"delay\"/> seconds."
+#
+msgid   "game.scores"
+msgstr  "<var name=\"logo\"/>: Scores: <for from=\"scores\" key=\"nick\" item="
+        "\"score\"><b><var name=\"nick\"/></b>: <var name=\"score\"/></for>."
+#
+msgid   "game.round.new"
 msgstr  "<var name=\"logo\"/> This is round #<b><var name=\"round\"/></b>, "
         "starting after <var name=\"playtime\"/>. <b><var name=\"last_winner\"/"
         "></b>, you must now choose a card to give to <b><var name=\"last_loser"
         "\"/></b>. You will receive <var name=\"card\"/>. Please choose with: "
         "<var name=\"trigger\"/> &lt;card&gt;."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 702
-msgid   "<var name=\"logo\"/> This is the first round and you have the <var "
-        "name=\"m1\"/> <b><var name=\"nick\"/></b>. You <b>must</b> play it "
-        "alone or in a combination!"
+msgid   "game.round.first"
 msgstr  "<var name=\"logo\"/> This is the first round and you have the <var "
         "name=\"m1\"/> <b><var name=\"nick\"/></b>. You <b>must</b> play it "
         "alone or in a combination!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 445
-msgid   "<var name=\"logo\"/> Uh <b><var name=\"nick\"/></b>? No cards need to "
-        "be exchanged for now..."
-msgstr  "<var name=\"logo\"/> Uh <b><var name=\"nick\"/></b>? No cards need to "
-        "be exchanged for now..."
+msgid   "game.order"
+msgstr  "<var name=\"logo\"/>: playing turn: <for from=\"nicks\" item=\"nick"
+        "\"><b><var name=\"nick\"/></b></for>."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 501
-msgid   "<var name=\"logo\"/> You are already part of that game <b><var name="
-        "\"nick\"/></b>!"
-msgstr  "<var name=\"logo\"/> You are already part of that game <b><var name="
-        "\"nick\"/></b>!"
+msgid   "game.not-started"
+msgstr  "The <var name=\"logo\"/> game has not yet started!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 715
-msgid   "<var name=\"logo\"/> You do not have the cards required for that move "
-        "<b><var name=\"nick\"/></b>!"
-msgstr  "<var name=\"logo\"/> You do not have the cards required for that move "
-        "<b><var name=\"nick\"/></b>!"
+msgid   "game.new"
+msgstr  "Ok! A new <var name=\"logo\"/> game has been created in <var name="
+        "\"chan\"/>. Say \"<var name=\"trigger\"/>\" to join it."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 751
-msgid   "<var name=\"logo\"/>: <b><var name=\"nick\"/></b> plays <var name="
-        "\"type\"/>: <for from=\"cards\" item=\"card\" separator=\" \"><var "
-        "name=\"card\"/></for>"
-msgstr  "<var name=\"logo\"/>: <b><var name=\"nick\"/></b> plays <var name="
-        "\"type\"/>: <for from=\"cards\" item=\"card\" separator=\" \"><var "
-        "name=\"card\"/></for>"
+msgid   "game.hands"
+msgstr  "<var name=\"logo\"/>: Hands: <for from=\"hands\" key=\"nick\" item="
+        "\"nb_cards\"><b><var name=\"nick\"/></b>: <var name=\"nb_cards\"/></"
+        "for>."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 743
-msgid   "<var name=\"logo\"/>: <b><var name=\"nick\"/></b> plays <var name="
-        "\"type\"/>: <for from=\"cards\" item=\"card\" separator=\" \"><var "
-        "name=\"card\"/></for> - This is <b><var name=\"nick\"/></b>'s last "
-        "card!"
-msgstr  "<var name=\"logo\"/>: <b><var name=\"nick\"/></b> plays <var name="
-        "\"type\"/>: <for from=\"cards\" item=\"card\" separator=\" \"><var "
-        "name=\"card\"/></for> - This is <b><var name=\"nick\"/></b>'s last "
-        "card!"
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 1061
-msgid   "<var name=\"logo\"/>: <b><var name=\"nick\"/></b>, since there is "
-        "only 1 card left in <b><var name=\"next_player\"/></b>'s hand, you "
-        "MUST play your best card or a combination on this turn!"
-msgstr  "<var name=\"logo\"/>: <b><var name=\"nick\"/></b>, since there is "
-        "only 1 card left in <b><var name=\"next_player\"/></b>'s hand, you "
-        "MUST play your best card or a combination on this turn!"
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 468
-msgid   "<var name=\"logo\"/>: Exchanges: <b><var name=\"winner\"/></b> "
-        "receives a <var name=\"received\"/> and gives a <var name=\"given\"/> "
-        "to <b><var name=\"loser\"/></b>. <b><var name=\"winner\"/></b>, you "
-        "may now start this round."
+msgid   "game.exchange"
 msgstr  "<var name=\"logo\"/>: Exchanges: <b><var name=\"winner\"/></b> "
         "receives a <var name=\"received\"/> and gives a <var name=\"given\"/> "
         "to <b><var name=\"loser\"/></b>. <b><var name=\"winner\"/></b>, you "
         "may now start this round."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 879
-msgid   "<var name=\"logo\"/>: Hands: <for from=\"hands\" key=\"nick\" item="
-        "\"nb_cards\"><b><var name=\"nick\"/></b>: <var name=\"nb_cards\"/></"
-        "for>."
-msgstr  "<var name=\"logo\"/>: Hands: <for from=\"hands\" key=\"nick\" item="
-        "\"nb_cards\"><b><var name=\"nick\"/></b>: <var name=\"nb_cards\"/></"
-        "for>."
+msgid   "game.duration"
+msgstr  "This <var name=\"logo\"/> game has been running for <var name="
+        "\"playtime\"/>."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 1046
-msgid   "<var name=\"logo\"/>: It's <b><var name=\"nick\"/></b>'s turn."
-msgstr  "<var name=\"logo\"/>: It's <b><var name=\"nick\"/></b>'s turn."
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 902
-msgid   "<var name=\"logo\"/>: No card has been played in this round yet."
+msgid   "game.discard.empty"
 msgstr  "<var name=\"logo\"/>: No card has been played in this round yet."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 974
-msgid   "<var name=\"logo\"/>: Scores: <for from=\"scores\" key=\"nick\" item="
-        "\"score\"><b><var name=\"nick\"/></b>: <var name=\"score\"/></for>."
-msgstr  "<var name=\"logo\"/>: Scores: <for from=\"scores\" key=\"nick\" item="
-        "\"score\"><b><var name=\"nick\"/></b>: <var name=\"score\"/></for>."
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 390
-msgid   "<var name=\"logo\"/>: The game starts now. <b><var name=\"starter\"/"
-        "></b>, you must start this game. If you have the <var name=\"m1\"/>, "
-        "you MUST play it (alone or in a combination)."
-msgstr  "<var name=\"logo\"/>: The game starts now. <b><var name=\"starter\"/"
-        "></b>, you must start this game. If you have the <var name=\"m1\"/>, "
-        "you MUST play it (alone or in a combination)."
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 957
-msgid   "<var name=\"logo\"/>: playing turn: <for from=\"nicks\" item=\"nick"
-        "\"><b><var name=\"nick\"/></b></for>."
-msgstr  "<var name=\"logo\"/>: playing turn: <for from=\"nicks\" item=\"nick"
-        "\"><b><var name=\"nick\"/></b></for>."
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 184
-msgid   "A <var name=\"logo\"/> managed by <b><var name=\"admin\"/></b> is "
-        "already running. Say \"<var name=\"trigger\"/>\" to join it."
-msgstr  "A <var name=\"logo\"/> managed by <b><var name=\"admin\"/></b> is "
-        "already running. Say \"<var name=\"trigger\"/>\" to join it."
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 61
-msgid   "Could not register Gang of Four creation trigger"
-msgstr  "Could not register Gang of Four creation trigger"
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 930
-msgid   "Current discard: <for from=\"cards\" item=\"card\" separator=\" "
-        "\"><var name=\"card\"/></for> (<var name=\"type\"/> played by <b><var "
-        "name=\"player\"/></b>)"
+msgid   "game.discard.current"
 msgstr  "Current discard: <for from=\"cards\" item=\"card\" separator=\" "
         "\"><var name=\"card\"/></for> (<var name=\"type\"/> played by <b><var "
         "name=\"player\"/></b>)"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 312
-msgid   "Ok! A new <var name=\"logo\"/> game has been created in <var name="
-        "\"chan\"/>. Say \"<var name=\"trigger\"/>\" to join it."
-msgstr  "Ok! A new <var name=\"logo\"/> game has been created in <var name="
-        "\"chan\"/>. Say \"<var name=\"trigger\"/>\" to join it."
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 1115
-msgid   "The <var name=\"logo\"/> game has not yet started!"
-msgstr  "The <var name=\"logo\"/> game has not yet started!"
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 549
-msgid   "The game will start in <var name=\"delay\"/> seconds."
-msgstr  "The game will start in <var name=\"delay\"/> seconds."
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 1007
-msgid   "This <var name=\"logo\"/> game has been running for <var name="
-        "\"playtime\"/>."
-msgstr  "This <var name=\"logo\"/> game has been running for <var name="
-        "\"playtime\"/>."
-#
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 215
-msgid   "Unable to register triggers for <var name=\"logo\"/> game!"
+msgid   "error.trigger.others"
 msgstr  "Unable to register triggers for <var name=\"logo\"/> game!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 1098
-msgid   "Your cards: <for from=\"cards\" item=\"card\" separator=\" \"><var "
-        "name=\"card\"/></for>"
-msgstr  "Your cards: <for from=\"cards\" item=\"card\" separator=\" \"><var "
-        "name=\"card\"/></for>"
+msgid   "error.trigger.create"
+msgstr  "Could not register Gang of Four creation trigger"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 848
-msgid   "a flush"
-msgstr  "a flush"
+msgid   "error.play"
+msgstr  "<var name=\"logo\"/> Now is not the time to play <b><var name=\"nick"
+        "\"/></b>!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 850
-msgid   "a full house"
-msgstr  "a full house"
+msgid   "error.pass"
+msgstr  "<var name=\"logo\"/> Now is not the time to pass <b><var name=\"nick"
+        "\"/></b>!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 854
-msgid   "a gang"
-msgstr  "a gang"
+msgid   "error.not-enough"
+msgstr  "<var name=\"logo\"/> Sorry <b><var name=\"nick\"/></b>, but this is "
+        "not enough to take the leadership!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 842
-msgid   "a pair"
-msgstr  "a pair"
+msgid   "error.missing-cards"
+msgstr  "<var name=\"logo\"/> You do not have the cards required for that move "
+        "<b><var name=\"nick\"/></b>!"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 840
-msgid   "a single"
-msgstr  "a single"
+msgid   "error.missing-card"
+msgstr  "<var name=\"logo\"/> Sorry <b><var name=\"nick\"/></b>, you do not "
+        "have that card! (<var name=\"card\"/>)"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 846
-msgid   "a straight"
-msgstr  "a straight"
+msgid   "error.limit"
+msgstr  "Bad limit in the configuration file (<var name=\"limit\"/>). The <var "
+        "name=\"logo\"/> game cannot start."
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 852
-msgid   "a straight flush"
+msgid   "error.exchange-first"
+msgstr  "<var name=\"logo\"/> Proceed with the card exchange first. Use "
+        "<b><var name=\"trigger\"/> &lt;card&gt;</b> to select the &lt;"
+        "card&gt; to give away."
+#
+msgid   "error.enough-players"
+msgstr  "<var name=\"logo\"/> This game may only be played by 3-4 players and "
+        "you cannot join it once it started."
+#
+msgid   "error.cannot-exchange"
+msgstr  "<var name=\"logo\"/> Uh <b><var name=\"nick\"/></b>? No cards need to "
+        "be exchanged for now..."
+#
+msgid   "error.already-running"
+msgstr  "A <var name=\"logo\"/> managed by <b><var name=\"admin\"/></b> is "
+        "already running. Say \"<var name=\"trigger\"/>\" to join it."
+#
+msgid   "error.already-in"
+msgstr  "<var name=\"logo\"/> You are already part of that game <b><var name="
+        "\"nick\"/></b>!"
+#
+msgid   "combo.unknown"
+msgstr  "<var name=\"logo\"/> Hmm? What move was that <b><var name=\"nick\"/></"
+        "b>?"
+#
+msgid   "combo.unexpected"
+msgstr  "<var name=\"logo\"/> <b><var name=\"nick\"/></b>, you cannot play "
+        "<b><var name=\"type\"/></b> right now!"
+#
+msgid   "combo.three-of-a-kind"
+msgstr  "three of a kind"
+#
+msgid   "combo.straight-flush"
 msgstr  "a straight flush"
 #
-# File: /home/looksup/Documents/Erebot/modules/GoF/trunk/src/Erebot/Module/GoF.php, line: 844
-msgid   "three of a kind"
-msgstr  "three of a kind"
+msgid   "combo.straight"
+msgstr  "a straight"
+#
+msgid   "combo.single"
+msgstr  "a single"
+#
+msgid   "combo.pair"
+msgstr  "a pair"
+#
+msgid   "combo.gang"
+msgstr  "a gang"
+#
+msgid   "combo.full-house"
+msgstr  "a full house"
+#
+msgid   "combo.flush"
+msgstr  "a flush"
+#
+msgid   "card.unknown"
+msgstr  "<var name=\"logo\"/> Hmm? What is that card <b><var name=\"nick\"/></"
+        "b>?"
+#
+msgid   "admin.stopped"
+msgstr  "<var name=\"admin\"/> stopped this <var name=\"logo\"/> game!"
+#
+msgid   "admin.not-started"
+msgstr  "<var name=\"logo\"/> No game has been started in <var name=\"chan\"/> "
+        "yet! Nothing to stop."
+#
+msgid   "admin.alert"
+msgstr  "Well tried <var name=\"nick\"/>! But only <var name=\"admin\"/> can "
+        "stop this <var name=\"logo\"/> game!"
+#
+msgid   ""
+msgstr  "Project-Id-Version: Erebot_Module_GoF 0.5.0\n"
+        "PO-Revision-Date: 2011-04-16 12:24+0200\n"
+        "Last-Translator: Automatically generated\n"
+        "Language-Team: none\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=utf-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms: nplurals=2; plural=(n != 1);\n"
