@@ -44,7 +44,7 @@ msgstr  "Vos cartes : <for from=\"cards\" item=\"card\" separator=\" \"><var "
 #
 msgid   "player.best-card"
 msgstr  "<var name=\"logo\"/>: Il n'y a plus qu'une seule carte dans la main "
-        "de  <b><var name=\"next_player\"/></b>. De ce fait, <b><var name=\"nick\"/></b>, "
+        "de <b><var name=\"next_player\"/></b>. De ce fait, <b><var name=\"nick\"/></b>, "
         "tu DOIS jouer ta meilleure carte ou une combinaison durant ce tour !"
 #
 msgid   "game.winner"
@@ -190,7 +190,7 @@ msgid   "combo.gang"
 msgstr  "un gang"
 #
 msgid   "combo.full-house"
-msgstr  "full"
+msgstr  "un full"
 #
 msgid   "combo.flush"
 msgstr  "une couleur"
