@@ -52,6 +52,7 @@ extends PHPUnit_Framework_TestCase
             'm9',
             'mp',
             'md',
+            'g11',
         );
         foreach ($cards as $card) {
             try {

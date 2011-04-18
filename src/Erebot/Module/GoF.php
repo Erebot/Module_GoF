@@ -251,7 +251,8 @@ extends Erebot_Module_Base
             array($this, 'handleChoose'),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
-                new Erebot_Event_Match_TextWildcard($infos['triggers']['choose'].' *', NULL)
+                new Erebot_Event_Match_TextWildcard($infos['triggers']['choose'].' *', NULL),
+                new Erebot_Event_Match_Chan($chan)
             )
         );
 
@@ -259,7 +260,8 @@ extends Erebot_Module_Base
             array($this, 'handleJoin'),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
-                new Erebot_Event_Match_TextStatic($infos['triggers']['join'], NULL)
+                new Erebot_Event_Match_TextStatic($infos['triggers']['join'], NULL),
+                new Erebot_Event_Match_Chan($chan)
             )
         );
 
@@ -267,7 +269,8 @@ extends Erebot_Module_Base
             array($this, 'handlePass'),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
-                new Erebot_Event_Match_TextStatic($infos['triggers']['pass'], NULL)
+                new Erebot_Event_Match_TextStatic($infos['triggers']['pass'], NULL),
+                new Erebot_Event_Match_Chan($chan)
             )
         );
 
@@ -275,7 +278,8 @@ extends Erebot_Module_Base
             array($this, 'handlePlay'),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
-                new Erebot_Event_Match_TextWildcard($infos['triggers']['play'].' *', NULL)
+                new Erebot_Event_Match_TextWildcard($infos['triggers']['play'].' *', NULL),
+                new Erebot_Event_Match_Chan($chan)
             )
         );
 
@@ -283,7 +287,8 @@ extends Erebot_Module_Base
             array($this, 'handleShowCardsCount'),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
-                new Erebot_Event_Match_TextStatic($infos['triggers']['show_cards'], NULL)
+                new Erebot_Event_Match_TextStatic($infos['triggers']['show_cards'], NULL),
+                new Erebot_Event_Match_Chan($chan)
             )
         );
 
@@ -291,7 +296,8 @@ extends Erebot_Module_Base
             array($this, 'handleShowDiscard'),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
-                new Erebot_Event_Match_TextStatic($infos['triggers']['show_discard'], NULL)
+                new Erebot_Event_Match_TextStatic($infos['triggers']['show_discard'], NULL),
+                new Erebot_Event_Match_Chan($chan)
             )
         );
 
@@ -299,7 +305,8 @@ extends Erebot_Module_Base
             array($this, 'handleShowOrder'),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
-                new Erebot_Event_Match_TextStatic($infos['triggers']['show_order'], NULL)
+                new Erebot_Event_Match_TextStatic($infos['triggers']['show_order'], NULL),
+                new Erebot_Event_Match_Chan($chan)
             )
         );
 
@@ -307,7 +314,8 @@ extends Erebot_Module_Base
             array($this, 'handleShowScores'),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
-                new Erebot_Event_Match_TextStatic($infos['triggers']['show_scores'], NULL)
+                new Erebot_Event_Match_TextStatic($infos['triggers']['show_scores'], NULL),
+                new Erebot_Event_Match_Chan($chan)
             )
         );
 
@@ -315,7 +323,8 @@ extends Erebot_Module_Base
             array($this, 'handleShowTime'),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
-                new Erebot_Event_Match_TextStatic($infos['triggers']['show_time'], NULL)
+                new Erebot_Event_Match_TextStatic($infos['triggers']['show_time'], NULL),
+                new Erebot_Event_Match_Chan($chan)
             )
         );
 
@@ -323,7 +332,8 @@ extends Erebot_Module_Base
             array($this, 'handleShowTurn'),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
-                new Erebot_Event_Match_TextStatic($infos['triggers']['show_turn'], NULL)
+                new Erebot_Event_Match_TextStatic($infos['triggers']['show_turn'], NULL),
+                new Erebot_Event_Match_Chan($chan)
             )
         );
 
