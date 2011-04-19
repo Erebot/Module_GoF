@@ -104,6 +104,17 @@ extends Erebot_Module_Base
                 Erebot_Styling::CODE_BOLD;
     }
 
+    protected function sendMessage(
+        $targets,
+        $message,
+        $type = self::MSG_TYPE_PRIVMSG
+    )
+    {
+        if (!is_array($targets) && $this->_connection->isChannel($targets))
+            $message = $this->getLogo().': '.$message;
+        return parent::sendMessage($targets, $message, $type);
+    }
+
     protected function getColoredCard($color, $text)
     {
         $text       = ' '.$text.' ';
@@ -190,8 +201,8 @@ extends Erebot_Module_Base
         if (isset($this->_chans[$chan])) {
             $creator = (string) $this->_chans[$chan]['game']->getCreator();
             $msg = $translator->gettext(
-                'A <var name="logo"/> managed '.
-                'by <b><var name="admin"/></b> is already running. '.
+                'A game managed by <b><var name="admin"/></b> '.
+                'is already in progress here. '.
                 'Say "<b><var name="trigger"/></b>" to join it.'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -206,7 +217,7 @@ extends Erebot_Module_Base
         if ($limit < 10) {
             $msg = $translator->gettext(
                 'Bad limit in the configuration file (<var name="limit"/>). '.
-                'The <var name="logo"/> game cannot start.'
+                'The game cannot start.'
             );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('limit',   $limit);
@@ -234,8 +245,7 @@ extends Erebot_Module_Base
         $token  = $registry->registerTriggers($triggers, $chan);
         if ($token === NULL) {
             $msg = $translator->gettext(
-                'Unable to register triggers for '.
-                '<var name="logo"/> game!'
+                'Unable to register triggers for the game!'
             );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('logo', $this->getLogo());
@@ -351,8 +361,7 @@ extends Erebot_Module_Base
         $infos['limit']             =   $limit;
 
         $msg = $translator->gettext(
-            'Ok! A new <var name="logo"/> game has '.
-            'been created in <var name="chan"/>. '.
+            'Ok! A new game has been created in <var name="chan"/>. '.
             'It will not stop until someone gets '.
             'at least <b><var name="limit"/></b> points. '.
             'Say "<b><var name="trigger"/></b>" to join it.'
@@ -380,8 +389,8 @@ extends Erebot_Module_Base
 
         if (!isset($this->_chans[$chan])) {
             $msg = $translator->gettext(
-                '<var name="logo"/> No game has been started '.
-                'in <var name="chan"/> yet! Nothing to stop.'
+                'No game has been started in <var name="chan"/> yet! '.
+                'Nothing to stop.'
             );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('logo',    $this->getLogo());
@@ -393,8 +402,7 @@ extends Erebot_Module_Base
         $creator = (string) $this->_chans[$chan]['game']->getCreator();
         if (!$this->_connection->irccmp($creator, $nick)) {
             $msg = $translator->gettext(
-                '<var name="admin"/> stopped '.
-                'this <var name="logo"/> game!'
+                '<b><var name="admin"/></b> stopped the game!'
             );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('logo',    $this->getLogo());
@@ -406,8 +414,7 @@ extends Erebot_Module_Base
 
         $msg = $translator->gettext(
             'Well tried <var name="nick"/>! '.
-            'But only <var name="admin"/> can stop '.
-            'this <var name="logo"/> game!'
+            'But only <b><var name="admin"/></b> can stop this game!'
         );
         $tpl = new Erebot_Styling($msg, $translator);
         $tpl->assign('logo',    $this->getLogo());
@@ -457,7 +464,6 @@ extends Erebot_Module_Base
             );
 
             $msg = $translator->gettext(
-                '<var name="logo"/> '.
                 'This is round #<b><var name="round"/></b>, starting '.
                 'after <var name="playtime"/>. '.
                 '<b><var name="last_winner"/></b>, you must now choose '.
@@ -477,8 +483,8 @@ extends Erebot_Module_Base
         }
         else {
             $msg = $translator->gettext(
-                '<var name="logo"/>: The game starts '.
-                'now. <b><var name="starter"/></b>, you must start this game. '.
+                'The game starts now. '.
+                '<b><var name="starter"/></b>, you must start this game. '.
                 'If you have the <var name="m1"/>, you MUST play it (alone '.
                 'or in a combination).'
             );
@@ -515,8 +521,8 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_InvalidCardException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> '.
-                'Hmm? What is that card <b><var name="nick"/></b>?'
+                'Hmm? What card was that '.
+                '<b><var name="nick"/></b>?'
             );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('logo', $this->getLogo());
@@ -532,7 +538,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_InternalErrorException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> Uh <b><var name="nick"/></b>? '.
+                'Uh <b><var name="nick"/></b>? '.
                 'No cards need to be exchanged for now...'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -543,7 +549,7 @@ extends Erebot_Module_Base
         }
         catch( Erebot_Module_GoF_NoSuchCardException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> Sorry <b><var name="nick"/></b>, '.
+                'Sorry <b><var name="nick"/></b>, '.
                 'you do not have that card! (<var name="card"/>)'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -555,7 +561,7 @@ extends Erebot_Module_Base
         }
 
         $msg = $translator->gettext(
-            '<var name="logo"/>: Exchanges: '.
+            'Exchanges: '.
             '<b><var name="winner"/></b> receives a <var name="received"/> '.
             'and gives a <var name="given"/> to <b><var name="loser"/></b>. '.
             '<b><var name="winner"/></b>, you may now start this round.'
@@ -589,7 +595,7 @@ extends Erebot_Module_Base
             if (!$this->_connection->irccasecmp(
                 $nick, (string) $player->getToken())) {
                 $msg = $translator->gettext(
-                    '<var name="logo"/> You are already part of that game '.
+                    'You are already part of that game '.
                     '<b><var name="nick"/></b>!'
                 );
                 $tpl = new Erebot_Styling($msg, $translator);
@@ -606,8 +612,8 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_EnoughPlayersException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> This game may only be played '.
-                'by 3-4 players and you cannot join it once it started.'
+                'This game may only be played by 3-4 players '.
+                'and you cannot join it once it started.'
             );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('logo', $this->getLogo());
@@ -616,8 +622,7 @@ extends Erebot_Module_Base
         }
 
         $msg = $translator->gettext(
-            '<b><var name="nick"/></b> joins '.
-            'this <var name="logo"/> game.'
+            '<b><var name="nick"/></b> joins the game.'
         );
         $tpl = new Erebot_Styling($msg, $translator);
         $tpl->assign('logo', $this->getLogo());
@@ -639,8 +644,7 @@ extends Erebot_Module_Base
             $this->addTimer($infos['timer']);
 
             $msg = $translator->gettext(
-                'The game will start in '.
-                '<var name="delay"/> seconds.'
+                'The game will start in <var name="delay"/> seconds.'
             );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('delay', $startDelay);
@@ -667,7 +671,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_WaitingForCardException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> Proceed with the card exchange first. '.
+                'Proceed with the card exchange first. '.
                 'Use <b><var name="trigger"/> &lt;card&gt;</b> to select '.
                 'the &lt;card&gt; to give away.'
             );
@@ -679,7 +683,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_InternalErrorException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> Now is not the time to pass '.
+                'Now is not the time to pass '.
                 '<b><var name="nick"/></b>!'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -690,7 +694,7 @@ extends Erebot_Module_Base
         }
 
         $msg = $translator->gettext(
-            '<var name="logo"/> <b><var name="nick"/></b> passes turn.'
+            '<b><var name="nick"/></b> passes turn.'
         );
         $tpl = new Erebot_Styling($msg, $translator);
         $tpl->assign('logo',    $this->getLogo());
@@ -718,7 +722,7 @@ extends Erebot_Module_Base
 
         if (!preg_match('/^(?:[gyr][0-9]+|m1|gp|yp|rd)+$/', $move)) {
             $msg = $translator->gettext(
-                '<var name="logo"/> Hmm? What move was that '.
+                'Hmm? What move was that '.
                 '<b><var name="nick"/></b>?'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -738,7 +742,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_InvalidCardException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> Hmm? What card was that '.
+                'Hmm? What card was that '.
                 '<b><var name="nick"/></b>?'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -755,7 +759,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_InvalidComboException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> Hmm? What move was that '.
+                'Hmm? What move was that '.
                 '<b><var name="nick"/></b>?'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -771,7 +775,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_InternalErrorException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> Now is not the time to play '.
+                'Now is not the time to play '.
                 '<b><var name="nick"/></b>!'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -782,7 +786,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_WaitingForCardException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> Proceed with the card exchange first. '.
+                'Proceed with the card exchange first. '.
                 'Use <b><var name="trigger"/> &lt;card&gt;</b> to select '.
                 'the &lt;card&gt; to give away.'
             );
@@ -794,7 +798,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_InferiorComboException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> Sorry <b><var name="nick"/></b>, '.
+                'Sorry <b><var name="nick"/></b>, '.
                 'but this is not enough to take the leadership!'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -805,7 +809,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_StartWithMulti1Exception $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> This is the first round and '.
+                'This is the first round and '.
                 'you have the <var name="m1"/> <b><var name="nick"/></b>. '.
                 'You <b>must</b> play it alone or in a combination!'
             );
@@ -818,7 +822,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_NoSuchCardException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> You do not have the cards required '.
+                'You do not have the cards required '.
                 'for that move <b><var name="nick"/></b>!'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -829,7 +833,7 @@ extends Erebot_Module_Base
         }
         catch (Erebot_Module_GoF_NotComparableException $e) {
             $msg = $translator->gettext(
-                '<var name="logo"/> <b><var name="nick"/></b>, '.
+                '<b><var name="nick"/></b>, '.
                 'you cannot play <b><var name="type"/></b> right now!'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -846,7 +850,6 @@ extends Erebot_Module_Base
 
         if (count($current->getHand()) == 1)
             $msg = $translator->gettext(
-                '<var name="logo"/>: '.
                 '<b><var name="nick"/></b> plays <var name="type"/>: '.
                 '<for from="cards" item="card" separator=" "><var '.
                 'name="card"/></for> - This is <b><var name="nick"/></b>\'s '.
@@ -854,7 +857,6 @@ extends Erebot_Module_Base
             );
         else
             $msg = $translator->gettext(
-                '<var name="logo"/>: '.
                 '<b><var name="nick"/></b> plays <var name="type"/>: '.
                 '<for from="cards" item="card" separator=" "><var '.
                 'name="card"/></for>'
@@ -877,13 +879,11 @@ extends Erebot_Module_Base
 
             if (!$end)
                 $msg = $translator->gettext(
-                    '<var name="logo"/> '.
                     '<b><var name="nick"/></b> wins this round! '.
                     'The next round will start in <var name="delay"/> seconds.'
                 );
             else
                 $msg = $translator->gettext(
-                    '<var name="logo"/> '.
                     '<b><var name="nick"/></b> wins this round!'
                 );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -896,8 +896,8 @@ extends Erebot_Module_Base
 
             if ($end) {
                 $msg = $translator->gettext(
-                    '<var name="logo"/> The game was won '.
-                    'by <for from="winners" item="winner">'.
+                    'The game was won by '.
+                    '<for from="winners" item="winner">'.
                     '<b><var name="winner"/></b></for> '.
                     'with only <b><var name="score"/></b> '.
                     'points after <var name="playtime"/> '.
@@ -983,7 +983,7 @@ extends Erebot_Module_Base
         }
 
         $msg = $translator->gettext(
-            '<var name="logo"/>: Hands: '.
+            'Hands: '.
             '<for from="hands" key="nick" item="nb_cards"><b><var '.
             'name="nick"/></b>: <var name="nb_cards"/></for>.'
         );
@@ -1006,8 +1006,7 @@ extends Erebot_Module_Base
 
         if ($lastDiscard === NULL) {
             $msg = $translator->gettext(
-                '<var name="logo"/>: No card '.
-                'has been played in this round yet.'
+                'No card has been played in this round yet.'
             );
             $tpl = new Erebot_Styling($msg, $translator);
             $tpl->assign('logo', $this->getLogo());
@@ -1018,7 +1017,6 @@ extends Erebot_Module_Base
         $discardNick = (string) $lastDiscard['player']->getToken();
         if (!$this->_connection->irccasecmp($nick, $discardNick)) {
             $msg = $translator->gettext(
-                '<var name="logo"/> '.
                 '<b><var name="nick"/></b> has got the upper hand '.
                 'and may now start a new combination'
             );
@@ -1061,7 +1059,7 @@ extends Erebot_Module_Base
             $nicks[] = (string) $player->getToken();
 
         $msg = $translator->gettext(
-            '<var name="logo"/>: playing turn: '.
+            'Playing turn: '.
             '<for from="nicks" item="nick"><b><var name="nick"/></b></for>.'
         );
         $tpl = new Erebot_Styling($msg, $translator);
@@ -1078,7 +1076,7 @@ extends Erebot_Module_Base
         $translator = $this->getTranslator($chan);
 
         $msg = $translator->gettext(
-            '<var name="logo"/>: Scores: '.
+            'Scores: '.
             '<for from="scores" key="nick" item="score"><b><var '.
             'name="nick"/></b>: <var name="score"/></for>.'
         );
@@ -1111,8 +1109,7 @@ extends Erebot_Module_Base
 
         $playtime = $this->_chans[$chan]['game']->getElapsedTime();
         $msg = $translator->gettext(
-            'This <var name="logo"/> game has been running '.
-            'for <var name="playtime"/>.'
+            'This game has been running for <var name="playtime"/>.'
         );
         $tpl = new Erebot_Styling($msg, $translator);
         $tpl->assign('logo',        $this->getLogo());
@@ -1133,7 +1130,7 @@ extends Erebot_Module_Base
         if ($from !== NULL && !$this->_connection->irccasecmp(
             $from, $currentNick)) {
             $msg = $translator->gettext(
-                '<var name="logo"/>: <b><var name="nick"/></b>: '.
+                '<b><var name="nick"/></b>: '.
                 'it\'s your turn sleepyhead!'
             );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -1145,13 +1142,12 @@ extends Erebot_Module_Base
             $lastDiscard = $infos['game']->getDeck()->getLastDiscard();
             if ($lastDiscard !== NULL && $lastDiscard['player'] === $current)
                 $msg = $translator->gettext(
-                    '<var name="logo"/> No player dared to raise the heat! '.
+                    'No player dared to raise the heat! '.
                     'It\'s <b><var name="nick"/></b>\'s turn '.
                     'to play a new combination.'
                 );
             else
                 $msg = $translator->gettext(
-                    '<var name="logo"/>: '.
                     'It\'s <b><var name="nick"/></b>\'s turn.'
                 );
             $tpl = new Erebot_Styling($msg, $translator);
@@ -1166,7 +1162,6 @@ extends Erebot_Module_Base
 
         if (count($nextPlayer->getHand()) == 1) {
             $msg = $translator->gettext(
-                '<var name="logo"/>: '.
                 '<b><var name="nick"/></b>, since there is only 1 card left '.
                 'in <b><var name="next_player"/></b>\'s hand, you MUST play '.
                 'your best card or a combination on this turn!'
@@ -1216,7 +1211,7 @@ extends Erebot_Module_Base
             return TRUE;
 
         $msg = $translator->gettext(
-            'The <var name="logo"/> game has not yet started!'
+            'The game has not yet started!'
         );
         $tpl = new Erebot_Styling($msg, $translator);
         $tpl->assign('logo',        $this->getLogo());
