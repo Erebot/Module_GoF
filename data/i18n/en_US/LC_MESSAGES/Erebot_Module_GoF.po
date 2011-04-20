@@ -240,9 +240,6 @@ msgid   "admin.alert"
 msgstr  "Well tried <var name=\"nick\"/>! But only <var name=\"admin\"/> can "
         "stop this game!"
 #
-msgid   "Project-Id-Version: Erebot_Module_GoF 0.5.0\\n"
-msgstr  ""
-#
 msgid   ""
 msgstr  "Project-Id-Version: Erebot_Module_GoF 0.5.0\n"
         "PO-Revision-Date: 2011-04-16 12:24+0200\n"

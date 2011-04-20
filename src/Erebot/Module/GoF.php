@@ -917,7 +917,9 @@ extends Erebot_Module_Base
                 $tpl->assign('score',       $minScore);
                 $tpl->assign('winners',     $winners);
                 $tpl->assign('playtime',    $playtime);
-                $tpl->assign('rounds',      $infos['game']->getNbRounds());
+                // Subtract 1: the bot was ready for a new round,
+                // but there will not be one.
+                $tpl->assign('rounds',      $infos['game']->getNbRounds() - 1);
                 $this->sendMessage($chan, $tpl->render());
                 $this->cleanup($chan);
             }

@@ -1,13 +1,13 @@
 #
 msgid   "player.wins.normal"
 msgstr  "<b><var name=\"nick\"/></b> remporte cette "
-        "manche! La prochaine manche débutera dans <var name=\"delay\"/> "
+        "manche ! La prochaine manche débutera dans <var name=\"delay\"/> "
         "secondes."
 #
 #
 msgid   "player.wins.final"
 msgstr  "<b><var name=\"nick\"/></b> remporte cette "
-        "manche!"
+        "manche !"
 #
 #
 msgid   "player.upper-hand"
@@ -252,9 +252,6 @@ msgstr  "Aucune partie n'a été lancée dans <var name=\"chan\"/> "
 msgid   "admin.alert"
 msgstr  "Bien essayé <var name=\"nick\"/> ! "
         "Mais seul <b><var name=\"admin\"/></b> peut arrêter cette partie !"
-#
-msgid   "Project-Id-Version: Erebot_Module_GoF 0.5.0\\n"
-msgstr  ""
 #
 msgid   ""
 msgstr  "Project-Id-Version: Erebot_Module_GoF 0.5.0\n"
