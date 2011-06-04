@@ -1,169 +1,252 @@
-msgid ""
-msgstr ""
-"Project-Id-Version: Erebot_Module_GoF 0.5.0\n"
-"PO-Revision-Date: 2011-04-16 12:24+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-
-msgid "<b><var name=\"admin\"/></b> stopped the game!"
-msgstr "<b><var name=\"admin\"/></b> a arrêté cette partie !"
-
-msgid "<b><var name=\"nick\"/></b> has got the upper hand and may now start a new combination"
-msgstr "<b><var name=\"nick\"/></b> a pris la tête et peut jouer une nouvelle combinaison"
-
-msgid "<b><var name=\"nick\"/></b> joins the game."
-msgstr "<b><var name=\"nick\"/></b> rejoint la partie de <var name=\"logo\"/>."
-
-msgid "<b><var name=\"nick\"/></b> passes turn."
-msgstr "<b><var name=\"nick\"/></b> passe son tour."
-
-msgid "<b><var name=\"nick\"/></b> plays <var name=\"type\"/>: <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for>"
-msgstr "<b><var name=\"nick\"/></b> joue <var name=\"type\"/> : <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for>"
-
-msgid "<b><var name=\"nick\"/></b> plays <var name=\"type\"/>: <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for> - This is <b><var name=\"nick\"/></b>'s last card!"
-msgstr "<b><var name=\"nick\"/></b> joue <var name=\"type\"/> : <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for> - C'est la dernière carte de <b><var name=\"nick\"/></b> !"
-
-msgid "<b><var name=\"nick\"/></b> wins this round!"
-msgstr "<b><var name=\"nick\"/></b> remporte cette manche !"
-
-msgid "<b><var name=\"nick\"/></b> wins this round! The next round will start in <var name=\"delay\"/> seconds."
-msgstr "<b><var name=\"nick\"/></b> remporte cette manche ! La prochaine manche débutera dans <var name=\"delay\"/> secondes."
-
-msgid "<b><var name=\"nick\"/></b>, since there is only 1 card left in <b><var name=\"next_player\"/></b>'s hand, you MUST play your best card or a combination on this turn!"
-msgstr "Il n'y a plus qu'une seule carte dans la main de <b><var name=\"next_player\"/></b>. De ce fait, <b><var name=\"nick\"/></b>, tu DOIS jouer ta meilleure carte ou une combinaison durant ce tour !"
-
-msgid "<b><var name=\"nick\"/></b>, you cannot play <b><var name=\"type\"/></b> right now!"
-msgstr "<b><var name=\"nick\"/></b>, tu ne peux pas jouer <b><var name=\"type\"/></b> maintenant !"
-
-msgid "<b><var name=\"nick\"/></b>: it's your turn sleepyhead!"
-msgstr "<b><var name=\"nick\"/></b> : c'est ton tour tête de linotte !"
-
-msgid "A game managed by <b><var name=\"admin\"/></b> is already in progress here. Say \"<b><var name=\"trigger\"/></b>\" to join it."
-msgstr "Une partie gérée par <b><var name=\"admin\"/></b> est déjà en cours. Dites \"<var name=\"trigger\"/>\" pour rejoindre la partie."
-
-msgid "Bad limit in the configuration file (<var name=\"limit\"/>). The game cannot start."
-msgstr "Limite incorrecte dans le fichier de configuration (<var name=\"limit\"/>). Le jeu ne peut pas démarrer."
-
-msgid "Could not register Gang of Four creation trigger"
-msgstr "Impossible d'enregistrer le déclencheur de création pour le jeu du Gang of Four"
-
-msgid "Current discard: <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for> (<var name=\"type\"/> played by <b><var name=\"player\"/></b>)"
-msgstr "Défausse : <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for> (<var name=\"type\"/>, par <b><var name=\"player\"/></b>)"
-
-msgid "Exchanges: <b><var name=\"winner\"/></b> receives a <var name=\"received\"/> and gives a <var name=\"given\"/> to <b><var name=\"loser\"/></b>. <b><var name=\"winner\"/></b>, you may now start this round."
-msgstr "Échanges : <b><var name=\"winner\"/></b> reçoit un <var name=\"received\"/> et donne un <var name=\"given\"/> à <b><var name=\"loser\"/></b>. <b><var name=\"winner\"/></b>, à toi de commencer cette manche."
-
-msgid "Hands: <for from=\"hands\" key=\"nick\" item=\"nb_cards\"><b><var name=\"nick\"/></b>: <var name=\"nb_cards\"/></for>."
-msgstr "Cartes en main : <for from=\"hands\" key=\"nick\" item=\"nb_cards\"><b><var name=\"nick\"/></b>: <var name=\"nb_cards\"/></for>."
-
-msgid "Hmm? What card was that <b><var name=\"nick\"/></b>?"
-msgstr "Hum ? Qu'est-ce que c'est que cette carte <b><var name=\"nick\"/></b> ?"
-
-msgid "Hmm? What move was that <b><var name=\"nick\"/></b>?"
-msgstr "Hum ? C'est quoi ça <b><var name=\"nick\"/></b> ?"
-
-msgid "It's <b><var name=\"nick\"/></b>'s turn."
-msgstr "C'est au tour de <b><var name=\"nick\"/></b> de jouer."
-
-msgid "No card has been played in this round yet."
-msgstr "Aucune carte n'a été jouée dans cette manche pour le moment."
-
-msgid "No game has been started in <var name=\"chan\"/> yet! Nothing to stop."
-msgstr "Aucune partie n'a été lancée dans <var name=\"chan\"/> pour le moment ! Rien à arrêter."
-
-msgid "No player dared to raise the heat! It's <b><var name=\"nick\"/></b>'s turn to play a new combination."
-msgstr "Personne n'a osé surenchérir ! C'est à <b><var name=\"nick\"/></b> de lancer une nouvelle combinaison."
-
-msgid "Now is not the time to pass <b><var name=\"nick\"/></b>!"
-msgstr "Ce n'est pas le moment de passer <b><var name=\"nick\"/></b> !"
-
-msgid "Now is not the time to play <b><var name=\"nick\"/></b>!"
-msgstr "Ce n'est pas le moment de jouer <b><var name=\"nick\"/></b> !"
-
-msgid "Ok! A new game has been created in <var name=\"chan\"/>. It will not stop until someone gets at least <b><var name=\"limit\"/></b> points. Say \"<b><var name=\"trigger\"/></b>\" to join it."
-msgstr "Ok ! Une nouvelle partie a été créée sur <var name=\"chan\"/>. Dites \"<var name=\"trigger\"/>\" pour jouer."
-
-msgid "Playing turn: <for from=\"nicks\" item=\"nick\"><b><var name=\"nick\"/></b></for>."
-msgstr "Ordre des tours : <for from=\"nicks\" item=\"nick\"><b><var name=\"nick\"/></b></for>."
-
-msgid "Proceed with the card exchange first. Use <b><var name=\"trigger\"/> &lt;card&gt;</b> to select the &lt;card&gt; to give away."
-msgstr "Commence par l'échange de cartes. Utilise <b><var name=\"trigger\"/> &lt;carte&gt;</b> pour sélectionner la &lt;carte&gt; à donner."
-
-msgid "Scores: <for from=\"scores\" key=\"nick\" item=\"score\"><b><var name=\"nick\"/></b>: <var name=\"score\"/></for>."
-msgstr "Scores : <for from=\"scores\" key=\"nick\" item=\"score\"><b><var name=\"nick\"/></b>: <var name=\"score\"/></for>."
-
-msgid "Sorry <b><var name=\"nick\"/></b>, but this is not enough to take the leadership!"
-msgstr "Désolé <b><var name=\"nick\"/></b>, mais ce n'est pas suffisant pour prendre la main !"
-
-msgid "Sorry <b><var name=\"nick\"/></b>, you do not have that card! (<var name=\"card\"/>)"
-msgstr "Désolé <b><var name=\"nick\"/></b>, mais tu ne disposes pas de cette carte ! (<var name=\"card\"/>)"
-
-msgid "The game has not yet started!"
-msgstr "La partie n'a pas encore débuté !"
-
-msgid "The game starts now. <b><var name=\"starter\"/></b>, you must start this game. If you have the <var name=\"m1\"/>, you MUST play it (alone or in a combination)."
-msgstr "La partie commence. <b><var name=\"starter\"/></b>, c'est ton tour. Si tu as le <var name=\"m1\"/>, tu DOIS le jouer (seul ou dans une combinaison)."
-
-msgid "The game was won by <for from=\"winners\" item=\"winner\"><b><var name=\"winner\"/></b></for> with only <b><var name=\"score\"/></b> points after <var name=\"playtime\"/> and <var name=\"rounds\"/> rounds."
-msgstr "Cette partie a été remportée par <for from=\"winners\" item=\"winner\"><b><var name=\"winner\"/></b></for> avec seulement <b><var name=\"score\"/></b> points, après <var name=\"playtime\"/> de jeu et <var name=\"rounds\"/> manches."
-
-msgid "The game will start in <var name=\"delay\"/> seconds."
-msgstr "La partie commencera dans <var name=\"delay\"/> secondes."
-
-msgid "This game has been running for <var name=\"playtime\"/>."
-msgstr "Cette partie est lancée depuis <var name=\"playtime\"/>."
-
-msgid "This game may only be played by 3-4 players and you cannot join it once it started."
-msgstr "Ce jeu ne peut être joué que par 3 à 4 joueurs et il n'est pas possible de rejoindre la partie une fois celle-ci lancée."
-
-msgid "This is round #<b><var name=\"round\"/></b>, starting after <var name=\"playtime\"/>. <b><var name=\"last_winner\"/></b>, you must now choose a card to give to <b><var name=\"last_loser\"/></b>. You will receive <var name=\"card\"/>. Please choose with: \"<b><var name=\"trigger\"/></b> &lt;card&gt;\"."
-msgstr "Voici la manche n°<b><var name=\"round\"/></b>, qui démarre après <var name=\"playtime\"/> de jeu. <b><var name=\"last_winner\"/></b>, tu dois choisir une carte à donner à <b><var name=\"last_loser\"/></b>. En échange, tu recevras <var name=\"card\"/>. Pour choisir, utilise cette commande : <var name=\"trigger\"/> &lt;card&gt;."
-
-msgid "This is the first round and you have the <var name=\"m1\"/> <b><var name=\"nick\"/></b>. You <b>must</b> play it alone or in a combination!"
-msgstr "Il s'agit de la première manche et tu as le <var name=\"m1\"/> <b><var name=\"nick\"/></b>. Tu <b>dois</b> le jouer, seul ou dans une combinaison."
-
-msgid "Uh <b><var name=\"nick\"/></b>? No cards need to be exchanged for now..."
-msgstr "Hein <b><var name=\"nick\"/></b> ? Aucun échange de cartes ne doit avoir lieu pour le moment..."
-
-msgid "Unable to register triggers for the game!"
-msgstr "Impossible d'enregistrer les déclencheurs pour le <var name=\"logo\"/> !"
-
-msgid "Well tried <var name=\"nick\"/>! But only <b><var name=\"admin\"/></b> can stop this game!"
-msgstr "Bien essayé <var name=\"nick\"/> ! Mais seul <b><var name=\"admin\"/></b> peut arrêter cette partie !"
-
-msgid "You are already part of that game <b><var name=\"nick\"/></b>!"
-msgstr "Tu es déjà inscrit pour cette partie <b><var name=\"nick\"/></b> !"
-
-msgid "You do not have the cards required for that move <b><var name=\"nick\"/></b>!"
-msgstr "Tu ne disposes pas des cartes pour cette combinaison <b><var name=\"nick\"/></b> !"
-
-msgid "Your cards: <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for>"
-msgstr "Vos cartes : <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for>"
-
-msgid "a flush"
-msgstr "une couleur"
-
-msgid "a full house"
-msgstr "un full"
-
-msgid "a gang"
-msgstr "un gang"
-
-msgid "a pair"
-msgstr "une paire"
-
-msgid "a single"
-msgstr "une carte seule"
-
-msgid "a straight"
-msgstr "une suite"
-
-msgid "a straight flush"
-msgstr "une quinte flush"
-
-msgid "three of a kind"
-msgstr "un brelan"
-
+msgid   "three of a kind"
+msgstr  "un brelan"
+#
+msgid   "a straight flush"
+msgstr  "une quinte flush"
+#
+msgid   "a straight"
+msgstr  "une suite"
+#
+msgid   "a single"
+msgstr  "une carte seule"
+#
+msgid   "a pair"
+msgstr  "une paire"
+#
+msgid   "a gang"
+msgstr  "un gang"
+#
+msgid   "a full house"
+msgstr  "un full"
+#
+msgid   "a flush"
+msgstr  "une couleur"
+#
+msgid   "Your cards: <for from=\"cards\" item=\"card\" separator=\" \"><var "
+        "name=\"card\"/></for>"
+msgstr  "Vos cartes : <for from=\"cards\" item=\"card\" separator=\" \"><var "
+        "name=\"card\"/></for>"
+#
+msgid   "You do not have the cards required for that move <b><var name=\"nick"
+        "\"/></b>!"
+msgstr  "Tu ne disposes pas des cartes pour cette combinaison <b><var name="
+        "\"nick\"/></b> !"
+#
+msgid   "You are already part of that game <b><var name=\"nick\"/></b>!"
+msgstr  "Tu es déjà inscrit pour cette partie <b><var name=\"nick\"/></b> !"
+#
+msgid   "Well tried <var name=\"nick\"/>! But only <b><var name=\"admin\"/></"
+        "b> can stop this game!"
+msgstr  "Bien essayé <var name=\"nick\"/> ! Mais seul <b><var name=\"admin\"/"
+        "></b> peut arrêter cette partie !"
+#
+msgid   "Unable to register triggers for the game!"
+msgstr  "Impossible d'enregistrer les déclencheurs pour le <var name=\"logo\"/"
+        "> !"
+#
+msgid   "Uh <b><var name=\"nick\"/></b>? No cards need to be exchanged for "
+        "now..."
+msgstr  "Hein <b><var name=\"nick\"/></b> ? Aucun échange de cartes ne doit "
+        "avoir lieu pour le moment..."
+#
+msgid   "This is the first round and you have the <var name=\"m1\"/> <b><var "
+        "name=\"nick\"/></b>. You <b>must</b> play it alone or in a "
+        "combination!"
+msgstr  "Il s'agit de la première manche et tu as le <var name=\"m1\"/> "
+        "<b><var name=\"nick\"/></b>. Tu <b>dois</b> le jouer, seul ou dans "
+        "une combinaison."
+#
+msgid   "This is round #<b><var name=\"round\"/></b>, starting after <var name="
+        "\"playtime\"/>. <b><var name=\"last_winner\"/></b>, you must now "
+        "choose a card to give to <b><var name=\"last_loser\"/></b>. You will "
+        "receive <var name=\"card\"/>. Please choose with: \"<b><var name="
+        "\"trigger\"/></b> &lt;card&gt;\"."
+msgstr  "Voici la manche n°<b><var name=\"round\"/></b>, qui démarre après "
+        "<var name=\"playtime\"/> de jeu. <b><var name=\"last_winner\"/></b>, "
+        "tu dois choisir une carte à donner à <b><var name=\"last_loser\"/></"
+        "b>. En échange, tu recevras <var name=\"card\"/>. Pour choisir, "
+        "utilise cette commande : <var name=\"trigger\"/> &lt;card&gt;."
+#
+msgid   "This game may only be played by 3-4 players and you cannot join it "
+        "once it started."
+msgstr  "Ce jeu ne peut être joué que par 3 à 4 joueurs et il n'est pas "
+        "possible de rejoindre la partie une fois celle-ci lancée."
+#
+msgid   "This game has been running for <var name=\"playtime\"/>."
+msgstr  "Cette partie est lancée depuis <var name=\"playtime\"/>."
+#
+msgid   "The game will start in <var name=\"delay\"/> seconds."
+msgstr  "La partie commencera dans <var name=\"delay\"/> secondes."
+#
+msgid   "The game was won by <for from=\"winners\" item=\"winner\"><b><var "
+        "name=\"winner\"/></b></for> with only <b><var name=\"score\"/></b> "
+        "points after <var name=\"playtime\"/> and <var name=\"rounds\"/> "
+        "rounds."
+msgstr  "Cette partie a été remportée par <for from=\"winners\" item=\"winner"
+        "\"><b><var name=\"winner\"/></b></for> avec seulement <b><var name="
+        "\"score\"/></b> points, après <var name=\"playtime\"/> de jeu et <var "
+        "name=\"rounds\"/> manches."
+#
+msgid   "The game starts now. <b><var name=\"starter\"/></b>, you must start "
+        "this game. If you have the <var name=\"m1\"/>, you MUST play it "
+        "(alone or in a combination)."
+msgstr  "La partie commence. <b><var name=\"starter\"/></b>, c'est ton tour. "
+        "Si tu as le <var name=\"m1\"/>, tu DOIS le jouer (seul ou dans une "
+        "combinaison)."
+#
+msgid   "The game has not yet started!"
+msgstr  "La partie n'a pas encore débuté !"
+#
+msgid   "Sorry <b><var name=\"nick\"/></b>, you do not have that card! (<var "
+        "name=\"card\"/>)"
+msgstr  "Désolé <b><var name=\"nick\"/></b>, mais tu ne disposes pas de cette "
+        "carte ! (<var name=\"card\"/>)"
+#
+msgid   "Sorry <b><var name=\"nick\"/></b>, but this is not enough to take the "
+        "leadership!"
+msgstr  "Désolé <b><var name=\"nick\"/></b>, mais ce n'est pas suffisant pour "
+        "prendre la main !"
+#
+msgid   "Scores: <for from=\"scores\" key=\"nick\" item=\"score\"><b><var name="
+        "\"nick\"/></b>: <var name=\"score\"/></for>."
+msgstr  "Scores : <for from=\"scores\" key=\"nick\" item=\"score\"><b><var "
+        "name=\"nick\"/></b>: <var name=\"score\"/></for>."
+#
+msgid   "Proceed with the card exchange first. Use <b><var name=\"trigger\"/> "
+        "&lt;card&gt;</b> to select the &lt;card&gt; to give away."
+msgstr  "Commence par l'échange de cartes. Utilise <b><var name=\"trigger\"/> "
+        "&lt;carte&gt;</b> pour sélectionner la &lt;carte&gt; à donner."
+#
+msgid   "Playing turn: <for from=\"nicks\" item=\"nick\"><b><var name=\"nick\"/"
+        "></b></for>."
+msgstr  "Ordre des tours : <for from=\"nicks\" item=\"nick\"><b><var name="
+        "\"nick\"/></b></for>."
+#
+msgid   "Ok! A new game has been created in <var name=\"chan\"/>. It will not "
+        "stop until someone gets at least <b><var name=\"limit\"/></b> points. "
+        "Say \"<b><var name=\"trigger\"/></b>\" to join it."
+msgstr  "Ok ! Une nouvelle partie a été créée sur <var name=\"chan\"/>. Dites "
+        "\"<var name=\"trigger\"/>\" pour jouer."
+#
+msgid   "Now is not the time to play <b><var name=\"nick\"/></b>!"
+msgstr  "Ce n'est pas le moment de jouer <b><var name=\"nick\"/></b> !"
+#
+msgid   "Now is not the time to pass <b><var name=\"nick\"/></b>!"
+msgstr  "Ce n'est pas le moment de passer <b><var name=\"nick\"/></b> !"
+#
+msgid   "No player dared to raise the heat! It's <b><var name=\"nick\"/></b>'s "
+        "turn to play a new combination."
+msgstr  "Personne n'a osé surenchérir ! C'est à <b><var name=\"nick\"/></b> de "
+        "lancer une nouvelle combinaison."
+#
+msgid   "No game has been started in <var name=\"chan\"/> yet! Nothing to stop."
+msgstr  "Aucune partie n'a été lancée dans <var name=\"chan\"/> pour le "
+        "moment ! Rien à arrêter."
+#
+msgid   "No card has been played in this round yet."
+msgstr  "Aucune carte n'a été jouée dans cette manche pour le moment."
+#
+msgid   "It's <b><var name=\"nick\"/></b>'s turn."
+msgstr  "C'est au tour de <b><var name=\"nick\"/></b> de jouer."
+#
+msgid   "Hmm? What move was that <b><var name=\"nick\"/></b>?"
+msgstr  "Hum ? C'est quoi ça <b><var name=\"nick\"/></b> ?"
+#
+msgid   "Hmm? What card was that <b><var name=\"nick\"/></b>?"
+msgstr  "Hum ? Qu'est-ce que c'est que cette carte <b><var name=\"nick\"/></"
+        "b> ?"
+#
+msgid   "Hands: <for from=\"hands\" key=\"nick\" item=\"nb_cards\"><b><var "
+        "name=\"nick\"/></b>: <var name=\"nb_cards\"/></for>."
+msgstr  "Cartes en main : <for from=\"hands\" key=\"nick\" item=\"nb_cards"
+        "\"><b><var name=\"nick\"/></b>: <var name=\"nb_cards\"/></for>."
+#
+msgid   "Exchanges: <b><var name=\"winner\"/></b> receives a <var name="
+        "\"received\"/> and gives a <var name=\"given\"/> to <b><var name="
+        "\"loser\"/></b>. <b><var name=\"winner\"/></b>, you may now start "
+        "this round."
+msgstr  "Échanges : <b><var name=\"winner\"/></b> reçoit un <var name="
+        "\"received\"/> et donne un <var name=\"given\"/> à <b><var name="
+        "\"loser\"/></b>. <b><var name=\"winner\"/></b>, à toi de commencer "
+        "cette manche."
+#
+msgid   "Current discard: <for from=\"cards\" item=\"card\" separator=\" "
+        "\"><var name=\"card\"/></for> (<var name=\"type\"/> played by <b><var "
+        "name=\"player\"/></b>)"
+msgstr  "Défausse : <for from=\"cards\" item=\"card\" separator=\" \"><var "
+        "name=\"card\"/></for> (<var name=\"type\"/>, par <b><var name=\"player"
+        "\"/></b>)"
+#
+msgid   "Could not register Gang of Four creation trigger"
+msgstr  "Impossible d'enregistrer le déclencheur de création pour le jeu du "
+        "Gang of Four"
+#
+msgid   "Bad limit in the configuration file (<var name=\"limit\"/>). The game "
+        "cannot start."
+msgstr  "Limite incorrecte dans le fichier de configuration (<var name=\"limit"
+        "\"/>). Le jeu ne peut pas démarrer."
+#
+msgid   "A game managed by <b><var name=\"admin\"/></b> is already in progress "
+        "here. Say \"<b><var name=\"trigger\"/></b>\" to join it."
+msgstr  "Une partie gérée par <b><var name=\"admin\"/></b> est déjà en cours. "
+        "Dites \"<var name=\"trigger\"/>\" pour rejoindre la partie."
+#
+msgid   "<b><var name=\"nick\"/></b>: it's your turn sleepyhead!"
+msgstr  "<b><var name=\"nick\"/></b> : c'est ton tour tête de linotte !"
+#
+msgid   "<b><var name=\"nick\"/></b>, you cannot play <b><var name=\"type\"/></"
+        "b> right now!"
+msgstr  "<b><var name=\"nick\"/></b>, tu ne peux pas jouer <b><var name=\"type"
+        "\"/></b> maintenant !"
+#
+msgid   "<b><var name=\"nick\"/></b>, since there is only 1 card left in "
+        "<b><var name=\"next_player\"/></b>'s hand, you MUST play your best "
+        "card or a combination on this turn!"
+msgstr  "Il n'y a plus qu'une seule carte dans la main de <b><var name="
+        "\"next_player\"/></b>. De ce fait, <b><var name=\"nick\"/></b>, tu "
+        "DOIS jouer ta meilleure carte ou une combinaison durant ce tour !"
+#
+msgid   "<b><var name=\"nick\"/></b> wins this round! The next round will "
+        "start in <var name=\"delay\"/> seconds."
+msgstr  "<b><var name=\"nick\"/></b> remporte cette manche ! La prochaine "
+        "manche débutera dans <var name=\"delay\"/> secondes."
+#
+msgid   "<b><var name=\"nick\"/></b> wins this round!"
+msgstr  "<b><var name=\"nick\"/></b> remporte cette manche !"
+#
+msgid   "<b><var name=\"nick\"/></b> plays <var name=\"type\"/>: <for from="
+        "\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for> - "
+        "This is <b><var name=\"nick\"/></b>'s last card!"
+msgstr  "<b><var name=\"nick\"/></b> joue <var name=\"type\"/> : <for from="
+        "\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for> - "
+        "C'est la dernière carte de <b><var name=\"nick\"/></b> !"
+#
+msgid   "<b><var name=\"nick\"/></b> plays <var name=\"type\"/>: <for from="
+        "\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for>"
+msgstr  "<b><var name=\"nick\"/></b> joue <var name=\"type\"/> : <for from="
+        "\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for>"
+#
+msgid   "<b><var name=\"nick\"/></b> passes turn."
+msgstr  "<b><var name=\"nick\"/></b> passe son tour."
+#
+msgid   "<b><var name=\"nick\"/></b> joins the game."
+msgstr  "<b><var name=\"nick\"/></b> rejoint la partie de <var name=\"logo\"/>."
+#
+msgid   "<b><var name=\"nick\"/></b> has got the upper hand and may now start "
+        "a new combination"
+msgstr  "<b><var name=\"nick\"/></b> a pris la tête et peut jouer une nouvelle "
+        "combinaison"
+#
+msgid   "<b><var name=\"admin\"/></b> stopped the game!"
+msgstr  "<b><var name=\"admin\"/></b> a arrêté cette partie !"
+#
+msgid   ""
+msgstr  "Project-Id-Version: Erebot_Module_GoF 0.5.0\n"
+        "Report-Msgid-Bugs-To: clicky@erebot.net\n"
+        "POT-Creation-Date: 2011-06-03 22:25+0200\n"
+        "PO-Revision-Date: 2011-04-16 12:24+0200\n"
+        "Last-Translator: \n"
+        "Language-Team: \n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=utf-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
