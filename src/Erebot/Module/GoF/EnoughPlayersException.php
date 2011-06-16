@@ -16,8 +16,11 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// If there are already 4 players
-// and someone tries to join.
+/**
+ * \brief
+ *      Raised when someone tries to join the
+ *      current game but are already 4 players.
+ */
 class   Erebot_Module_GoF_EnoughPlayersException
 extends Erebot_Module_GoF_Exception
 {

@@ -16,6 +16,11 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Raised a person tries to play a card
+ *      he/she doesn't have.
+ */
 class   Erebot_Module_GoF_NoSuchCardException
 extends Erebot_Module_GoF_Exception
 {

@@ -16,9 +16,12 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// If the given combo could not be
-// recognized as a valid one.
-// eg. "g0" ou "b1" are invalid moves.
+/**
+ * \brief
+ *      Raised when someone tries to play
+ *      an invalid combination of cards,
+ *      such as a double pair.
+ */
 class   Erebot_Module_GoF_InvalidComboException
 extends Erebot_Module_GoF_Exception
 {

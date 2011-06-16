@@ -16,12 +16,16 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// If the given combo is inferior to the currently
-// leading one. The $allowed parameter may contain
-// an array of valid combos which could be played.
+/**
+ * \brief
+ *      Raised when trying to play a combination
+ *      that is inferior to the currently leading
+ *      one.
+ */
 class   Erebot_Module_GoF_InferiorComboException
 extends Erebot_Module_GoF_Exception
 {
+    /// Array of allowed (superior) combinations.
     protected $_allowed;
 
     public function __construct($message = NULL, $code = 0, $allowed = NULL)
@@ -30,6 +34,14 @@ extends Erebot_Module_GoF_Exception
         $this->_allowed = $allowed;
     }
 
+    /**
+     * Returns a list of superior combinations
+     * that may be played, in known.
+     *
+     * \retval list|NULL
+     *      List of superior combinations,
+     *      if known.
+     */
     public function getAllowedCombo()
     {
         return $this->_allowed;

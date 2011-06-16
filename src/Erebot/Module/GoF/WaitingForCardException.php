@@ -16,9 +16,13 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// If a previous round took place and the winner
-// tries to start the next one without first
-// choosing a card to give to the previous round's loser.
+/**
+ * \brief
+ *      Raised when a round has ended and the bot
+ *      is waiting for the winner of that round
+ *      to choose one card to exchange with the
+ *      loser of the round.
+ */
 class   Erebot_Module_GoF_WaitingForCardException
 extends Erebot_Module_GoF_Exception
 {

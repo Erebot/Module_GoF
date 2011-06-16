@@ -16,6 +16,11 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Raised when someone tries to play
+ *      something which is not a valid card.
+ */
 class   Erebot_Module_GoF_InvalidCardException
 extends Erebot_Module_GoF_Exception
 {

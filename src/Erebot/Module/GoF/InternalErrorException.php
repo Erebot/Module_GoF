@@ -16,7 +16,11 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// For other (unsorted) errors.
+/**
+ * \brief
+ *      Raised in various cases where an internal
+ *      error has been detected.
+ */
 class   Erebot_Module_GoF_InternalErrorException
 extends Erebot_Module_GoF_Exception
 {

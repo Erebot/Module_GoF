@@ -16,8 +16,12 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Trying to compare two things which cannot be compared,
-// such as two incompatible combinations.
+/**
+ * \brief
+ *      Raised when an attempt is made to compare
+ *      two things that cannot be compared together,
+ *      such as two incompatible combinations.
+ */
 class   Erebot_Module_GoF_NotComparableException
 extends Erebot_Module_GoF_Exception
 {

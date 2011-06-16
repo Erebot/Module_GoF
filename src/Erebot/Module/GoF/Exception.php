@@ -16,10 +16,12 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Generic GoF error for easy
-// try...catch'ing.
-class   Erebot_Module_GoF_Exception
-extends Exception
+/**
+ * \brief
+ *      Generic base exception.
+ */
+abstract class  Erebot_Module_GoF_Exception
+extends         Exception
 {
 }
 

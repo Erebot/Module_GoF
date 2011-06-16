@@ -16,9 +16,12 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// If the starting player has M1
-// but tried not to play it.
-// (neither alone nor in a combo)
+/**
+ * \brief
+ *      Raised when the first player of the first round
+ *      has the Multicolor One (m1) but tried not to
+ *      play it.
+ */
 class   Erebot_Module_GoF_StartWithMulti1Exception
 extends Erebot_Module_GoF_Exception
 {
