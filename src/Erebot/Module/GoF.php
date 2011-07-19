@@ -19,12 +19,6 @@
 class   Erebot_Module_GoF
 extends Erebot_Module_Base
 {
-    static protected $_metadata = array(
-        'requires'  =>  array(
-            'Erebot_Module_TriggerRegistry',
-            'Erebot_Module_IrcTracker',
-        ),
-    );
     protected $_chans;
     protected $_creator;
 
