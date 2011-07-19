@@ -437,7 +437,7 @@ extends Erebot_Module_Base
         return $colors[$a[0]] - $colors[$b[0]];
     }
 
-    public function startGame(Erebot_Timer &$timer, $chan)
+    public function startGame(Erebot_Interface_Timer $timer, $chan)
     {
         if (!isset($this->_chans[$chan])) return;
         $infos =& $this->_chans[$chan];
@@ -630,7 +630,7 @@ extends Erebot_Module_Base
                 $startDelay = 20;
 
             $infos['timer'] = new Erebot_Timer(
-                array($this, 'startGame'),
+                new Erebot_Callable(array($this, 'startGame')),
                 $startDelay,
                 FALSE,
                 array($chan)
@@ -919,7 +919,7 @@ extends Erebot_Module_Base
             }
             else {
                 $infos['timer'] = new Erebot_Timer(
-                    array($this, 'startGame'),
+                    new Erebot_Callable(array($this, 'startGame')),
                     $pauseDelay,
                     FALSE,
                     array($chan)
