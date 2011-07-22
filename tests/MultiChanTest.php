@@ -55,6 +55,7 @@ extends ErebotModuleTestCase
         );
 
         $this->_tracker->handleJoin(
+            $this->_eventHandler,
             new Erebot_Event_Join(
                 $this->_connection,
                 '#foo',
@@ -62,6 +63,7 @@ extends ErebotModuleTestCase
             )
         );
         $this->_tracker->handleJoin(
+            $this->_eventHandler,
             new Erebot_Event_Join(
                 $this->_connection,
                 '#bar',
@@ -102,6 +104,7 @@ extends ErebotModuleTestCase
     {
         // First channel.
         $this->_module->handleCreate(
+            $this->_eventHandler,
             new Erebot_Event_ChanText(
                 $this->_connection,
                 '#foo',
@@ -111,6 +114,7 @@ extends ErebotModuleTestCase
         );
 
         $this->_module->handleJoin(
+            $this->_eventHandler,
             new Erebot_Event_ChanText(
                 $this->_connection,
                 '#foo',
@@ -121,6 +125,7 @@ extends ErebotModuleTestCase
 
         // Second channel.
         $this->_module->handleCreate(
+            $this->_eventHandler,
             new Erebot_Event_ChanText(
                 $this->_connection,
                 '#bar',
@@ -130,6 +135,7 @@ extends ErebotModuleTestCase
         );
 
         $this->_module->handleJoin(
+            $this->_eventHandler,
             new Erebot_Event_ChanText(
                 $this->_connection,
                 '#bar',
