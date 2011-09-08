@@ -253,8 +253,9 @@ extends Erebot_Module_Base
         $this->_chans[$chan] = array();
         $infos =& $this->_chans[$chan];
         $infos['triggers'] =& $triggers;
+        $handlerCls = $this->getFactory('!EventHandler');
 
-        $infos['handlers']['choose']        =   new Erebot_EventHandler(
+        $infos['handlers']['choose'] = new $handlerCls(
             new Erebot_Callable(array($this, 'handleChoose')),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
@@ -263,7 +264,7 @@ extends Erebot_Module_Base
             )
         );
 
-        $infos['handlers']['join']          =   new Erebot_EventHandler(
+        $infos['handlers']['join'] = new $handlerCls(
             new Erebot_Callable(array($this, 'handleJoin')),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
@@ -272,7 +273,7 @@ extends Erebot_Module_Base
             )
         );
 
-        $infos['handlers']['pass']          =   new Erebot_EventHandler(
+        $infos['handlers']['pass'] = new $handlerCls(
             new Erebot_Callable(array($this, 'handlePass')),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
@@ -281,7 +282,7 @@ extends Erebot_Module_Base
             )
         );
 
-        $infos['handlers']['play']          =   new Erebot_EventHandler(
+        $infos['handlers']['play'] = new $handlerCls(
             new Erebot_Callable(array($this, 'handlePlay')),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
@@ -290,7 +291,7 @@ extends Erebot_Module_Base
             )
         );
 
-        $infos['handlers']['show_cards']    =   new Erebot_EventHandler(
+        $infos['handlers']['show_cards'] = new $handlerCls(
             new Erebot_Callable(array($this, 'handleShowCardsCount')),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
@@ -299,7 +300,7 @@ extends Erebot_Module_Base
             )
         );
 
-        $infos['handlers']['show_discard']  =   new Erebot_EventHandler(
+        $infos['handlers']['show_discard'] = new $handlerCls(
             new Erebot_Callable(array($this, 'handleShowDiscard')),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
@@ -308,7 +309,7 @@ extends Erebot_Module_Base
             )
         );
 
-        $infos['handlers']['show_order']    =   new Erebot_EventHandler(
+        $infos['handlers']['show_order'] = new $handlerCls(
             new Erebot_Callable(array($this, 'handleShowOrder')),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
@@ -317,7 +318,7 @@ extends Erebot_Module_Base
             )
         );
 
-        $infos['handlers']['show_scores']   =   new Erebot_EventHandler(
+        $infos['handlers']['show_scores'] = new $handlerCls(
             new Erebot_Callable(array($this, 'handleShowScores')),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
@@ -326,7 +327,7 @@ extends Erebot_Module_Base
             )
         );
 
-        $infos['handlers']['show_time']     =   new Erebot_EventHandler(
+        $infos['handlers']['show_time'] = new $handlerCls(
             new Erebot_Callable(array($this, 'handleShowTime')),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
@@ -335,7 +336,7 @@ extends Erebot_Module_Base
             )
         );
 
-        $infos['handlers']['show_turn'] =   new Erebot_EventHandler(
+        $infos['handlers']['show_turn'] = new $handlerCls(
             new Erebot_Callable(array($this, 'handleShowTurn')),
             new Erebot_Event_Match_All(
                 new Erebot_Event_Match_InstanceOf('Erebot_Interface_Event_ChanText'),
