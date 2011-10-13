@@ -93,7 +93,10 @@ implements  Countable
         catch (Erebot_Module_GoF_NoSuchCardException $e) {
             // Restore the cards as they were before.
             $this->_cards = array_merge($this->_cards, $removedCards);
-            usort($this->_cards, array('Erebot_Module_GoF_Card', 'compareCards'));
+            usort(
+                $this->_cards,
+                array('Erebot_Module_GoF_Card', 'compareCards')
+            );
             $this->_cards = array_reverse($this->_cards);
             throw $e;
         }

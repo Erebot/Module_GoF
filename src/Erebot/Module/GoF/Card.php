@@ -54,7 +54,9 @@ class Erebot_Module_GoF_Card
         // Allow only m1 as a multicolor card.
         if ($color == self::COLOR_MULTI &&
             $value != self::VALUE_1)
-            throw new Erebot_Module_GoF_InvalidCardException("Invalid multicolor");
+            throw new Erebot_Module_GoF_InvalidCardException(
+                "Invalid multicolor"
+            );
 
         // Allow only yp & gp as phoenixes.
         if ($value == self::VALUE_PHOENIX &&

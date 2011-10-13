@@ -19,7 +19,7 @@
 class       Erebot_Module_GoF_Game
 implements  Countable
 {
-    /// 
+    ///
     protected $_deck;
     protected $_order;
     protected $_players;
@@ -89,30 +89,16 @@ implements  Countable
         if ($this->_lastLoser !== NULL)
             throw new Erebot_Module_GoF_WaitingForCardException();
 
-        /// @TODO: implement this rule.
-#        if (count($infos['players'][$next]['cards']) == 1) {
-#            if (count($cards) == 1 && reset($cards) != end($infos['players'][$token]['cards'])) {
-#                $msg = $translator->gettext(
-#                    '<b><var name="nick"/></b>, '.
-#                    '<b><var name="next_player"/></b> has only 1 card left. '.
-#                    'You <b>MUST</b> play your best card or a combination '.
-#                    'on this turn!'
-#                );
-#                $tpl = new Erebot_Styling($msg, $translator);
-#                $tpl->assign('nick', $nick);
-#                $tpl->assign('next_player', $tracker->getNick($next));
-#                $this->sendMessage($chan, $tpl->render());
-#                return $event->preventDefault(TRUE);
-#            }
-#        }
-
-        $current = $this->getCurrentPlayer();
-
         // Check that the new combo is indeed
         // superior to the previous one.
+        $current = $this->getCurrentPlayer();
         $lastDiscard = $this->_deck->getLastDiscard();
-        if ($lastDiscard !== NULL && $lastDiscard['player'] !== $current &&
-            Erebot_Module_GoF_Combo::compareCombos($combo, $lastDiscard['combo']) <= 0)
+        if ($lastDiscard !== NULL &&
+            $lastDiscard['player'] !== $current &&
+            Erebot_Module_GoF_Combo::compareCombos(
+                $combo,
+                $lastDiscard['combo']
+            ) <= 0)
             throw new Erebot_Module_GoF_InferiorComboException();
 
         $currentHand =& $current->getHand();

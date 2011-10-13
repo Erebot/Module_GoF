@@ -55,7 +55,9 @@ implements  ArrayAccess,
 
         $nbCards = count($cards);
         if ($nbCards < 1 || $nbCards > 7)
-            throw new Erebot_Module_GoF_InvalidComboException("Bad cards count");
+            throw new Erebot_Module_GoF_InvalidComboException(
+                "Bad cards count"
+            );
 
         $this->_position = 0;
 
@@ -84,9 +86,11 @@ implements  ArrayAccess,
         foreach ($values as $val) {
             // At this point, it's impossible to have more than three times
             // the same value (which would be a gang but this was already
-            // handled above). This prevents combos such as 4 X & 1 single Y. 
+            // handled above). This prevents combos such as 4 X & 1 single Y.
             if (count($val) > 3)
-                throw new Erebot_Module_GoF_InvalidComboException("WTF is that?");
+                throw new Erebot_Module_GoF_InvalidComboException(
+                    "WTF is that?"
+                );
         }
 
         // Full houses.
@@ -109,7 +113,9 @@ implements  ArrayAccess,
         // Restricted cards for multi-cards combos.
         if (isset($values[Erebot_Module_GoF_Card::VALUE_PHOENIX]) ||
             isset($values[Erebot_Module_GoF_Card::VALUE_DRAGON]))
-            throw new Erebot_Module_GoF_InvalidComboException("Restricted card");
+            throw new Erebot_Module_GoF_InvalidComboException(
+                "Restricted card"
+            );
 
         // Other types.
         $this->_type = 0;
