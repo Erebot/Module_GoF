@@ -1021,10 +1021,14 @@ extends Erebot_Module_Base
 
     protected function _qualify($chan, Erebot_Module_GoF_Combo &$combo)
     {
+        static $gettext = NULL;
+
         $translator     = $this->getTranslator($chan);
         // lazy-gettext so that only 1 lookup is actually done
         // through the real gettext method.
-        $gettext = create_function('$a', 'return $a;');
+        if ($gettext === NULL)
+            $gettext = create_function('$a', 'return $a;');
+
         $typeNames = array(
             Erebot_Module_GoF_Combo::COMBO_SINGLE =>
                 $gettext('a single'),
