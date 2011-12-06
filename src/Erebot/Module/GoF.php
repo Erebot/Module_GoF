@@ -1184,10 +1184,10 @@ extends Erebot_Module_Base
         $msg = $fmt->_(
             'Playing turn: '.
             '<for from="nicks" item="nick"><b><var name="nick"/></b></for>.',
-                array(
-                    'logo' => $this->getLogo(),
-                    'nicks' => $nicks,
-                )
+            array(
+                'logo' => $this->getLogo(),
+                'nicks' => $nicks,
+            )
         );
         $this->sendMessage($chan, $msg);
         $event->preventDefault(TRUE);

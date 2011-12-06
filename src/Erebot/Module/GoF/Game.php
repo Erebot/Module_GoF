@@ -135,7 +135,11 @@ implements  Countable
             $losers = array_keys($nbCards, max($nbCards));
             if (count($losers) > 1) {
                 $losers = array_combine($losers, $losers);
-                array_walk($losers, array('self', '_getScore'), $this->_players);
+                array_walk(
+                    $losers,
+                    array('self', '_getScore'),
+                    $this->_players
+                );
                 $losers = array_keys($losers, max($losers));
 
                 if (count($losers) > 1) {
