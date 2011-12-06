@@ -25,14 +25,33 @@ extends         Erebot_Module_Base
     }
 }
 
+abstract class  TrackerStub
+extends         Erebot_Module_Base
+{
+    public function startTracking($identity)
+    {
+        return 42;
+    }
+}
+
+class   GoFStub
+extends Erebot_Module_GoF
+{
+    protected function getLogo()
+    {
+        return "GoF";
+    }
+}
+
 class   Erebot_Module_GoF_MultiChanText
-extends ErebotModuleTestCase
+extends Erebot_Testenv_Module_TestCase
 {
     public function setUp()
     {
+        $this->_module = new GoFStub(NULL);
         parent::setUp();
-        $this->_module = new Erebot_Module_GoF(NULL);
         $this->_module->reload($this->_connection, 0);
+
         $this->_serverConfig
             ->expects($this->any())
             ->method('parseInt')
@@ -46,30 +65,11 @@ extends ErebotModuleTestCase
             'RegistryStub',
             array(), '', FALSE, FALSE
         );
-        $this->_registry->reload($this->_connection, 0);
 
         $this->_tracker = $this->getMockForAbstractClass(
-            'Erebot_Module_Base',
+            'TrackerStub',
             array(), '', FALSE, FALSE
         );
-        $this->_tracker->reload($this->_connection, 0);
-
-#        $this->_tracker->handleJoin(
-#            $this->_eventHandler,
-#            new Erebot_Event_Join(
-#                $this->_connection,
-#                '#foo',
-#                'Clicky'
-#            )
-#        );
-#        $this->_tracker->handleJoin(
-#            $this->_eventHandler,
-#            new Erebot_Event_Join(
-#                $this->_connection,
-#                '#bar',
-#                'Clicky'
-#            )
-#        );
 
         $this->_connection
             ->expects($this->any())
@@ -81,11 +81,6 @@ extends ErebotModuleTestCase
     {
         $this->_module->unload();
         parent::tearDown();
-    }
-
-    protected function _mockJoin($chan)
-    {
-
     }
 
     protected function _mockMessage($chan, $text)
@@ -132,6 +127,11 @@ extends ErebotModuleTestCase
 
     public function testJoin()
     {
+        $this->_module->setFactory(
+            '!EventHandler',
+            get_class($this->_eventHandler)
+        );
+
         // First channel.
         $this->_module->handleCreate(
             $this->_eventHandler,
