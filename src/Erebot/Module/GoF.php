@@ -717,7 +717,8 @@ extends Erebot_Module_Base
             if ($startDelay < 0)
                 $startDelay = 20;
 
-            $infos['timer'] = new Erebot_Timer(
+            $timerCls = $this->getFactory('!Timer');
+            $infos['timer'] = new $timerCls(
                 new Erebot_Callable(array($this, 'startGame')),
                 $startDelay,
                 FALSE,
@@ -1030,7 +1031,8 @@ extends Erebot_Module_Base
                 $this->cleanup($chan);
             }
             else {
-                $infos['timer'] = new Erebot_Timer(
+                $timerCls = $this->getFactory('!Timer');
+                $infos['timer'] = new $timerCls(
                     new Erebot_Callable(array($this, 'startGame')),
                     $pauseDelay,
                     FALSE,
