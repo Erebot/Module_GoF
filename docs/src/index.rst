@@ -15,6 +15,12 @@ Contents:
     Configuration
     Usage
 
+Current status on http://travis-ci.org/:
+
+..  image:: https://secure.travis-ci.org/fpoirotte/Erebot_Module_GoF.png
+    :alt: unknown
+    :target: http://travis-ci.org/#!/fpoirotte/Erebot_Module_GoF/
+
 
 ..  _`Erebot`:
     https://www.erebot.net/
@@ -22,3 +28,4 @@ Contents:
     http://www.daysofwonder.com/gangoffour/en/
 
 .. vim: ts=4 et
+
