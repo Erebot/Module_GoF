@@ -468,8 +468,9 @@ extends Erebot_Module_Base
             return $event->preventDefault(TRUE);
         }
 
-        $creator = (string) $this->_chans[$chan]['game']->getCreator();
-        if (!$this->_connection->irccmp($creator, $nick)) {
+        $creator    = (string) $this->_chans[$chan]['game']->getCreator();
+        $collator   = $this->_connection->getCollator();
+        if (!$collator->compare($creator, $nick)) {
             $msg = $fmt->_(
                 '<b><var name="admin"/></b> stopped the game!',
                 array(
