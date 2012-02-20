@@ -583,9 +583,9 @@ extends Erebot_Module_Base
 
         $infos      =&  $this->_chans[$chan];
         $current    =   $infos['game']->getCurrentPlayer();
-        if ($current === FALSE ||
-            $this->_connection->irccasecmp($nick, (string) $current->getToken())
-            )
+        $collator   = $this->_connection->getCollator();
+        $tokenNick  = (string) $current->getToken();
+        if ($current === FALSE || $collator->compare($nick, $tokenNick))
             return;
 
         $fmt = $this->getFormatter($chan);
@@ -674,7 +674,8 @@ extends Erebot_Module_Base
 
         foreach ($infos['game']->getPlayers() as $player) {
             $token = (string) $player->getToken();
-            if (!$this->_connection->irccasecmp($nick, $token)) {
+            $collator = $this->_connection->getCollator();
+            if (!$collator->compare($nick, $token)) {
                 $msg = $fmt->_(
                     'You are already part of that game '.
                     '<b><var name="nick"/></b>!',
@@ -747,9 +748,9 @@ extends Erebot_Module_Base
         $fmt        =   $this->getFormatter($chan);
         $infos      =&  $this->_chans[$chan];
         $current    =   $infos['game']->getCurrentPlayer();
-        if ($current === FALSE ||
-            $this->_connection->irccasecmp($nick, (string) $current->getToken())
-            )
+        $collator   = $this->_connection->getCollator();
+        $tokenNick  = (string) $current->getToken();
+        if ($current === FALSE || $collator->compare($nick, $tokenNick))
             return;
 
         try {
@@ -808,9 +809,9 @@ extends Erebot_Module_Base
         $fmt        = $this->getFormatter($chan);
         $infos      =&  $this->_chans[$chan];
         $current    =   $infos['game']->getCurrentPlayer();
-        if ($current === FALSE ||
-            $this->_connection->irccasecmp($nick, (string) $current->getToken())
-            )
+        $collator   = $this->_connection->getCollator();
+        $tokenNick  = (string) $current->getToken();
+        if ($current === FALSE || $collator->compare($nick, $tokenNick))
             return;
 
         if (!preg_match('/^(?:[gyr][0-9]+|m1|gp|yp|rd)+$/', $move)) {
@@ -1091,11 +1092,12 @@ extends Erebot_Module_Base
         if (!$this->_checkStarted($chan))
             return $event->preventDefault(TRUE);
 
-        $hands = array();
+        $hands      = array();
+        $collator   = $this->_connection->getCollator();
         foreach ($infos['game']->getPlayers() as $player) {
             $playerNick = (string) $player->getToken();
             $hands[$playerNick] = count($player->getHand());
-            if (!$this->_connection->irccasecmp($playerNick, $nick))
+            if (!$collator->compare($playerNick, $nick))
                 $this->_sendCards($chan, $player);
         }
 
@@ -1134,8 +1136,9 @@ extends Erebot_Module_Base
             return $event->preventDefault(TRUE);
         }
 
-        $discardNick = (string) $lastDiscard['player']->getToken();
-        if (!$this->_connection->irccasecmp($nick, $discardNick)) {
+        $discardNick    = (string) $lastDiscard['player']->getToken();
+        $collator       = $this->_connection->getCollator();
+        if (!$collator->compare($nick, $discardNick)) {
             $msg = $fmt->_(
                 '<b><var name="nick"/></b> has got the upper hand '.
                 'and may now start a new combination',
@@ -1262,9 +1265,8 @@ extends Erebot_Module_Base
         if (!$this->_checkStarted($chan))
             return;
 
-        if ($from !== NULL &&
-            !$this->_connection->irccasecmp($from, $currentNick)
-            ) {
+        $collator   = $this->_connection->getCollator();
+        if ($from !== NULL && !$collator->compare($from, $currentNick)) {
             $msg = $fmt->_(
                 '<b><var name="nick"/></b>: '.
                 'it\'s your turn sleepyhead!',
@@ -1315,9 +1317,8 @@ extends Erebot_Module_Base
             $this->sendMessage($chan, $msg);
         }
 
-        if ($from === NULL ||
-            !$this->_connection->irccasecmp($from, $currentNick)
-            )
+        $collator   = $this->_connection->getCollator();
+        if ($from === NULL || !$collator->compare($from, $currentNick))
             $this->_sendCards($chan, $current);
     }
 
