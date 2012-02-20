@@ -128,7 +128,7 @@ msgid   "Ok! A new game has been created in <var name=\"chan\"/>. It will not "
         "Say \"<b><var name=\"trigger\"/></b>\" to join it."
 msgstr  "Ok ! Une nouvelle partie a été créée sur <var name=\"chan\"/>. "
         "La partie ne s'arrêtera pas avant que quelqu'un n'atteigne <b><var "
-        "name=\"limit\"></b> points. Dites \"<b><var name=\"trigger\"/></b>\" "
+        "name=\"limit\"/></b> points. Dites \"<b><var name=\"trigger\"/></b>\" "
         "pour jouer."
 #
 msgid   "Now is not the time to play <b><var name=\"nick\"/></b>!"
@@ -254,3 +254,4 @@ msgstr  "Project-Id-Version: Erebot_Module_GoF 0.5.0\n"
         "MIME-Version: 1.0\n"
         "Content-Type: text/plain; charset=utf-8\n"
         "Content-Transfer-Encoding: 8bit\n"
+
