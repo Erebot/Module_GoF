@@ -2,17 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Usage &mdash; Erebot_Module_GoF v0.1.0snapshot290 documentation</title>
+    <title>Usage &mdash; Erebot_Module_GoF 0.1.0snapshot302 documentation</title>
+    
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1.0snapshot290',
+        VERSION:     '0.1.0snapshot302',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,9 +25,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Erebot_Module_GoF v0.1.0snapshot290 documentation"
+          title="Search within Erebot_Module_GoF 0.1.0snapshot302 documentation"
           href="_static/opensearch.xml"/>
-    <link rel="top" title="Erebot_Module_GoF v0.1.0snapshot290 documentation" href="index.html" />
+    <link rel="top" title="Erebot_Module_GoF 0.1.0snapshot302 documentation" href="index.html" />
     <link rel="prev" title="Configuration" href="Configuration.html" /> 
   </head>
   <body>
@@ -34,7 +37,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="Configuration.html" title="Configuration"
              accesskey="P">previous</a></li>
-        <li><a href="index.html">Erebot_Module_GoF v0.1.0snapshot290 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Erebot_Module_GoF 0.1.0snapshot302 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -63,15 +66,15 @@ The full rules for the game can be found (in multiple languages) on
 <col width="61%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Command</th>
+<tr class="row-odd"><th class="head">Command</th>
 <th class="head">Description</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td><tt class="docutils literal"><span class="pre">!gof</span></tt></td>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">!gof</span></tt></td>
 <td>Start a new Gang of Four game.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">!gof</span> <span class="pre">cancel</span></tt> or
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">!gof</span> <span class="pre">cancel</span></tt> or
 <tt class="docutils literal"><span class="pre">!gof</span> <span class="pre">end</span></tt> or
 <tt class="docutils literal"><span class="pre">!gof</span> <span class="pre">off</span></tt> or
 <tt class="docutils literal"><span class="pre">!gof</span> <span class="pre">stop</span></tt></td>
@@ -79,44 +82,44 @@ The full rules for the game can be found (in multiple languages) on
 game. Can only be used by the person who
 started the game in the first place.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">ca</span></tt></td>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ca</span></tt></td>
 <td>Display the number of remaining cards in
 each player&#8217;s hand.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">cd</span></tt></td>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">cd</span></tt></td>
 <td>Display the last played (and thus
 discarded) card.</td>
 </tr>
-<tr><td><tt class="samp docutils literal"><span class="pre">ch</span> <em><span class="pre">card</span></em></tt></td>
+<tr class="row-even"><td><tt class="samp docutils literal"><span class="pre">ch</span> <em><span class="pre">card</span></em></tt></td>
 <td>Choose a card to give to the loser of the
 previous round. Can only be used at the
 end of a round by the winner of the
 previous round.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">jo</span></tt></td>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">jo</span></tt></td>
 <td>Join a currently running Uno game.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">od</span></tt></td>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">od</span></tt></td>
 <td>Display playing order.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">pa</span></tt></td>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">pa</span></tt></td>
 <td>Pass instead of playing.</td>
 </tr>
-<tr><td><tt class="samp docutils literal"><span class="pre">pl</span> <em><span class="pre">combo</span></em></tt></td>
+<tr class="row-even"><td><tt class="samp docutils literal"><span class="pre">pl</span> <em><span class="pre">combo</span></em></tt></td>
 <td>Play the given <em>combo</em> of cards (see
 <a class="reference internal" href="#mnemonics"><em>Mnemonics for cards</em></a> for the syntax used).
 Eg. <tt class="docutils literal"><span class="pre">pl</span> <span class="pre">g1y1</span></tt> to play a pair of 1s,
 containing a &#8220;Green 1&#8221; and a &#8220;Yellow 1&#8221;.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">sc</span></tt></td>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">sc</span></tt></td>
 <td>Display the score of each player involved
 in the current game.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">ti</span></tt></td>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ti</span></tt></td>
 <td>Display information on how long the
 current game has been running for.</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">tu</span></tt></td>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">tu</span></tt></td>
 <td>Display the name of the player whose turn
 it is to play.</td>
 </tr>
@@ -149,27 +152,27 @@ of the card they refer to:</p>
 <col width="68%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Mnemonic</th>
+<tr class="row-odd"><th class="head">Mnemonic</th>
 <th class="head">Actual card</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td><tt class="docutils literal"><span class="pre">g1</span></tt></td>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">g1</span></tt></td>
 <td>&#8220;Green 1&#8221;</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">m1</span></tt></td>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">m1</span></tt></td>
 <td>&#8220;Multicolored 1&#8221;</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">r10</span></tt></td>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">r10</span></tt></td>
 <td>&#8220;Red 10&#8221;</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">gp</span></tt></td>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">gp</span></tt></td>
 <td>&#8220;Green Phoenix&#8221;</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">yp</span></tt></td>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">yp</span></tt></td>
 <td>&#8220;Yellow Phoenix&#8221;</td>
 </tr>
-<tr><td><tt class="docutils literal"><span class="pre">rd</span></tt></td>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">rd</span></tt></td>
 <td>&#8220;Red Dragon&#8221;</td>
 </tr>
 </tbody>
@@ -220,12 +223,12 @@ only one multicolored figure, one red dragon, a green and a yellow phoenix.</p>
         <li class="right" style="margin-right: 10px">
           <a href="Configuration.html" title="Configuration"
              >previous</a></li>
-        <li><a href="index.html">Erebot_Module_GoF v0.1.0snapshot290 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Erebot_Module_GoF 0.1.0snapshot302 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Erebot.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.8.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>
 </html>
