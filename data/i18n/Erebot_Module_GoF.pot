@@ -3,269 +3,291 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
-msgid   ""
-msgstr  "Project-Id-Version: Erebot_Module_GoF 0.1.0\n"
-        "Report-Msgid-Bugs-To: i18n@erebot.net\n"
-        "POT-Creation-Date: 2012-02-20 22:46+0100\n"
-        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-        "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-        "Language-Team: LANGUAGE <LL@li.org>\n"
-        "Language: \n"
-        "MIME-Version: 1.0\n"
-        "Content-Type: text/plain; charset=CHARSET\n"
-        "Content-Transfer-Encoding: 8bit\n"
+msgid ""
+msgstr ""
+"Project-Id-Version: Erebot_Module_GoF 0.1.0\n"
+"Report-Msgid-Bugs-To: i18n@erebot.net\n"
+"POT-Creation-Date: 2012-05-21 00:13+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
 #
-# File: src/Erebot/Module/GoF.php, line: 474
-msgid   "<b><var name=\"admin\"/></b> stopped the game!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 475
+msgid "<b><var name=\"admin\"/></b> stopped the game!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1143
-msgid   "<b><var name=\"nick\"/></b> has got the upper hand and may now start "
-        "a new combination"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1144
+msgid ""
+"<b><var name=\"nick\"/></b> has got the upper hand and may now start a new "
+"combination"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 707
-msgid   "<b><var name=\"nick\"/></b> joins the game."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 708
+msgid "<b><var name=\"nick\"/></b> joins the game."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 786
-msgid   "<b><var name=\"nick\"/></b> passes turn."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 787
+msgid "<b><var name=\"nick\"/></b> passes turn."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 971
-msgid   "<b><var name=\"nick\"/></b> plays <var name=\"type\"/>: <for from="
-        "\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for>"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 972
+msgid ""
+"<b><var name=\"nick\"/></b> plays <var name=\"type\"/>: <for from=\"cards\" "
+"item=\"card\" separator=\" \"><var name=\"card\"/></for>"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 963
-msgid   "<b><var name=\"nick\"/></b> plays <var name=\"type\"/>: <for from="
-        "\"cards\" item=\"card\" separator=\" \"><var name=\"card\"/></for> - "
-        "This is <b><var name=\"nick\"/></b>'s last card!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 964
+msgid ""
+"<b><var name=\"nick\"/></b> plays <var name=\"type\"/>: <for from=\"cards\" "
+"item=\"card\" separator=\" \"><var name=\"card\"/></for> - This is <b><var "
+"name=\"nick\"/></b>'s last card!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1000
-msgid   "<b><var name=\"nick\"/></b> wins this round!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1001
+msgid "<b><var name=\"nick\"/></b> wins this round!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 994
-msgid   "<b><var name=\"nick\"/></b> wins this round! The next round will "
-        "start in <var name=\"delay\"/> seconds."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 995
+msgid ""
+"<b><var name=\"nick\"/></b> wins this round! The next round will start in "
+"<var name=\"delay\"/> seconds."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1308
-msgid   "<b><var name=\"nick\"/></b>, since there is only 1 card left in "
-        "<b><var name=\"next_player\"/></b>'s hand, you MUST play your best "
-        "card or a combination on this turn!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1309
+msgid ""
+"<b><var name=\"nick\"/></b>, since there is only 1 card left in <b><var name="
+"\"next_player\"/></b>'s hand, you MUST play your best card or a combination "
+"on this turn!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 938
-msgid   "<b><var name=\"nick\"/></b>, you cannot play <b><var name=\"type\"/></"
-        "b> right now!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 939
+msgid ""
+"<b><var name=\"nick\"/></b>, you cannot play <b><var name=\"type\"/></b> "
+"right now!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1271
-msgid   "<b><var name=\"nick\"/></b>: it's your turn sleepyhead!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1272
+msgid "<b><var name=\"nick\"/></b>: it's your turn sleepyhead!"
+msgstr ""
 #
 # File: src/Erebot/Module/GoF.php, line: 215
-msgid   "A game managed by <b><var name=\"admin\"/></b> is already in progress "
-        "here. Say \"<b><var name=\"trigger\"/></b>\" to join it."
-msgstr  ""
+msgid ""
+"A game managed by <b><var name=\"admin\"/></b> is already in progress here. "
+"Say \"<b><var name=\"trigger\"/></b>\" to join it."
+msgstr ""
 #
 # File: src/Erebot/Module/GoF.php, line: 231
-msgid   "Bad limit in the configuration file (<var name=\"limit\"/>). The game "
-        "cannot start."
-msgstr  ""
+msgid ""
+"Bad limit in the configuration file (<var name=\"limit\"/>). The game cannot "
+"start."
+msgstr ""
 #
 # File: src/Erebot/Module/GoF.php, line: 59
-msgid   "Could not register Gang of Four creation trigger"
-msgstr  ""
+msgid "Could not register Gang of Four creation trigger"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1159
-msgid   "Current discard: <for from=\"cards\" item=\"card\" separator=\" "
-        "\"><var name=\"card\"/></for> (<var name=\"type\"/> played by <b><var "
-        "name=\"player\"/></b>)"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1160
+msgid ""
+"Current discard: <for from=\"cards\" item=\"card\" separator=\" \"><var name="
+"\"card\"/></for> (<var name=\"type\"/> played by <b><var name=\"player\"/></"
+"b>)"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 642
-msgid   "Exchanges: <b><var name=\"winner\"/></b> receives a <var name="
-        "\"received\"/> and gives a <var name=\"given\"/> to <b><var name="
-        "\"loser\"/></b>. <b><var name=\"winner\"/></b>, you may now start "
-        "this round."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 643
+msgid ""
+"Exchanges: <b><var name=\"winner\"/></b> receives a <var name=\"received\"/> "
+"and gives a <var name=\"given\"/> to <b><var name=\"loser\"/></b>. <b><var "
+"name=\"winner\"/></b>, you may now start this round."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1105
-msgid   "Hands: <for from=\"hands\" key=\"nick\" item=\"nb_cards\"><b><var "
-        "name=\"nick\"/></b>: <var name=\"nb_cards\"/></for>."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1106
+msgid ""
+"Hands: <for from=\"hands\" key=\"nick\" item=\"nb_cards\"><b><var name=\"nick"
+"\"/></b>: <var name=\"nb_cards\"/></for>."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 599
-# File: src/Erebot/Module/GoF.php, line: 840
-msgid   "Hmm? What card was that <b><var name=\"nick\"/></b>?"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 600
+# File: src/Erebot/Module/GoF.php, line: 841
+msgid "Hmm? What card was that <b><var name=\"nick\"/></b>?"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 819
-# File: src/Erebot/Module/GoF.php, line: 858
-msgid   "Hmm? What move was that <b><var name=\"nick\"/></b>?"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 820
+# File: src/Erebot/Module/GoF.php, line: 859
+msgid "Hmm? What move was that <b><var name=\"nick\"/></b>?"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1296
-msgid   "It's <b><var name=\"nick\"/></b>'s turn."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1297
+msgid "It's <b><var name=\"nick\"/></b>'s turn."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1132
-msgid   "No card has been played in this round yet."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1133
+msgid "No card has been played in this round yet."
+msgstr ""
 #
 # File: src/Erebot/Module/GoF.php, line: 460
-msgid   "No game has been started in <var name=\"chan\"/> yet! Nothing to stop."
-msgstr  ""
+msgid "No game has been started in <var name=\"chan\"/> yet! Nothing to stop."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1289
-msgid   "No player dared to raise the heat! It's <b><var name=\"nick\"/></b>'s "
-        "turn to play a new combination."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1290
+msgid ""
+"No player dared to raise the heat! It's <b><var name=\"nick\"/></b>'s turn to "
+"play a new combination."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 774
-msgid   "Now is not the time to pass <b><var name=\"nick\"/></b>!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 775
+msgid "Now is not the time to pass <b><var name=\"nick\"/></b>!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 875
-msgid   "Now is not the time to play <b><var name=\"nick\"/></b>!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 876
+msgid "Now is not the time to play <b><var name=\"nick\"/></b>!"
+msgstr ""
 #
 # File: src/Erebot/Module/GoF.php, line: 428
-msgid   "Ok! A new game has been created in <var name=\"chan\"/>. It will not "
-        "stop until someone gets at least <b><var name=\"limit\"/></b> points. "
-        "Say \"<b><var name=\"trigger\"/></b>\" to join it."
-msgstr  ""
+msgid ""
+"Ok! A new game has been created in <var name=\"chan\"/>. It will not stop "
+"until someone gets at least <b><var name=\"limit\"/></b> points. Say "
+"\"<b><var name=\"trigger\"/></b>\" to join it."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1190
-msgid   "Playing turn: <for from=\"nicks\" item=\"nick\"><b><var name=\"nick\"/"
-        "></b></for>."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1191
+msgid ""
+"Playing turn: <for from=\"nicks\" item=\"nick\"><b><var name=\"nick\"/></b></"
+"for>."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 761
-# File: src/Erebot/Module/GoF.php, line: 887
-msgid   "Proceed with the card exchange first. Use <b><var name=\"trigger\"/> "
-        "&lt;card&gt;</b> to select the &lt;card&gt; to give away."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 762
+# File: src/Erebot/Module/GoF.php, line: 888
+msgid ""
+"Proceed with the card exchange first. Use <b><var name=\"trigger\"/> &lt;"
+"card&gt;</b> to select the &lt;card&gt; to give away."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1212
-msgid   "Scores: <for from=\"scores\" key=\"nick\" item=\"score\"><b><var name="
-        "\"nick\"/></b>: <var name=\"score\"/></for>."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1213
+msgid ""
+"Scores: <for from=\"scores\" key=\"nick\" item=\"score\"><b><var name=\"nick"
+"\"/></b>: <var name=\"score\"/></for>."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 900
-msgid   "Sorry <b><var name=\"nick\"/></b>, but this is not enough to take the "
-        "leadership!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 901
+msgid ""
+"Sorry <b><var name=\"nick\"/></b>, but this is not enough to take the "
+"leadership!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 629
-msgid   "Sorry <b><var name=\"nick\"/></b>, you do not have that card! (<var "
-        "name=\"card\"/>)"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 630
+msgid ""
+"Sorry <b><var name=\"nick\"/></b>, you do not have that card! (<var name="
+"\"card\"/>)"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1360
-msgid   "The game has not yet started!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1361
+msgid "The game has not yet started!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 556
-msgid   "The game starts now. <b><var name=\"starter\"/></b>, you must start "
-        "this game. If you have the <var name=\"m1\"/>, you MUST play it "
-        "(alone or in a combination)."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 557
+msgid ""
+"The game starts now. <b><var name=\"starter\"/></b>, you must start this "
+"game. If you have the <var name=\"m1\"/>, you MUST play it (alone or in a "
+"combination)."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1015
-msgid   "The game was won by <for from=\"winners\" item=\"winner\"><b><var "
-        "name=\"winner\"/></b></for> with only <b><var name=\"score\"/></b> "
-        "points after <var name=\"playtime\"/> and <var name=\"rounds\"/> "
-        "rounds."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1016
+msgid ""
+"The game was won by <for from=\"winners\" item=\"winner\"><b><var name="
+"\"winner\"/></b></for> with only <b><var name=\"score\"/></b> points after "
+"<var name=\"playtime\"/> and <var name=\"rounds\"/> rounds."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 731
-msgid   "The game will start in <var name=\"delay\"/>."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 732
+msgid "The game will start in <var name=\"delay\"/>."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1248
-msgid   "This game has been running for <var name=\"playtime\"/>."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1249
+msgid "This game has been running for <var name=\"playtime\"/>."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 698
-msgid   "This game may only be played by 3-4 players and you cannot join it "
-        "once it started."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 699
+msgid ""
+"This game may only be played by 3-4 players and you cannot join it once it "
+"started."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 536
-msgid   "This is round #<b><var name=\"round\"/></b>, starting after <var name="
-        "\"playtime\"/>. <b><var name=\"last_winner\"/></b>, you must now "
-        "choose a card to give to <b><var name=\"last_loser\"/></b>. You will "
-        "receive <var name=\"card\"/>. Please choose with: \"<b><var name="
-        "\"trigger\"/></b> &lt;card&gt;\"."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 537
+msgid ""
+"This is round #<b><var name=\"round\"/></b>, starting after <var name="
+"\"playtime\"/>. <b><var name=\"last_winner\"/></b>, you must now choose a "
+"card to give to <b><var name=\"last_loser\"/></b>. You will receive <var name="
+"\"card\"/>. Please choose with: \"<b><var name=\"trigger\"/></b> &lt;card&gt;"
+"\"."
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 912
-msgid   "This is the first round and you have the <var name=\"m1\"/> <b><var "
-        "name=\"nick\"/></b>. You <b>must</b> play it alone or in a "
-        "combination!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 913
+msgid ""
+"This is the first round and you have the <var name=\"m1\"/> <b><var name="
+"\"nick\"/></b>. You <b>must</b> play it alone or in a combination!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 617
-msgid   "Uh <b><var name=\"nick\"/></b>? No cards need to be exchanged for "
-        "now..."
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 618
+msgid "Uh <b><var name=\"nick\"/></b>? No cards need to be exchanged for now..."
+msgstr ""
 #
 # File: src/Erebot/Module/GoF.php, line: 261
-msgid   "Unable to register triggers for the game!"
-msgstr  ""
+msgid "Unable to register triggers for the game!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 486
-msgid   "Well tried <var name=\"nick\"/>! But only <b><var name=\"admin\"/></"
-        "b> can stop this game!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 487
+msgid ""
+"Well tried <var name=\"nick\"/>! But only <b><var name=\"admin\"/></b> can "
+"stop this game!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 680
-msgid   "You are already part of that game <b><var name=\"nick\"/></b>!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 681
+msgid "You are already part of that game <b><var name=\"nick\"/></b>!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 926
-msgid   "You do not have the cards required for that move <b><var name=\"nick"
-        "\"/></b>!"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 927
+msgid ""
+"You do not have the cards required for that move <b><var name=\"nick\"/></b>!"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1344
-msgid   "Your cards: <for from=\"cards\" item=\"card\" separator=\" \"><var "
-        "name=\"card\"/></for>"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1345
+msgid ""
+"Your cards: <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card"
+"\"/></for>"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1070
-msgid   "a flush"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1071
+msgid "a flush"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1072
-msgid   "a full house"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1073
+msgid "a full house"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1076
-msgid   "a gang"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1077
+msgid "a gang"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1064
-msgid   "a pair"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1065
+msgid "a pair"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1062
-msgid   "a single"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1063
+msgid "a single"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1068
-msgid   "a straight"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1069
+msgid "a straight"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1074
-msgid   "a straight flush"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1075
+msgid "a straight flush"
+msgstr ""
 #
-# File: src/Erebot/Module/GoF.php, line: 1066
-msgid   "three of a kind"
-msgstr  ""
+# File: src/Erebot/Module/GoF.php, line: 1067
+msgid "three of a kind"
+msgstr ""
