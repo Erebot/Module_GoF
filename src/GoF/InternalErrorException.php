@@ -16,13 +16,13 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\GoF;
+
 /**
  * \brief
- *      Raised a person tries to play a card
- *      he/she doesn't have.
+ *      Raised in various cases where an internal
+ *      error has been detected.
  */
-class   Erebot_Module_GoF_NoSuchCardException
-extends Erebot_Module_GoF_Exception
+class InternalErrorException extends \Erebot\Module\GoF\Exception
 {
 }
-

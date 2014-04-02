@@ -16,12 +16,15 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/**
- * \brief
- *      Generic base exception.
- */
-abstract class  Erebot_Module_GoF_Exception
-extends         Exception
-{
-}
+namespace Erebot\Module\GoF;
 
+interface DeckInterface
+{
+    public function draw();
+    public function shuffle();
+    public function getLastDiscard();
+    public function discard(
+        \Erebot\Module\GoF\Player   $player,
+        \Erebot\Module\GoF\Combo    $card
+    );
+}

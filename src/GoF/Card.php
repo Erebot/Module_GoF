@@ -16,10 +16,12 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class Erebot_Module_GoF_Card
+namespace Erebot\Module\GoF;
+
+class Card
 {
-    protected $_value;
-    protected $_color;
+    protected $value;
+    protected $color;
 
     const VALUE_1       = 1;
     const VALUE_2       = 2;
@@ -41,36 +43,31 @@ class Erebot_Module_GoF_Card
 
     public function __construct($color, $value)
     {
-        if (!is_int($color) ||
-            $color < self::COLOR_GREEN ||
-            $color > self::COLOR_MULTI)
-            throw new Erebot_Module_GoF_InvalidCardException("Invalid color");
+        if (!is_int($color) || $color < self::COLOR_GREEN || $color > self::COLOR_MULTI) {
+            throw new \Erebot\Module\GoF\InvalidCardException("Invalid color");
+        }
 
-        if (!is_int($value) ||
-            $value < self::VALUE_1 ||
-            $value > self::VALUE_DRAGON)
-            throw new Erebot_Module_GoF_InvalidCardException("Invalid value");
+        if (!is_int($value) || $value < self::VALUE_1 || $value > self::VALUE_DRAGON) {
+            throw new \Erebot\Module\GoF\InvalidCardException("Invalid value");
+        }
 
         // Allow only m1 as a multicolor card.
-        if ($color == self::COLOR_MULTI &&
-            $value != self::VALUE_1)
-            throw new Erebot_Module_GoF_InvalidCardException(
-                "Invalid multicolor"
-            );
+        if ($color == self::COLOR_MULTI && $value != self::VALUE_1) {
+            throw new \Erebot\Module\GoF\InvalidCardException("Invalid multicolor");
+        }
 
         // Allow only yp & gp as phoenixes.
-        if ($value == self::VALUE_PHOENIX &&
-            $color != self::COLOR_GREEN &&
-            $color != self::COLOR_YELLOW)
-            throw new Erebot_Module_GoF_InvalidCardException("Invalid phoenix");
+        if ($value == self::VALUE_PHOENIX && $color != self::COLOR_GREEN && $color != self::COLOR_YELLOW) {
+            throw new \Erebot\Module\GoF\InvalidCardException("Invalid phoenix");
+        }
 
         // Allow only rd as a dragon.
-        if ($value == self::VALUE_DRAGON &&
-            $color != self::COLOR_RED)
-            throw new Erebot_Module_GoF_InvalidCardException("Invalid dragon");
+        if ($value == self::VALUE_DRAGON && $color != self::COLOR_RED) {
+            throw new \Erebot\Module\GoF\InvalidCardException("Invalid dragon");
+        }
 
-        $this->_color = $color;
-        $this->_value = $value;
+        $this->color = $color;
+        $this->value = $value;
 
         $colors = array(
             self::COLOR_GREEN   => 'g',
@@ -79,8 +76,8 @@ class Erebot_Module_GoF_Card
             self::COLOR_MULTI   => 'm',
         );
 
-        $color = $colors[$this->_color];
-        $value = $this->_value;
+        $color = $colors[$this->color];
+        $value = $this->value;
         switch ($value) {
             case self::VALUE_DRAGON:
                 $value = 'd';
@@ -89,13 +86,14 @@ class Erebot_Module_GoF_Card
                 $value = 'p';
                 break;
         }
-        $this->_label = $color.$value;
+        $this->label = $color.$value;
     }
 
-    static protected function _parseCard($card)
+    protected static function parseCard($card)
     {
-        if (!is_string($card))
-            throw new Erebot_Module_GoF_InvalidCardException($card);
+        if (!is_string($card)) {
+            throw new \Erebot\Module\GoF\InvalidCardException($card);
+        }
 
         $colors = array(
             'g' => self::COLOR_GREEN,
@@ -114,54 +112,55 @@ class Erebot_Module_GoF_Card
                 return array(self::VALUE_PHOENIX, $colors[$card[0]]);
         }
 
-        if (!in_array($card[0], array('g', 'y', 'r')))
-            throw new Erebot_Module_GoF_InvalidCardException($card);
+        if (!in_array($card[0], array('g', 'y', 'r'))) {
+            throw new \Erebot\Module\GoF\InvalidCardException($card);
+        }
 
-        if (!ctype_digit(substr($card, 1)))
-            throw new Erebot_Module_GoF_InvalidCardException($card);
+        if (!ctype_digit(substr($card, 1))) {
+            throw new \Erebot\Module\GoF\InvalidCardException($card);
+        }
 
         $value = (int) substr($card, 1);
-        if ($value >= 1 && $value <= 10)
+        if ($value >= 1 && $value <= 10) {
             return array($value, $colors[$card[0]]);
+        }
 
-        throw new Erebot_Module_GoF_InvalidCardException($card);
+        throw new \Erebot\Module\GoF\InvalidCardException($card);
     }
 
     public function getLabel()
     {
-        return $this->_label;
+        return $this->label;
     }
 
     public function getColor()
     {
-        return $this->_color;
+        return $this->color;
     }
 
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     public function __toString()
     {
-        return $this->_label;
+        return $this->label;
     }
 
-    static public function fromLabel($card)
+    public static function fromLabel($card)
     {
-        list($value, $color) = self::_parseCard($card);
-        $cls = __CLASS__;
-        return new $cls($color, $value);
+        list($value, $color) = self::parseCard($card);
+        return new static($color, $value);
     }
 
-    static public function compareCards(
-        Erebot_Module_GoF_Card  $cardA,
-        Erebot_Module_GoF_Card  $cardB
-    )
-    {
-        if ($cardA->_value != $cardB->_value)
-            return $cardA->_value - $cardB->_value;
-        return $cardA->_color - $cardB->_color;
+    public static function compareCards(
+        \Erebot\Module\GoF\Card $cardA,
+        \Erebot\Module\GoF\Card $cardB
+    ) {
+        if ($cardA->value != $cardB->value) {
+            return $cardA->value - $cardB->value;
+        }
+        return $cardA->color - $cardB->color;
     }
 }
-

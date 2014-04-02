@@ -16,10 +16,9 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class       Erebot_Module_GoF_Combo
-implements  ArrayAccess,
-            SeekableIterator,
-            Countable
+namespace Erebot\Module\GoF;
+
+class Combo implements \ArrayAccess, \SeekableIterator, \Countable
 {
     const COMBO_SINGLE          = 1;
     const COMBO_PAIR            = 2;
@@ -30,67 +29,72 @@ implements  ArrayAccess,
     const COMBO_STRAIGHT_FLUSH  = 30;
     const COMBO_GANG            = 50;
 
-    private $_position;
-    protected $_cards;
-    protected $_type;
+    private $position;
+    protected $cards;
+    protected $type;
 
-    public function __construct(Erebot_Module_GoF_Card $card /* , ... */)
+    public function __construct(\Erebot\Module\GoF\Card $card /* , ... */)
     {
         $cards = func_get_args();
         $values = array();
         $colors = array();
         foreach ($cards as $card) {
-            if (!is_object($card) || !($card instanceof Erebot_Module_GoF_Card))
-                throw new Erebot_Module_GoF_InvalidComboException("Not a card");
+            if (!is_object($card) || !($card instanceof \Erebot\Module\GoF\Card)) {
+                throw new \Erebot\Module\GoF\InvalidComboException("Not a card");
+            }
             $value = $card->getValue();
-            if (!isset($values[$value]))
+            if (!isset($values[$value])) {
                 $values[$value] = array();
+            }
             $values[$value][] = $card;
 
             $color = $card->getColor();
-            if (!isset($colors[$color]))
+            if (!isset($colors[$color])) {
                 $colors[$color] = array();
+            }
             $colors[$color][] = $card;
         }
 
         $nbCards = count($cards);
-        if ($nbCards < 1 || $nbCards > 7)
-            throw new Erebot_Module_GoF_InvalidComboException(
+        if ($nbCards < 1 || $nbCards > 7) {
+            throw new \Erebot\Module\GoF\InvalidComboException(
                 "Bad cards count"
             );
+        }
 
-        $this->_position = 0;
+        $this->position = 0;
 
         // Sort cards by decreasing values and colors.
-        usort($cards, array('Erebot_Module_GoF_Card', 'compareCards'));
-        $this->_cards = array_reverse($cards);
+        usort($cards, array('\\Erebot\\Module\\GoF\\Card', 'compareCards'));
+        $this->cards = array_reverse($cards);
 
         $nbValues = count($values);
         if ($nbValues == 1) {
             // Gangs.
-            if ($nbCards >= 4)
-                $this->_type = self::COMBO_GANG;
-            // self::COMBO_SINGLE, PAIR, TRIO map directly
-            // to their number of cards, so it's easy.
-            else
-                $this->_type = $nbCards;
+            if ($nbCards >= 4) {
+                $this->type = self::COMBO_GANG;
+            } else {
+                // self::COMBO_SINGLE, PAIR, TRIO map directly
+                // to their number of cards, so it's easy.
+                $this->type = $nbCards;
+            }
 
             // This is it, we successfully identified the combo.
             return;
         }
 
         // Detect invalid combos.
-        if ((!$nbValues != 1 && $nbCards <= 3) || $nbCards != 5)
-            throw new Erebot_Module_GoF_InvalidComboException("WTF is that?");
+        if ((!$nbValues != 1 && $nbCards <= 3) || $nbCards != 5) {
+            throw new \Erebot\Module\GoF\InvalidComboException("WTF is that?");
+        }
 
         foreach ($values as $val) {
             // At this point, it's impossible to have more than three times
             // the same value (which would be a gang but this was already
             // handled above). This prevents combos such as 4 X & 1 single Y.
-            if (count($val) > 3)
-                throw new Erebot_Module_GoF_InvalidComboException(
-                    "WTF is that?"
-                );
+            if (count($val) > 3) {
+                throw new \Erebot\Module\GoF\InvalidComboException("WTF is that?");
+            }
         }
 
         // Full houses.
@@ -102,96 +106,99 @@ implements  ArrayAccess,
              * We must make sure the trio appears first. */
 
             // If the pair is first, swap the cards.
-            if (count($values[$this->_cards[0]->getValue()]) == 2) {
-                $portion = array_splice($this->_cards, 2);
-                $this->_cards = array_merge($portion, $this->_cards);
+            if (count($values[$this->cards[0]->getValue()]) == 2) {
+                $portion = array_splice($this->cards, 2);
+                $this->cards = array_merge($portion, $this->cards);
             }
-            $this->_type = self::COMBO_FULL_HOUSE;
+            $this->type = self::COMBO_FULL_HOUSE;
             return;
         }
 
         // Restricted cards for multi-cards combos.
-        if (isset($values[Erebot_Module_GoF_Card::VALUE_PHOENIX]) ||
-            isset($values[Erebot_Module_GoF_Card::VALUE_DRAGON]))
-            throw new Erebot_Module_GoF_InvalidComboException(
-                "Restricted card"
-            );
+        if (isset($values[\Erebot\Module\GoF\Card::VALUE_PHOENIX]) ||
+            isset($values[\Erebot\Module\GoF\Card::VALUE_DRAGON])) {
+            throw new \Erebot\Module\GoF\InvalidComboException("Restricted card");
+        }
 
         // Other types.
-        $this->_type = 0;
+        $this->type = 0;
 
         // For (straight) flushes, m1 can assume any color.
         // We hence remove it from the equation.
-        unset($colors[Erebot_Module_GoF_Card::COLOR_MULTI]);
+        unset($colors[\Erebot\Module\GoF\Card::COLOR_MULTI]);
 
         // Flush or straight flush.
-        if (count($colors) == 1)
-            $this->_type |= self::COMBO_FLUSH;
+        if (count($colors) == 1) {
+            $this->type |= self::COMBO_FLUSH;
+        }
 
         // Straight or straight flush.
         if ($nbValues == 5) {
-            $previous = $this->_cards[0]->getValue();
+            $previous = $this->cards[0]->getValue();
             for ($i = 1; $i < 5; $i++) {
-                $value = $this->_cards[$i]->getValue();
+                $value = $this->cards[$i]->getValue();
                 if ($value != $previous - 1) {
-                    $previous = NULL;
+                    $previous = null;
                     break;
                 }
                 $previous = $value;
             }
-            if ($previous !== NULL)
-                $this->_type |= self::COMBO_STRAIGHT;
+            if ($previous !== null) {
+                $this->type |= self::COMBO_STRAIGHT;
+            }
         }
 
         // Check whether we identified a valid type.
-        if ($this->_type)
+        if ($this->type) {
             return;
+        }
 
-        throw new Erebot_Module_GoF_InvalidComboException("WTF is that?");
+        throw new \Erebot\Module\GoF\InvalidComboException("WTF is that?");
     }
 
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
-    static public function compareCombos(
-        Erebot_Module_GoF_Combo $comboA,
-        Erebot_Module_GoF_Combo $comboB
-    )
-    {
-        if ($comboA->_type != $comboB->_type) {
+    public static function compareCombos(
+        \Erebot\Module\GoF\Combo $comboA,
+        \Erebot\Module\GoF\Combo $comboB
+    ) {
+        if ($comboA->type != $comboB->type) {
             $specials = array(
                 self::COMBO_SINGLE,
                 self::COMBO_PAIR,
                 self::COMBO_TRIO,
             );
             if ((
-                    in_array($comboA->_type, $specials) &&
-                    $comboB->_type != self::COMBO_GANG
+                    in_array($comboA->type, $specials) &&
+                    $comboB->type != self::COMBO_GANG
                 ) || (
-                    in_array($comboB->_type, $specials) &&
-                    $comboA->_type != self::COMBO_GANG
-                ))
-                throw new Erebot_Module_GoF_NotComparableException();
-            return $comboA->_type - $comboB->_type;
+                    in_array($comboB->type, $specials) &&
+                    $comboA->type != self::COMBO_GANG
+                )) {
+                throw new \Erebot\Module\GoF\NotComparableException();
+            }
+            return $comboA->type - $comboB->type;
         }
 
-        $nbCardsA = count($comboA->_cards);
-        $nbCardsB = count($comboB->_cards);
-        if ($comboA->_type == self::COMBO_GANG &&
+        $nbCardsA = count($comboA->cards);
+        $nbCardsB = count($comboB->cards);
+        if ($comboA->type == self::COMBO_GANG &&
             $nbCardsA != $nbCardsB) {
             return $nbCardsA - $nbCardsB;
         }
 
         assert($nbCardsA == $nbCardsB);
         for ($i = 0; $i < $nbCardsA; $i++) {
-            $cmp = Erebot_Module_GoF_Card::compareCards(
-                $comboA->_cards[$i],
-                $comboB->_cards[$i]
+            $cmp = \Erebot\Module\GoF\Card::compareCards(
+                $comboA->cards[$i],
+                $comboB->cards[$i]
             );
-            if ($cmp)
+            if ($cmp) {
                 return $cmp;
+            }
         }
         return 0;
     }
@@ -199,59 +206,58 @@ implements  ArrayAccess,
     // ArrayAccess interface.
     public function offsetExists($offset)
     {
-        return isset($this->_cards[$offset]);
+        return isset($this->cards[$offset]);
     }
 
     public function offsetGet($offset)
     {
-        return $this->_cards[$offset];
+        return $this->cards[$offset];
     }
 
     public function offsetSet($offset, $value)
     {
-        throw new Exception('Write-access forbidden');
+        throw new \Exception('Write-access forbidden');
     }
 
     public function offsetUnset($offset)
     {
-        throw new Exception('Write-access forbidden');
+        throw new \Exception('Write-access forbidden');
     }
 
     // SeekableIterator interface.
     public function seek($position)
     {
-        $this->_position = $position;
+        $this->position = $position;
     }
 
     public function current()
     {
-        return $this->_cards[$this->_position];
+        return $this->cards[$this->position];
     }
 
     public function key()
     {
-        return $this->_position;
+        return $this->position;
     }
 
     public function next()
     {
-        $this->_position++;
+        $this->position++;
     }
 
     public function rewind()
     {
-        $this->_position = 0;
+        $this->position = 0;
     }
 
     public function valid()
     {
-        return ($this->_position < count($this->_cards));
+        return ($this->position < count($this->cards));
     }
 
     // Countable interface.
     public function count()
     {
-        return count($this->_cards);
+        return count($this->cards);
     }
 }
-

@@ -16,14 +16,13 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\GoF;
+
 /**
  * \brief
- *      Raised when an attempt is made to compare
- *      two things that cannot be compared together,
- *      such as two incompatible combinations.
+ *      Raised when someone tries to play
+ *      something which is not a valid card.
  */
-class   Erebot_Module_GoF_NotComparableException
-extends Erebot_Module_GoF_Exception
+class InvalidCardException extends \Erebot\Module\GoF\Exception
 {
 }
-

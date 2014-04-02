@@ -16,15 +16,43 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/**
- * \brief
- *      Raised when a round has ended and the bot
- *      is waiting for the winner of that round
- *      to choose one card to exchange with the
- *      loser of the round.
- */
-class   Erebot_Module_GoF_WaitingForCardException
-extends Erebot_Module_GoF_Exception
-{
-}
+namespace Erebot\Module\GoF;
 
+class Player
+{
+    protected $token;
+    protected $hand;
+    protected $score;
+
+    public function __construct(&$token)
+    {
+        $this->token  =&  $token;
+        $this->score  =   0;
+    }
+
+    public function & getToken()
+    {
+        return $this->token;
+    }
+
+    public function setHand(\Erebot\Module\GoF\Hand $hand)
+    {
+        $this->hand = $hand;
+    }
+
+    public function & getHand()
+    {
+        return $this->hand;
+    }
+
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    public function computeScore()
+    {
+        $this->score += $this->hand->getScore();
+        return $this->score;
+    }
+}

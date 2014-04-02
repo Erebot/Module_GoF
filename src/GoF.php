@@ -16,154 +16,153 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class   Erebot_Module_GoF
-extends Erebot_Module_Base
+namespace Erebot\Module;
+
+class GoF extends \Erebot\Module\Base
 {
-    protected $_chans;
-    protected $_creator;
+    protected $chans;
+    protected $creator;
 
     const COLOR_RED                 = '00,04';
     const COLOR_GREEN               = '00,03';
     const COLOR_YELLOW              = '01,08';
 
-    public function _reload($flags)
+    public function reload($flags)
     {
         if ($flags & self::RELOAD_MEMBERS) {
-            $this->_chans    = array();
+            $this->chans = array();
         }
 
         if ($flags & self::RELOAD_HANDLERS) {
-            $registry   = $this->_connection->getModule(
-                'Erebot_Module_TriggerRegistry'
+            $registry = $this->connection->getModule(
+                '\\Erebot\\Module\\TriggerRegistry'
             );
-            $matchAny  = Erebot_Utils::getVStatic($registry, 'MATCH_ANY');
 
             if (!($flags & self::RELOAD_INIT)) {
-                $this->_connection->removeEventHandler(
-                    $this->_creator['handlerCreate']
-                );
-                $this->_connection->removeEventHandler(
-                    $this->_creator['handlerStop']
-                );
-                $registry->freeTriggers($this->_creator['trigger'], $matchAny);
+                $this->connection->removeEventHandler($this->creator['handlerCreate']);
+                $this->connection->removeEventHandler($this->creator['handlerStop']);
+                $registry->freeTriggers($this->creator['trigger'], $registry::MATCH_ANY);
             }
 
-            $triggerCreate               =
-                $this->parseString('trigger_create', 'gof');
-            $this->_creator['trigger']   =
-                $registry->registerTriggers($triggerCreate, $matchAny);
-            if ($this->_creator['trigger'] === NULL) {
-                $fmt = $this->getFormatter(FALSE);
-                throw new Exception(
+            $triggerCreate = $this->parseString('trigger_create', 'gof');
+            $this->creator['trigger'] = $registry->registerTriggers($triggerCreate, $registry::MATCH_ANY);
+            if ($this->creator['trigger'] === null) {
+                $fmt = $this->getFormatter(false);
+                throw new \Exception(
                     $fmt->_(
                         'Could not register Gang of Four creation trigger'
                     )
                 );
             }
 
-            $this->_creator['handlerCreate'] = new Erebot_EventHandler(
-                new Erebot_Callable(array($this, 'handleCreate')),
-                new Erebot_Event_Match_All(
-                    new Erebot_Event_Match_InstanceOf(
-                        'Erebot_Interface_Event_ChanText'
+            $this->creator['handlerCreate'] = new \Erebot\EventHandler(
+                \Erebot\CallableWrapper::wrap(array($this, 'handleCreate')),
+                new \Erebot\Event\Match\All(
+                    new \Erebot\Event\Match\Type(
+                        '\\Erebot\\Interfaces\\Event\\ChanText'
                     ),
-                    new Erebot_Event_Match_TextStatic($triggerCreate, TRUE)
+                    new \Erebot\Event\Match\TextStatic($triggerCreate, true)
                 )
             );
 
-            $this->_creator['handlerStop'] = new Erebot_EventHandler(
-                new Erebot_Callable(array($this, 'handleStop')),
-                new Erebot_Event_Match_All(
-                    new Erebot_Event_Match_InstanceOf(
-                        'Erebot_Interface_Event_ChanText'
+            $this->creator['handlerStop'] = new \Erebot\EventHandler(
+                \Erebot\CallableWrapper::wrap(array($this, 'handleStop')),
+                new \Erebot\Event\Match\All(
+                    new \Erebot\Event\Match\Type(
+                        '\\Erebot\\Interfaces\\Event\\ChanText'
                     ),
-                    new Erebot_Event_Match_TextWildcard(
+                    new \Erebot\Event\Match\TextWildcard(
                         $triggerCreate.' &',
-                        TRUE
+                        true
                     )
                 )
             );
 
-            $this->_connection->addEventHandler(
-                $this->_creator['handlerCreate']
+            $this->connection->addEventHandler(
+                $this->creator['handlerCreate']
             );
 
-            $this->_connection->addEventHandler(
-                $this->_creator['handlerStop']
+            $this->connection->addEventHandler(
+                $this->creator['handlerStop']
             );
         }
     }
 
-    protected function _unload()
+    protected function unload()
     {
-        foreach ($this->_chans as $entry) {
-            if (isset($entry['timer']))
+        foreach ($this->chans as $entry) {
+            if (isset($entry['timer'])) {
                 $this->removeTimer($entry['timer']);
+            }
         }
     }
 
     protected function getLogo()
     {
-        return  Erebot_Styling::CODE_BOLD.
-                Erebot_Styling::CODE_COLOR.'03Gang '.
-                Erebot_Styling::CODE_COLOR.'08of '.
-                Erebot_Styling::CODE_COLOR.'04Four'.
-                Erebot_Styling::CODE_COLOR.
-                Erebot_Styling::CODE_BOLD;
+        return  \Erebot\Styling::CODE_BOLD.
+                \Erebot\Styling::CODE_COLOR.'03Gang '.
+                \Erebot\Styling::CODE_COLOR.'08of '.
+                \Erebot\Styling::CODE_COLOR.'04Four'.
+                \Erebot\Styling::CODE_COLOR.
+                \Erebot\Styling::CODE_BOLD;
     }
 
     protected function sendMessage(
         $targets,
         $message,
         $type = self::MSG_TYPE_PRIVMSG
-    )
-    {
-        if (!is_array($targets) && $this->_connection->isChannel($targets))
+    ) {
+        if (!is_array($targets) && $this->connection->isChannel($targets)) {
             $message = $this->getLogo().': '.$message;
+        }
         return parent::sendMessage($targets, $message, $type);
     }
 
     protected function getColoredCard($color, $text)
     {
         $text       = ' '.$text.' ';
-        $colorCodes =   array(
-                            'r' => self::COLOR_RED,
-                            'g' => self::COLOR_GREEN,
-                            'y' => self::COLOR_YELLOW,
-                        );
+        $colorCodes = array(
+            'r' => self::COLOR_RED,
+            'g' => self::COLOR_GREEN,
+            'y' => self::COLOR_YELLOW,
+        );
 
-        if (!isset($colorCodes[$color]))
-            throw new Exception('Unknown color!');
+        if (!isset($colorCodes[$color])) {
+            throw new \Exception('Unknown color!');
+        }
 
-        return  Erebot_Styling::CODE_COLOR.$colorCodes[$color].
-                Erebot_Styling::CODE_BOLD.$text.
-                Erebot_Styling::CODE_BOLD.
-                Erebot_Styling::CODE_COLOR;
+        return  \Erebot\Styling::CODE_COLOR.$colorCodes[$color].
+                \Erebot\Styling::CODE_BOLD.$text.
+                \Erebot\Styling::CODE_BOLD.
+                \Erebot\Styling::CODE_COLOR;
     }
 
     protected function cleanup($chan)
     {
-        $registry   = $this->_connection->getModule(
-            'Erebot_Module_TriggerRegistry'
+        $registry   = $this->connection->getModule(
+            '\\Erebot\\Module\\TriggerRegistry'
         );
 
-        $infos      =&  $this->_chans[$chan];
-        foreach ($infos['handlers'] as $handler)
-            $this->_connection->removeEventHandler($handler);
+        $infos      =&  $this->chans[$chan];
+        foreach ($infos['handlers'] as $handler) {
+            $this->connection->removeEventHandler($handler);
+        }
 
         $registry->freeTriggers($infos['triggers_token'], $chan);
 
-        if ($infos['timer'] !== NULL)
-            $this->_connection->removeTimer($infos['timer']);
+        if ($infos['timer'] !== null) {
+            $this->connection->removeTimer($infos['timer']);
+        }
 
         unset($infos);
-        unset($this->_chans[$chan]);
+        unset($this->chans[$chan]);
     }
 
     protected function getCardText($card)
     {
-        if ($card instanceof Erebot_Module_GoF_Card)
+        if ($card instanceof \Erebot\Module\GoF\Card) {
             $card = $card->getLabel();
+        }
 
         $colors = array(
             'r' => 'Red',
@@ -176,23 +175,25 @@ extends Erebot_Module_Base
             'p' => 'Phoenix',
         );
 
-        if ($card == 'm1')
+        if ($card == 'm1') {
             return
-                Erebot_Styling::CODE_BOLD.
-                Erebot_Styling::CODE_COLOR.
+                \Erebot\Styling::CODE_BOLD.
+                \Erebot\Styling::CODE_COLOR.
                 self::COLOR_GREEN.' Mu'.
-                Erebot_Styling::CODE_COLOR.
+                \Erebot\Styling::CODE_COLOR.
                 self::COLOR_YELLOW.'lti'.
-                Erebot_Styling::CODE_COLOR.
+                \Erebot\Styling::CODE_COLOR.
                 self::COLOR_RED.' 1 '.
-                Erebot_Styling::CODE_COLOR.
-                Erebot_Styling::CODE_BOLD;
+                \Erebot\Styling::CODE_COLOR.
+                \Erebot\Styling::CODE_BOLD;
+        }
 
-        if (isset($texts[$card[1]]))
+        if (isset($texts[$card[1]])) {
             return $this->getColoredCard(
                 $card[0],
                 $colors[$card[0]].' '.$texts[$card[1]]
             );
+        }
 
         return $this->getColoredCard(
             $card[0],
@@ -201,16 +202,15 @@ extends Erebot_Module_Base
     }
 
     public function handleCreate(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $nick   = $event->getSource();
         $chan   = $event->getChan();
         $fmt    = $this->getFormatter($chan);
 
-        if (isset($this->_chans[$chan])) {
-            $creator = (string) $this->_chans[$chan]['game']->getCreator();
+        if (isset($this->chans[$chan])) {
+            $creator = (string) $this->chans[$chan]['game']->getCreator();
             $msg = $fmt->_(
                 'A game managed by <b><var name="admin"/></b> '.
                 'is already in progress here. '.
@@ -218,11 +218,11 @@ extends Erebot_Module_Base
                 array(
                     'logo' => $this->getLogo(),
                     'admin' => $creator,
-                    'trigger' => $this->_chans[$chan]['triggers']['join'],
+                    'trigger' => $this->chans[$chan]['triggers']['join'],
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         $limit = $this->parseInt('limit', 100);
@@ -236,11 +236,11 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
-        $registry   =   $this->_connection->getModule(
-            'Erebot_Module_TriggerRegistry'
+        $registry   =   $this->connection->getModule(
+            '\\Erebot\\Module\\TriggerRegistry'
         );
         $triggers   =   array(
             'choose'       => $this->parseString('trigger_choose', 'ch'),
@@ -256,172 +256,172 @@ extends Erebot_Module_Base
         );
 
         $token  = $registry->registerTriggers($triggers, $chan);
-        if ($token === NULL) {
+        if ($token === null) {
             $msg = $fmt->_(
                 'Unable to register triggers for the game!',
                 array('logo' => $this->getLogo())
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
-        $this->_chans[$chan] = array();
-        $infos =& $this->_chans[$chan];
+        $this->chans[$chan] = array();
+        $infos =& $this->chans[$chan];
         $infos['triggers'] =& $triggers;
         $handlerCls = $this->getFactory('!EventHandler');
 
         $infos['handlers']['choose'] = new $handlerCls(
-            new Erebot_Callable(array($this, 'handleChoose')),
-            new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf(
-                    'Erebot_Interface_Event_ChanText'
+            \Erebot\CallableWrapper::wrap(array($this, 'handleChoose')),
+            new \Erebot\Event\Match\All(
+                new \Erebot\Event\Match\Type(
+                    '\\Erebot\\Interfaces\\Event\\ChanText'
                 ),
-                new Erebot_Event_Match_TextWildcard(
+                new \Erebot\Event\Match\TextWildcard(
                     $infos['triggers']['choose'].' *',
-                    NULL
+                    null
                 ),
-                new Erebot_Event_Match_Chan($chan)
+                new \Erebot\Event\Match\Chan($chan)
             )
         );
 
         $infos['handlers']['join'] = new $handlerCls(
-            new Erebot_Callable(array($this, 'handleJoin')),
-            new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf(
-                    'Erebot_Interface_Event_ChanText'
+            \Erebot\CallableWrapper::wrap(array($this, 'handleJoin')),
+            new \Erebot\Event\Match\All(
+                new \Erebot\Event\Match\Type(
+                    '\\Erebot\\Interfaces\\Event\\ChanText'
                 ),
-                new Erebot_Event_Match_TextStatic(
+                new \Erebot\Event\Match\TextStatic(
                     $infos['triggers']['join'],
-                    NULL
+                    null
                 ),
-                new Erebot_Event_Match_Chan($chan)
+                new \Erebot\Event\Match\Chan($chan)
             )
         );
 
         $infos['handlers']['pass'] = new $handlerCls(
-            new Erebot_Callable(array($this, 'handlePass')),
-            new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf(
-                    'Erebot_Interface_Event_ChanText'
+            \Erebot\CallableWrapper::wrap(array($this, 'handlePass')),
+            new \Erebot\Event\Match\All(
+                new \Erebot\Event\Match\Type(
+                    '\\Erebot\\Interfaces\\Event\\ChanText'
                 ),
-                new Erebot_Event_Match_TextStatic(
+                new \Erebot\Event\Match\TextStatic(
                     $infos['triggers']['pass'],
-                    NULL
+                    null
                 ),
-                new Erebot_Event_Match_Chan($chan)
+                new \Erebot\Event\Match\Chan($chan)
             )
         );
 
         $infos['handlers']['play'] = new $handlerCls(
-            new Erebot_Callable(array($this, 'handlePlay')),
-            new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf(
-                    'Erebot_Interface_Event_ChanText'
+            \Erebot\CallableWrapper::wrap(array($this, 'handlePlay')),
+            new \Erebot\Event\Match\All(
+                new \Erebot\Event\Match\Type(
+                    '\\Erebot\\Interfaces\\Event\\ChanText'
                 ),
-                new Erebot_Event_Match_TextWildcard(
+                new \Erebot\Event\Match\TextWildcard(
                     $infos['triggers']['play'].' *',
-                    NULL
+                    null
                 ),
-                new Erebot_Event_Match_Chan($chan)
+                new \Erebot\Event\Match\Chan($chan)
             )
         );
 
         $infos['handlers']['show_cards'] = new $handlerCls(
-            new Erebot_Callable(array($this, 'handleShowCardsCount')),
-            new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf(
-                    'Erebot_Interface_Event_ChanText'
+            \Erebot\CallableWrapper::wrap(array($this, 'handleShowCardsCount')),
+            new \Erebot\Event\Match\All(
+                new \Erebot\Event\Match\Type(
+                    '\\Erebot\\Interfaces\\Event\\ChanText'
                 ),
-                new Erebot_Event_Match_TextStatic(
+                new \Erebot\Event\Match\TextStatic(
                     $infos['triggers']['show_cards'],
-                    NULL
+                    null
                 ),
-                new Erebot_Event_Match_Chan($chan)
+                new \Erebot\Event\Match\Chan($chan)
             )
         );
 
         $infos['handlers']['show_discard'] = new $handlerCls(
-            new Erebot_Callable(array($this, 'handleShowDiscard')),
-            new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf(
-                    'Erebot_Interface_Event_ChanText'
+            \Erebot\CallableWrapper::wrap(array($this, 'handleShowDiscard')),
+            new \Erebot\Event\Match\All(
+                new \Erebot\Event\Match\Type(
+                    '\\Erebot\\Interfaces\\Event\\ChanText'
                 ),
-                new Erebot_Event_Match_TextStatic(
+                new \Erebot\Event\Match\TextStatic(
                     $infos['triggers']['show_discard'],
-                    NULL
+                    null
                 ),
-                new Erebot_Event_Match_Chan($chan)
+                new \Erebot\Event\Match\Chan($chan)
             )
         );
 
         $infos['handlers']['show_order'] = new $handlerCls(
-            new Erebot_Callable(array($this, 'handleShowOrder')),
-            new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf(
-                    'Erebot_Interface_Event_ChanText'
+            \Erebot\CallableWrapper::wrap(array($this, 'handleShowOrder')),
+            new \Erebot\Event\Match\All(
+                new \Erebot\Event\Match\Type(
+                    '\\Erebot\\Interfaces\\Event\\ChanText'
                 ),
-                new Erebot_Event_Match_TextStatic(
+                new \Erebot\Event\Match\TextStatic(
                     $infos['triggers']['show_order'],
-                    NULL
+                    null
                 ),
-                new Erebot_Event_Match_Chan($chan)
+                new \Erebot\Event\Match\Chan($chan)
             )
         );
 
         $infos['handlers']['show_scores'] = new $handlerCls(
-            new Erebot_Callable(array($this, 'handleShowScores')),
-            new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf(
-                    'Erebot_Interface_Event_ChanText'
+            \Erebot\CallableWrapper::wrap(array($this, 'handleShowScores')),
+            new \Erebot\Event\Match\All(
+                new \Erebot\Event\Match\Type(
+                    '\\Erebot\\Interfaces\\Event\\ChanText'
                 ),
-                new Erebot_Event_Match_TextStatic(
+                new \Erebot\Event\Match\TextStatic(
                     $infos['triggers']['show_scores'],
-                    NULL
+                    null
                 ),
-                new Erebot_Event_Match_Chan($chan)
+                new \Erebot\Event\Match\Chan($chan)
             )
         );
 
         $infos['handlers']['show_time'] = new $handlerCls(
-            new Erebot_Callable(array($this, 'handleShowTime')),
-            new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf(
-                    'Erebot_Interface_Event_ChanText'
+            \Erebot\CallableWrapper::wrap(array($this, 'handleShowTime')),
+            new \Erebot\Event\Match\All(
+                new \Erebot\Event\Match\Type(
+                    '\\Erebot\\Interfaces\\Event\\ChanText'
                 ),
-                new Erebot_Event_Match_TextStatic(
+                new \Erebot\Event\Match\TextStatic(
                     $infos['triggers']['show_time'],
-                    NULL
+                    null
                 ),
-                new Erebot_Event_Match_Chan($chan)
+                new \Erebot\Event\Match\Chan($chan)
             )
         );
 
         $infos['handlers']['show_turn'] = new $handlerCls(
-            new Erebot_Callable(array($this, 'handleShowTurn')),
-            new Erebot_Event_Match_All(
-                new Erebot_Event_Match_InstanceOf(
-                    'Erebot_Interface_Event_ChanText'
+            \Erebot\CallableWrapper::wrap(array($this, 'handleShowTurn')),
+            new \Erebot\Event\Match\All(
+                new \Erebot\Event\Match\Type(
+                    '\\Erebot\\Interfaces\\Event\\ChanText'
                 ),
-                new Erebot_Event_Match_TextStatic(
+                new \Erebot\Event\Match\TextStatic(
                     $infos['triggers']['show_turn'],
-                    NULL
+                    null
                 ),
-                new Erebot_Event_Match_Chan($chan)
+                new \Erebot\Event\Match\Chan($chan)
             )
         );
 
-        foreach ($infos['handlers'] as $handler)
-            $this->_connection->addEventHandler($handler);
+        foreach ($infos['handlers'] as $handler) {
+            $this->connection->addEventHandler($handler);
+        }
 
-        $tracker    = $this->_connection->getModule('Erebot_Module_IrcTracker');
-        $deck       = new Erebot_Module_GoF_Deck_Official();
+        $tracker    = $this->connection->getModule('\\Erebot\\Module\\IrcTracker');
+        $deck       = new \Erebot\Module\GoF\Deck\Official();
         $creator    = $tracker->startTracking($nick);
 
         $infos['triggers_token']    =   $token;
         $infos['triggers']          =&  $triggers;
-        $infos['game']              =
-            new Erebot_Module_GoF_Game($creator, $deck);
-        $infos['timer']             =   NULL;
+        $infos['game']              =   new \Erebot\Module\GoF\Game($creator, $deck);
+        $infos['timer']             =   null;
         $infos['limit']             =   $limit;
 
         $msg = $fmt->_(
@@ -437,14 +437,13 @@ extends Erebot_Module_Base
             )
         );
         $this->sendMessage($chan, $msg);
-        $event->preventDefault(TRUE);
+        $event->preventDefault(true);
     }
 
     public function handleStop(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $nick   = $event->getSource();
         $chan   = $event->getChan();
         $fmt    = $this->getFormatter($chan);
@@ -453,9 +452,11 @@ extends Erebot_Module_Base
             array('end', 'off', 'stop', 'cancel')
         );
 
-        if (!$end) return;
+        if (!$end) {
+            return;
+        }
 
-        if (!isset($this->_chans[$chan])) {
+        if (!isset($this->chans[$chan])) {
             $msg = $fmt->_(
                 'No game has been started in <var name="chan"/> yet! '.
                 'Nothing to stop.',
@@ -465,11 +466,11 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
-        $creator    = (string) $this->_chans[$chan]['game']->getCreator();
-        $collator   = $this->_connection->getCollator();
+        $creator    = (string) $this->chans[$chan]['game']->getCreator();
+        $collator   = $this->connection->getCollator();
         if (!$collator->compare($creator, $nick)) {
             $msg = $fmt->_(
                 '<b><var name="admin"/></b> stopped the game!',
@@ -480,7 +481,7 @@ extends Erebot_Module_Base
             );
             $this->sendMessage($chan, $msg);
             $this->cleanup($chan);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         $msg = $fmt->_(
@@ -493,45 +494,51 @@ extends Erebot_Module_Base
             )
         );
         $this->sendMessage($chan, $msg);
-        return $event->preventDefault(TRUE);
+        return $event->preventDefault(true);
     }
 
     protected function compareCards($a, $b)
     {
         $levels = array();
-        for ($i = 1; $i <= 10; $i++)
+        for ($i = 1; $i <= 10; $i++) {
             $levels[] = "$i";
+        }
         $levels[] = 'p';
         $levels[] = 'd';
         $levels = array_flip($levels);
 
         $lvlA = $levels[substr($a, 1)];
         $lvlB = $levels[substr($b, 1)];
-        if ($lvlA != $lvlB)
+        if ($lvlA !== $lvlB) {
             return $lvlA - $lvlB;
+        }
 
         $colors = array('g', 'y', 'r', 'm');
         $colors = array_flip($colors);
         return $colors[$a[0]] - $colors[$b[0]];
     }
 
-    public function startGame(Erebot_Interface_Timer $timer, $chan)
+    public function startGame(\Erebot\TimerInterface $timer, $chan)
     {
-        if (!isset($this->_chans[$chan])) return;
-        $infos =& $this->_chans[$chan];
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
+        $infos =& $this->chans[$chan];
 
         $fmt            = $this->getFormatter($chan);
-        $infos['timer'] = NULL;
+        $infos['timer'] = null;
         $lastLoser      = $infos['game']->getLastLoser();
 
         // First round, actually start the game.
-        if ($lastLoser === NULL)
+        if ($lastLoser === null) {
             $infos['game']->start();
+        }
         $starter        = $infos['game']->getCurrentPlayer();
 
-        if ($lastLoser !== NULL) {
+        if ($lastLoser !== null) {
             $bestCard   = $lastLoser->getHand()->getBestCard();
             $playtime   = $infos['game']->getElapsedTime();
+            $cls        = $this->getFactory('!Styling\\Variables\\Duration');
 
             $msg = $fmt->_(
                 'This is round #<b><var name="round"/></b>, starting '.
@@ -543,7 +550,7 @@ extends Erebot_Module_Base
                 array(
                     'logo' => $this->getLogo(),
                     'round' => $infos['game']->getNbRounds(),
-                    'playtime' => new Erebot_Styling_Duration($playtime),
+                    'playtime' => new $cls($playtime),
                     'last_winner' => (string) $starter->getToken(),
                     'last_loser' => (string) $lastLoser->getToken(),
                     'card' => $this->getCardText($bestCard),
@@ -551,8 +558,7 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-        }
-        else {
+        } else {
             $msg = $fmt->_(
                 'The game starts now. '.
                 '<b><var name="starter"/></b>, you must start this game. '.
@@ -568,34 +574,37 @@ extends Erebot_Module_Base
         }
 
         foreach ($infos['game']->getPlayers() as $player) {
-            if ($player == $lastLoser) continue;
-            $this->_sendCards($chan, $player);
+            if ($player == $lastLoser) {
+                continue;
+            }
+            $this->sendCards($chan, $player);
         }
     }
 
     public function handleChoose(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
-        if (!isset($this->_chans[$chan])) return;
-
-        $infos      =&  $this->_chans[$chan];
-        $current    =   $infos['game']->getCurrentPlayer();
-        $collator   = $this->_connection->getCollator();
-        $tokenNick  = (string) $current->getToken();
-        if ($current === FALSE || $collator->compare($nick, $tokenNick))
+        if (!isset($this->chans[$chan])) {
             return;
+        }
+
+        $infos      =&  $this->chans[$chan];
+        $current    =   $infos['game']->getCurrentPlayer();
+        $collator   =   $this->connection->getCollator();
+        $tokenNick  =   (string) $current->getToken();
+        if ($current === false || $collator->compare($nick, $tokenNick)) {
+            return;
+        }
 
         $fmt = $this->getFormatter($chan);
         try {
-            $card = Erebot_Module_GoF_Card::fromLabel(
+            $card = \Erebot\Module\GoF\Card::fromLabel(
                 strtolower($event->getText()->getTokens(1))
             );
-        }
-        catch (Erebot_Module_GoF_InvalidCardException $e) {
+        } catch (\Erebot\Module\GoF\InvalidCardException $e) {
             $msg = $fmt->_(
                 'Hmm? What card was that '.
                 '<b><var name="nick"/></b>?',
@@ -605,15 +614,14 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         $loser = $infos['game']->getLastLoser();
 
         try {
             $best = $infos['game']->chooseCard($card);
-        }
-        catch (Erebot_Module_GoF_InternalErrorException $e) {
+        } catch (\Erebot\Module\GoF\InternalErrorException $e) {
             $msg = $fmt->_(
                 'Uh <b><var name="nick"/></b>? '.
                 'No cards need to be exchanged for now...',
@@ -623,9 +631,8 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
-        }
-        catch( Erebot_Module_GoF_NoSuchCardException $e) {
+            return $event->preventDefault(true);
+        } catch (\Erebot\Module\GoF\NoSuchCardException $e) {
             $msg = $fmt->_(
                 'Sorry <b><var name="nick"/></b>, '.
                 'you do not have that card! (<var name="card"/>)',
@@ -636,7 +643,7 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         $msg = $fmt->_(
@@ -653,29 +660,28 @@ extends Erebot_Module_Base
             )
         );
         $this->sendMessage($chan, $msg);
-        $this->_sendCards($chan, $current);
-        $this->_sendCards($chan, $loser);
-        $event->preventDefault(TRUE);
+        $this->sendCards($chan, $current);
+        $this->sendCards($chan, $loser);
+        $event->preventDefault(true);
     }
 
     public function handleJoin(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
-        $tracker    = $this->_connection->getModule(
-            'Erebot_Module_IrcTracker'
-        );
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
+        $tracker    = $this->connection->getModule('\\Erebot\\Module\\IrcTracker');
         $nick       = $event->getSource();
         $chan       = $event->getChan();
 
-        if (!isset($this->_chans[$chan])) return;
-        $infos  =&  $this->_chans[$chan];
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
+        $infos  =&  $this->chans[$chan];
         $fmt    =   $this->getFormatter($chan);
 
         foreach ($infos['game']->getPlayers() as $player) {
             $token = (string) $player->getToken();
-            $collator = $this->_connection->getCollator();
+            $collator = $this->connection->getCollator();
             if (!$collator->compare($nick, $token)) {
                 $msg = $fmt->_(
                     'You are already part of that game '.
@@ -686,22 +692,21 @@ extends Erebot_Module_Base
                     )
                 );
                 $this->sendMessage($chan, $msg);
-                return $event->preventDefault(TRUE);
+                return $event->preventDefault(true);
             }
         }
 
         try {
             $token = $tracker->startTracking($nick);
             $player = $infos['game']->join($token);
-        }
-        catch (Erebot_Module_GoF_EnoughPlayersException $e) {
+        } catch (\Erebot\Module\GoF\EnoughPlayersException $e) {
             $msg = $fmt->_(
                 'This game may only be played by 3-4 players '.
                 'and you cannot join it once it started.',
                 array('logo' => $this->getLogo())
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         $msg = $fmt->_(
@@ -716,48 +721,51 @@ extends Erebot_Module_Base
         // If we have enough players, start the game.
         if (count($infos['game']) >= 3) {
             $startDelay = $this->parseInt('start_delay', 20);
-            if ($startDelay < 0)
+            if ($startDelay < 0) {
                 $startDelay = 20;
+            }
 
             $timerCls = $this->getFactory('!Timer');
             $infos['timer'] = new $timerCls(
-                new Erebot_Callable(array($this, 'startGame')),
+                \Erebot\CallableWrapper::wrap(array($this, 'startGame')),
                 $startDelay,
-                FALSE,
+                false,
                 array($chan)
             );
             $this->addTimer($infos['timer']);
 
+            $cls = $this->getFactory('!Styling\\Variables\\Duration');
             $msg = $fmt->_(
                 'The game will start in <var name="delay"/>.',
-                array('delay' => new Erebot_Styling_Duration($startDelay))
+                array('delay' => new $cls($startDelay))
             );
             $this->sendMessage($chan, $msg);
         }
-        $event->preventDefault(TRUE);
+        $event->preventDefault(true);
     }
 
     public function handlePass(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
-        if (!isset($this->_chans[$chan])) return;
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
 
         $fmt        =   $this->getFormatter($chan);
-        $infos      =&  $this->_chans[$chan];
+        $infos      =&  $this->chans[$chan];
         $current    =   $infos['game']->getCurrentPlayer();
-        $collator   = $this->_connection->getCollator();
-        $tokenNick  = (string) $current->getToken();
-        if ($current === FALSE || $collator->compare($nick, $tokenNick))
+        $collator   =   $this->connection->getCollator();
+        $tokenNick  =   (string) $current->getToken();
+        if ($current === false || $collator->compare($nick, $tokenNick)) {
             return;
+        }
 
         try {
             $infos['game']->pass();
-        }
-        catch (Erebot_Module_GoF_WaitingForCardException $e) {
+        } catch (\Erebot\Module\GoF\WaitingForCardException $e) {
             $msg = $fmt->_(
                 'Proceed with the card exchange first. '.
                 'Use <b><var name="trigger"/> &lt;card&gt;</b> to select '.
@@ -768,9 +776,8 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
-        }
-        catch (Erebot_Module_GoF_InternalErrorException $e) {
+            return $event->preventDefault(true);
+        } catch (\Erebot\Module\GoF\InternalErrorException $e) {
             $msg = $fmt->_(
                 'Now is not the time to pass '.
                 '<b><var name="nick"/></b>!',
@@ -780,7 +787,7 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         $msg = $fmt->_(
@@ -791,29 +798,31 @@ extends Erebot_Module_Base
             )
         );
         $this->sendMessage($chan, $msg);
-        $this->_showTurn($chan, NULL);
-        $event->preventDefault(TRUE);
+        $this->showTurn($chan, null);
+        $event->preventDefault(true);
     }
 
     public function handlePlay(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
         $move   = strtolower(
             str_replace(' ', '', $event->getText()->getTokens(1))
         );
-        if (!isset($this->_chans[$chan])) return;
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
 
         $fmt        = $this->getFormatter($chan);
-        $infos      =&  $this->_chans[$chan];
+        $infos      =&  $this->chans[$chan];
         $current    =   $infos['game']->getCurrentPlayer();
-        $collator   = $this->_connection->getCollator();
+        $collator   = $this->connection->getCollator();
         $tokenNick  = (string) $current->getToken();
-        if ($current === FALSE || $collator->compare($nick, $tokenNick))
+        if ($current === false || $collator->compare($nick, $tokenNick)) {
             return;
+        }
 
         if (!preg_match('/^(?:[gyr][0-9]+|m1|gp|yp|rd)+$/', $move)) {
             $msg = $fmt->_(
@@ -825,18 +834,17 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         // Build the corresponding cards.
         preg_match_all('/(?:[gyr][0-9]+|m1|gp|yp|rd)/', $move, $matches);
         try {
             $cards = array_map(
-                array('Erebot_Module_GoF_Card', 'fromLabel'),
+                array('\\Erebot\\Module\\GoF\\Card', 'fromLabel'),
                 $matches[0]
             );
-        }
-        catch (Erebot_Module_GoF_InvalidCardException $e) {
+        } catch (\Erebot\Module\GoF\InvalidCardException $e) {
             $msg = $fmt->_(
                 'Hmm? What card was that '.
                 '<b><var name="nick"/></b>?',
@@ -846,15 +854,14 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         // Build a combo from those cards.
-        $reflector = new ReflectionClass('Erebot_Module_GoF_Combo');
+        $reflector = new ReflectionClass('\\Erebot\\Module\\GoF\\Combo');
         try {
             $combo = $reflector->newInstanceArgs($cards);
-        }
-        catch (Erebot_Module_GoF_InvalidComboException $e) {
+        } catch (\Erebot\Module\GoF\InvalidComboException $e) {
             $msg = $fmt->_(
                 'Hmm? What move was that '.
                 '<b><var name="nick"/></b>?',
@@ -864,14 +871,13 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         // Try to play that combo.
         try {
             $endOfRound = $infos['game']->play($combo);
-        }
-        catch (Erebot_Module_GoF_InternalErrorException $e) {
+        } catch (\Erebot\Module\GoF\InternalErrorException $e) {
             $msg = $fmt->_(
                 'Now is not the time to play '.
                 '<b><var name="nick"/></b>!',
@@ -881,9 +887,8 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
-        }
-        catch (Erebot_Module_GoF_WaitingForCardException $e) {
+            return $event->preventDefault(true);
+        } catch (\Erebot\Module\GoF\WaitingForCardException $e) {
             $msg = $fmt->_(
                 'Proceed with the card exchange first. '.
                 'Use <b><var name="trigger"/> &lt;card&gt;</b> to select '.
@@ -894,9 +899,8 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
-        }
-        catch (Erebot_Module_GoF_InferiorComboException $e) {
+            return $event->preventDefault(true);
+        } catch (\Erebot\Module\GoF\InferiorComboException $e) {
             $msg = $fmt->_(
                 'Sorry <b><var name="nick"/></b>, '.
                 'but this is not enough to take the leadership!',
@@ -906,9 +910,8 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
-        }
-        catch (Erebot_Module_GoF_StartWithMulti1Exception $e) {
+            return $event->preventDefault(true);
+        } catch (\Erebot\Module\GoF\StartWithMulti1Exception $e) {
             $msg = $fmt->_(
                 'This is the first round and '.
                 'you have the <var name="m1"/> <b><var name="nick"/></b>. '.
@@ -920,9 +923,8 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
-        }
-        catch (Erebot_Module_GoF_NoSuchCardException $e) {
+            return $event->preventDefault(true);
+        } catch (\Erebot\Module\GoF\NoSuchCardException $e) {
             $msg = $fmt->_(
                 'You do not have the cards required '.
                 'for that move <b><var name="nick"/></b>!',
@@ -932,34 +934,34 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
-        }
-        catch (Erebot_Module_GoF_NotComparableException $e) {
+            return $event->preventDefault(true);
+        } catch (\Erebot\Module\GoF\NotComparableException $e) {
             $msg = $fmt->_(
                 '<b><var name="nick"/></b>, '.
                 'you cannot play <b><var name="type"/></b> right now!',
                 array(
                     'logo' => $this->getLogo(),
                     'nick' => $nick,
-                    'type' => $this->_qualify($chan, $combo),
+                    'type' => $this->qualify($chan, $combo),
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         $cards = array();
-        foreach ($combo as $card)
+        foreach ($combo as $card) {
             $cards[] = $this->getCardText($card);
+        }
 
         $vars = array(
             'logo' => $this->getLogo(),
             'nick' => $nick,
-            'type' => $this->_qualify($chan, $combo),
+            'type' => $this->qualify($chan, $combo),
             'cards' => $cards,
         );
 
-        if (count($current->getHand()) == 1)
+        if (count($current->getHand()) == 1) {
             $msg = $fmt->_(
                 '<b><var name="nick"/></b> plays <var name="type"/>: '.
                 '<for from="cards" item="card" separator=" "><var '.
@@ -967,42 +969,46 @@ extends Erebot_Module_Base
                 'last card!',
                 $vars
             );
-        else
+        } else {
             $msg = $fmt->_(
                 '<b><var name="nick"/></b> plays <var name="type"/>: '.
                 '<for from="cards" item="card" separator=" "><var '.
                 'name="card"/></for>',
                 $vars
             );
+        }
         $this->sendMessage($chan, $msg);
+        $cls = $this->getFactory('!Styling\\Variables\\Duration');
 
         // We have a winner.
-        if ($endOfRound !== FALSE) {
+        if ($endOfRound !== false) {
             $end = ($endOfRound >= $infos['limit']);
 
             $pauseDelay = $this->parseInt('pause_delay', 5);
-            if ($pauseDelay < 0)
+            if ($pauseDelay < 0) {
                 $pauseDelay = 5;
+            }
 
             $vars = array(
                 'logo' => $this->getLogo(),
                 'nick' => $nick,
-                'delay' => new Erebot_Styling_Duration($pauseDelay),
+                'delay' => new $cls($pauseDelay),
             );
 
-            if (!$end)
+            if (!$end) {
                 $msg = $fmt->_(
                     '<b><var name="nick"/></b> wins this round! '.
                     'The next round will start in <var name="delay"/> seconds.',
                     $vars
                 );
-            else
+            } else {
                 $msg = $fmt->_(
                     '<b><var name="nick"/></b> wins this round!',
                     $vars
                 );
+            }
             $this->sendMessage($chan, $msg);
-            $this->_showScores($chan);
+            $this->showScores($chan);
 
             if ($end) {
                 $scores = array();
@@ -1023,7 +1029,7 @@ extends Erebot_Module_Base
                         'logo' => $this->getLogo(),
                         'score' => $minScore,
                         'winners' => $winners,
-                        'playtime' => new Erebot_Styling_Duration($playtime),
+                        'playtime' => new $cls($playtime),
                         // Subtract 1: the bot was ready for a new round,
                         // but there will not be one.
                         'rounds' => $infos['game']->getNbRounds() - 1,
@@ -1031,75 +1037,90 @@ extends Erebot_Module_Base
                 );
                 $this->sendMessage($chan, $msg);
                 $this->cleanup($chan);
-            }
-            else {
+            } else {
                 $timerCls = $this->getFactory('!Timer');
                 $infos['timer'] = new $timerCls(
-                    new Erebot_Callable(array($this, 'startGame')),
+                    \Erebot\CallableWrapper::wrap(array($this, 'startGame')),
                     $pauseDelay,
-                    FALSE,
+                    false,
                     array($chan)
                 );
                 $this->addTimer($infos['timer']);
             }
-        } // endOfRound (or game)
-        else $this->_showTurn($chan, NULL);
+            // endOfRound (or game)
+        } else {
+            $this->showTurn($chan, null);
+        }
 
-        $event->preventDefault(TRUE);
+        $event->preventDefault(true);
     }
 
-    protected function _qualify($chan, Erebot_Module_GoF_Combo &$combo)
+    protected function qualify($chan, \Erebot\Module\GoF\Combo &$combo)
     {
-        static $gettext = NULL;
-
-        $fmt = $this->getFormatter($chan);
         // lazy-gettext so that only 1 lookup is actually done
         // through the real gettext method.
-        if ($gettext === NULL)
-            $gettext = create_function('$a', 'return $a;');
+        static $gettext = null;
+
+        if ($gettext === null) {
+            $gettext = function ($a) {
+                return $a;
+            };
+        }
 
         $typeNames = array(
-            Erebot_Module_GoF_Combo::COMBO_SINGLE =>
+            \Erebot\Module\GoF\Combo::COMBO_SINGLE =>
                 $gettext('a single'),
-            Erebot_Module_GoF_Combo::COMBO_PAIR =>
+
+            \Erebot\Module\GoF\Combo::COMBO_PAIR =>
                 $gettext('a pair'),
-            Erebot_Module_GoF_Combo::COMBO_TRIO =>
+
+            \Erebot\Module\GoF\Combo::COMBO_TRIO =>
                 $gettext('three of a kind'),
-            Erebot_Module_GoF_Combo::COMBO_STRAIGHT =>
+
+            \Erebot\Module\GoF\Combo::COMBO_STRAIGHT =>
                 $gettext('a straight'),
-            Erebot_Module_GoF_Combo::COMBO_FLUSH =>
+
+            \Erebot\Module\GoF\Combo::COMBO_FLUSH =>
                 $gettext('a flush'),
-            Erebot_Module_GoF_Combo::COMBO_FULL_HOUSE =>
+
+            \Erebot\Module\GoF\Combo::COMBO_FULL_HOUSE =>
                 $gettext('a full house'),
-            Erebot_Module_GoF_Combo::COMBO_STRAIGHT_FLUSH =>
+
+            \Erebot\Module\GoF\Combo::COMBO_STRAIGHT_FLUSH =>
                 $gettext('a straight flush'),
-            Erebot_Module_GoF_Combo::COMBO_GANG =>
+
+            \Erebot\Module\GoF\Combo::COMBO_GANG =>
                 $gettext('a gang'),
         );
+
+        $fmt = $this->getFormatter($chan);
         return $fmt->_($typeNames[$combo->getType()]);
     }
 
     public function handleShowCardsCount(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
-        if (!isset($this->_chans[$chan])) return;
-        $infos  =&  $this->_chans[$chan];
-        $fmt    =   $this->getFormatter($chan);
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
 
-        if (!$this->_checkStarted($chan))
-            return $event->preventDefault(TRUE);
+        $infos  =&  $this->chans[$chan];
+        $fmt    =   $this->getFormatter($chan);
+        if (!$this->checkStarted($chan)) {
+            return $event->preventDefault(true);
+        }
 
         $hands      = array();
-        $collator   = $this->_connection->getCollator();
+        $collator   = $this->connection->getCollator();
         foreach ($infos['game']->getPlayers() as $player) {
             $playerNick = (string) $player->getToken();
             $hands[$playerNick] = count($player->getHand());
-            if (!$collator->compare($playerNick, $nick))
-                $this->_sendCards($chan, $player);
+            if (!$collator->compare($playerNick, $nick)) {
+                $this->sendCards($chan, $player);
+            }
         }
 
         $msg = $fmt->_(
@@ -1112,33 +1133,34 @@ extends Erebot_Module_Base
             )
         );
         $this->sendMessage($chan, $msg);
-        $event->preventDefault(TRUE);
+        $event->preventDefault(true);
     }
 
     public function handleShowDiscard(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
 
-        if (!isset($this->_chans[$chan])) return;
-        $infos          =&  $this->_chans[$chan];
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
+        $infos          =&  $this->chans[$chan];
         $fmt            =   $this->getFormatter($chan);
         $lastDiscard    =   $infos['game']->getDeck()->getLastDiscard();
 
-        if ($lastDiscard === NULL) {
+        if ($lastDiscard === null) {
             $msg = $fmt->_(
                 'No card has been played in this round yet.',
                 array('logo' => $this->getLogo())
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         $discardNick    = (string) $lastDiscard['player']->getToken();
-        $collator       = $this->_connection->getCollator();
+        $collator       = $this->connection->getCollator();
         if (!$collator->compare($nick, $discardNick)) {
             $msg = $fmt->_(
                 '<b><var name="nick"/></b> has got the upper hand '.
@@ -1149,12 +1171,13 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-            return $event->preventDefault(TRUE);
+            return $event->preventDefault(true);
         }
 
         $cards = array();
-        foreach ($lastDiscard['combo'] as $card)
+        foreach ($lastDiscard['combo'] as $card) {
             $cards[] = $this->getCardText($card);
+        }
 
         $msg = $fmt->_(
             'Current discard: <for from="cards" '.
@@ -1162,30 +1185,33 @@ extends Erebot_Module_Base
             'name="type"/> played by <b><var name="player"/></b>)',
             array(
                 'cards' => $cards,
-                'type' => $this->_qualify($chan, $lastDiscard['combo']),
+                'type' => $this->qualify($chan, $lastDiscard['combo']),
                 'player' => $discardNick,
             )
         );
         $this->sendMessage($chan, $msg);
-        $event->preventDefault(TRUE);
+        $event->preventDefault(true);
     }
 
     public function handleShowOrder(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $chan = $event->getChan();
-        if (!isset($this->_chans[$chan])) return;
-        $infos =& $this->_chans[$chan];
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
+        $infos =& $this->chans[$chan];
 
         $fmt = $this->getFormatter($chan);
-        if (!$this->_checkStarted($chan))
-            return $event->preventDefault(TRUE);
+        if (!$this->checkStarted($chan)) {
+            return $event->preventDefault(true);
+        }
 
         $nicks = array();
-        foreach ($infos['game']->getPlayers() as $player)
+        foreach ($infos['game']->getPlayers() as $player) {
             $nicks[] = (string) $player->getToken();
+        }
 
         $msg = $fmt->_(
             'Playing turn: '.
@@ -1196,18 +1222,21 @@ extends Erebot_Module_Base
             )
         );
         $this->sendMessage($chan, $msg);
-        $event->preventDefault(TRUE);
+        $event->preventDefault(true);
     }
 
-    protected function _showScores($chan)
+    protected function showScores($chan)
     {
-        if (!isset($this->_chans[$chan])) return;
-        $infos  =&  $this->_chans[$chan];
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
+        $infos  =&  $this->chans[$chan];
         $fmt    =   $this->getFormatter($chan);
 
         $scores = array();
-        foreach ($infos['game']->getPlayers() as $player)
+        foreach ($infos['game']->getPlayers() as $player) {
             $scores[(string) $player->getToken()] = $player->getScore();
+        }
 
         $msg = $fmt->_(
             'Scores: '.
@@ -1222,52 +1251,57 @@ extends Erebot_Module_Base
     }
 
     public function handleShowScores(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $chan = $event->getChan();
-        if (!isset($this->_chans[$chan])) return;
-        $this->_showScores($chan);
-        $event->preventDefault(TRUE);
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
+        $this->showScores($chan);
+        $event->preventDefault(true);
     }
 
     public function handleShowTime(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $chan = $event->getChan();
-        if (!isset($this->_chans[$chan])) return;
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
         $fmt = $this->getFormatter($chan);
 
-        if (!$this->_checkStarted($chan))
-            return $event->preventDefault(TRUE);
+        if (!$this->checkStarted($chan)) {
+            return $event->preventDefault(true);
+        }
 
-        $playtime = $this->_chans[$chan]['game']->getElapsedTime();
+        $playtime = $this->chans[$chan]['game']->getElapsedTime();
+        $cls = $this->getFactory('!Styling\\Variables\\Duration');
         $msg = $fmt->_(
             'This game has been running for <var name="playtime"/>.',
             array(
                 'logo' => $this->getLogo(),
-                'playtime' => new Erebot_Styling_Duration($playtime),
+                'playtime' => new $cls($playtime),
             )
         );
         $this->sendMessage($chan, $msg);
-        $event->preventDefault(TRUE);
+        $event->preventDefault(true);
     }
 
-    protected function _showTurn($chan, $from)
+    protected function showTurn($chan, $from)
     {
-        $infos          =&  $this->_chans[$chan];
+        $infos          =&  $this->chans[$chan];
         $current        =   $infos['game']->getCurrentPlayer();
         $currentNick    =   (string) $current->getToken();
         $fmt            =   $this->getFormatter($chan);
 
-        if (!$this->_checkStarted($chan))
+        if (!$this->checkStarted($chan)) {
             return;
+        }
 
-        $collator   = $this->_connection->getCollator();
-        if ($from !== NULL && !$collator->compare($from, $currentNick)) {
+        $collator   = $this->connection->getCollator();
+        if ($from !== null && !$collator->compare($from, $currentNick)) {
             $msg = $fmt->_(
                 '<b><var name="nick"/></b>: '.
                 'it\'s your turn sleepyhead!',
@@ -1277,26 +1311,26 @@ extends Erebot_Module_Base
                 )
             );
             $this->sendMessage($chan, $msg);
-        }
-        else {
+        } else {
             $lastDiscard = $infos['game']->getDeck()->getLastDiscard();
             $vars = array(
                 'logo' => $this->getLogo(),
                 'nick' => $currentNick,
             );
 
-            if ($lastDiscard !== NULL && $lastDiscard['player'] === $current)
+            if ($lastDiscard !== null && $lastDiscard['player'] === $current) {
                 $msg = $fmt->_(
                     'No player dared to raise the heat! '.
                     'It\'s <b><var name="nick"/></b>\'s turn '.
                     'to play a new combination.',
                     $vars
                 );
-            else
+            } else {
                 $msg = $fmt->_(
                     'It\'s <b><var name="nick"/></b>\'s turn.',
                     $vars
                 );
+            }
             $this->sendMessage($chan, $msg);
         }
 
@@ -1318,23 +1352,25 @@ extends Erebot_Module_Base
             $this->sendMessage($chan, $msg);
         }
 
-        $collator   = $this->_connection->getCollator();
-        if ($from === NULL || !$collator->compare($from, $currentNick))
-            $this->_sendCards($chan, $current);
+        $collator   = $this->connection->getCollator();
+        if ($from === null || !$collator->compare($from, $currentNick)) {
+            $this->sendCards($chan, $current);
+        }
     }
 
     public function handleShowTurn(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler   $handler,
+        \Erebot\Interfaces\Event\ChanText $event
+    ) {
         $chan = $event->getChan();
-        if (!isset($this->_chans[$chan])) return;
-        $this->_showTurn($chan, $event->getSource());
-        $event->preventDefault(TRUE);
+        if (!isset($this->chans[$chan])) {
+            return;
+        }
+        $this->showTurn($chan, $event->getSource());
+        $event->preventDefault(true);
     }
 
-    protected function _sendCards($chan, Erebot_Module_GoF_Player &$player)
+    protected function sendCards($chan, \Erebot\Module\GoF\Player &$player)
     {
         $fmt = $this->getFormatter($chan);
         $cards = array_map(
@@ -1349,20 +1385,20 @@ extends Erebot_Module_Base
         $this->sendMessage((string) $player->getToken(), $msg);
     }
 
-    protected function _checkStarted($chan)
+    protected function checkStarted($chan)
     {
-        $infos  =&  $this->_chans[$chan];
+        $infos  =&  $this->chans[$chan];
         $fmt    =   $this->getFormatter($chan);
 
-        if ($infos['game']->getNbRounds())
-            return TRUE;
+        if ($infos['game']->getNbRounds()) {
+            return true;
+        }
 
         $msg = $fmt->_(
             'The game has not yet started!',
             array('logo' => $this->getLogo())
         );
         $this->sendMessage($chan, $msg);
-        return FALSE;
+        return false;
     }
 }
-

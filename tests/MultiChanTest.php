@@ -17,7 +17,7 @@
 */
 
 abstract class  RegistryStub
-extends         Erebot_Module_Base
+extends         \Erebot\Module\Base
 {
     public function registerTriggers($trigger, $chan)
     {
@@ -26,7 +26,7 @@ extends         Erebot_Module_Base
 }
 
 abstract class  TrackerStub
-extends         Erebot_Module_Base
+extends         \Erebot\Module\Base
 {
     public function startTracking($identity)
     {
@@ -35,7 +35,7 @@ extends         Erebot_Module_Base
 }
 
 class   GoFStub
-extends Erebot_Module_GoF
+extends \Erebot\Module\GoF
 {
     protected function getLogo()
     {
@@ -43,14 +43,14 @@ extends Erebot_Module_GoF
     }
 }
 
-class   Erebot_Module_GoF_MultiChanText
+class   MultiChanText
 extends Erebot_Testenv_Module_TestCase
 {
     public function setUp()
     {
         $this->_module = new GoFStub(NULL);
         parent::setUp();
-        $this->_module->reload($this->_connection, 0);
+        $this->_module->reloadModule($this->_connection, 0);
 
         $this->_serverConfig
             ->expects($this->any())
@@ -70,23 +70,18 @@ extends Erebot_Testenv_Module_TestCase
             'TrackerStub',
             array(), '', FALSE, FALSE
         );
-
-        $this->_connection
-            ->expects($this->any())
-            ->method('getModule')
-            ->will($this->returnCallback(array($this, 'getModule')));
     }
 
     public function tearDown()
     {
-        $this->_module->unload();
+        $this->_module->unloadModule();
         parent::tearDown();
     }
 
     protected function _mockMessage($chan, $text)
     {
         $event = $this->getMock(
-            'Erebot_Interface_Event_ChanText',
+            '\\Erebot\\Interfaces\\Event\\ChanText',
             array(), array(), '', FALSE, FALSE
         );
         $event
@@ -113,12 +108,12 @@ extends Erebot_Testenv_Module_TestCase
         return $default;
     }
 
-    public function getModule($name)
+    public function _getModule($name, $chan = null, $autoload = true)
     {
         switch ($name) {
-            case 'Erebot_Module_IrcTracker':
+            case '\\Erebot\\Module\\IrcTracker':
                 return $this->_tracker;
-            case 'Erebot_Module_TriggerRegistry':
+            case '\\Erebot\\Module\\TriggerRegistry':
                 return $this->_registry;
             default:
                 throw new Exception($name);
@@ -155,4 +150,3 @@ extends Erebot_Testenv_Module_TestCase
         );
     }
 }
-

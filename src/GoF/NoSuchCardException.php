@@ -16,14 +16,13 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\GoF;
+
 /**
  * \brief
- *      Raised when someone tries to play
- *      an invalid combination of cards,
- *      such as a double pair.
+ *      Raised a person tries to play a card
+ *      he/she doesn't have.
  */
-class   Erebot_Module_GoF_InvalidComboException
-extends Erebot_Module_GoF_Exception
+class NoSuchCardException extends \Erebot\Module\GoF\Exception
 {
 }
-

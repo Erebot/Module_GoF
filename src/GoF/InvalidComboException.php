@@ -16,42 +16,14 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class Erebot_Module_GoF_Player
+namespace Erebot\Module\GoF;
+
+/**
+ * \brief
+ *      Raised when someone tries to play
+ *      an invalid combination of cards,
+ *      such as a double pair.
+ */
+class InvalidComboException extends \Erebot\Module\GoF\Exception
 {
-    protected $_token;
-    protected $_hand;
-    protected $_score;
-
-    public function __construct(&$token)
-    {
-        $this->_token   =&  $token;
-        $this->_score   =   0;
-    }
-
-    public function & getToken()
-    {
-        return $this->_token;
-    }
-
-    public function setHand(Erebot_Module_GoF_Hand $hand)
-    {
-        $this->_hand = $hand;
-    }
-
-    public function & getHand()
-    {
-        return $this->_hand;
-    }
-
-    public function getScore()
-    {
-        return $this->_score;
-    }
-
-    public function computeScore()
-    {
-        $this->_score += $this->_hand->getScore();
-        return $this->_score;
-    }
 }
-

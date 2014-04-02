@@ -17,9 +17,9 @@
 */
 
 class   FakeDeck
-extends Erebot_Module_GoF_Deck_Official
+extends \Erebot\Module\GoF\Deck\Official
 {
-    protected $_fixedCards;
+    protected $fixedCards;
 
     public function __construct($cards)
     {
@@ -33,27 +33,27 @@ extends Erebot_Module_GoF_Deck_Official
             throw new Exception('Invalid deck');
         // Try to convert the given string to a valid card.
         foreach ($cards as $card)
-            Erebot_Module_GoF_Card::fromLabel($card);
-        $this->_fixedCards = array_values($cards);
+            \Erebot\Module\GoF\Card::fromLabel($card);
+        $this->fixedCards = array_values($cards);
     }
 
     public function shuffle()
     {
-        $this->_discarded   = NULL;
-        $this->_cards       = $this->_fixedCards;
+        $this->discarded   = null;
+        $this->cards       = $this->fixedCards;
     }
 }
 
 class   FakeGame
-extends Erebot_Module_GoF_Game
+extends \Erebot\Module\GoF\Game
 {
-    protected function _shuffle()
+    protected function shuffle()
     {
         // Don't shuffle.
     }
 }
 
-class   Erebot_Module_GoF_InGameTest
+class   InGameTest
 extends PHPUnit_Framework_TestCase
 {
     public function testDifferentHandsAfterVictory()
@@ -72,17 +72,17 @@ extends PHPUnit_Framework_TestCase
         $starter = $game->start();
         $this->assertSame($foo, $starter);
 
-        $m1 = Erebot_Module_GoF_Card::fromLabel('m1');
-        $comboFoo1 = new Erebot_Module_GoF_Combo($m1, $m1, $m1, $m1);
+        $m1 = \Erebot\Module\GoF\Card::fromLabel('m1');
+        $comboFoo1 = new \Erebot\Module\GoF\Combo($m1, $m1, $m1, $m1);
 
-        $g1 = Erebot_Module_GoF_Card::fromLabel('g1');
-        $comboFoo2 = new Erebot_Module_GoF_Combo($g1, $g1, $g1, $g1);
+        $g1 = \Erebot\Module\GoF\Card::fromLabel('g1');
+        $comboFoo2 = new \Erebot\Module\GoF\Combo($g1, $g1, $g1, $g1);
 
-        $r10 = Erebot_Module_GoF_Card::fromLabel('r10');
-        $comboFoo3 = new Erebot_Module_GoF_Combo($r10, $r10, $r10, $r10);
+        $r10 = \Erebot\Module\GoF\Card::fromLabel('r10');
+        $comboFoo3 = new \Erebot\Module\GoF\Combo($r10, $r10, $r10, $r10);
 
-        $g2 = Erebot_Module_GoF_Card::fromLabel('g2');
-        $comboBar = new Erebot_Module_GoF_Combo($g2, $g2, $g2, $g2);
+        $g2 = \Erebot\Module\GoF\Card::fromLabel('g2');
+        $comboBar = new \Erebot\Module\GoF\Combo($g2, $g2, $g2, $g2);
 
         $score = FALSE;
         for ($i = 0; $i < 2; $i++) {
@@ -150,7 +150,7 @@ extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException   Erebot_Module_GoF_InferiorComboException
+     * @expectedException \Erebot\Module\GoF\InferiorComboException
      */
     public function testIncorrectLeader()
     {
@@ -180,182 +180,182 @@ extends PHPUnit_Framework_TestCase
 
         // Round #1.
         try {
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('m1'),
-                Erebot_Module_GoF_Card::fromLabel('g1'),
-                Erebot_Module_GoF_Card::fromLabel('r1')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('m1'),
+                \Erebot\Module\GoF\Card::fromLabel('g1'),
+                \Erebot\Module\GoF\Card::fromLabel('r1')
             ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r4'),
-                Erebot_Module_GoF_Card::fromLabel('y4'),
-                Erebot_Module_GoF_Card::fromLabel('y4')
-            ));
-            $game->pass();
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r8'),
-                Erebot_Module_GoF_Card::fromLabel('y8'),
-                Erebot_Module_GoF_Card::fromLabel('y8')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r4'),
+                \Erebot\Module\GoF\Card::fromLabel('y4'),
+                \Erebot\Module\GoF\Card::fromLabel('y4')
             ));
             $game->pass();
-            $game->pass();
-            $game->pass();
-
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r9'),
-                Erebot_Module_GoF_Card::fromLabel('y9'),
-                Erebot_Module_GoF_Card::fromLabel('g9')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r8'),
+                \Erebot\Module\GoF\Card::fromLabel('y8'),
+                \Erebot\Module\GoF\Card::fromLabel('y8')
             ));
             $game->pass();
             $game->pass();
             $game->pass();
 
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('y1'),
-                Erebot_Module_GoF_Card::fromLabel('y1'),
-                Erebot_Module_GoF_Card::fromLabel('g1')
-            ));
-            $game->pass();
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r3'),
-                Erebot_Module_GoF_Card::fromLabel('r3'),
-                Erebot_Module_GoF_Card::fromLabel('g3')
-            ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('y5'),
-                Erebot_Module_GoF_Card::fromLabel('y5'),
-                Erebot_Module_GoF_Card::fromLabel('g5')
-            ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r10'),
-                Erebot_Module_GoF_Card::fromLabel('y10'),
-                Erebot_Module_GoF_Card::fromLabel('y10')
-            ));
-            $game->pass();
-            $game->pass();
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r6'),
-                Erebot_Module_GoF_Card::fromLabel('y6'),
-                Erebot_Module_GoF_Card::fromLabel('g6'),
-                Erebot_Module_GoF_Card::fromLabel('g6')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r9'),
+                \Erebot\Module\GoF\Card::fromLabel('y9'),
+                \Erebot\Module\GoF\Card::fromLabel('g9')
             ));
             $game->pass();
             $game->pass();
             $game->pass();
 
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r2'),
-                Erebot_Module_GoF_Card::fromLabel('g2')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('y1'),
+                \Erebot\Module\GoF\Card::fromLabel('y1'),
+                \Erebot\Module\GoF\Card::fromLabel('g1')
             ));
             $game->pass();
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('y3'),
-                Erebot_Module_GoF_Card::fromLabel('g3')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r3'),
+                \Erebot\Module\GoF\Card::fromLabel('r3'),
+                \Erebot\Module\GoF\Card::fromLabel('g3')
             ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r6'),
-                Erebot_Module_GoF_Card::fromLabel('y6')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('y5'),
+                \Erebot\Module\GoF\Card::fromLabel('y5'),
+                \Erebot\Module\GoF\Card::fromLabel('g5')
             ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r7'),
-                Erebot_Module_GoF_Card::fromLabel('g7')
-            ));
-            $game->pass();
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r8'),
-                Erebot_Module_GoF_Card::fromLabel('g8')
-            ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r9'),
-                Erebot_Module_GoF_Card::fromLabel('g9')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r10'),
+                \Erebot\Module\GoF\Card::fromLabel('y10'),
+                \Erebot\Module\GoF\Card::fromLabel('y10')
             ));
             $game->pass();
             $game->pass();
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r10'),
-                Erebot_Module_GoF_Card::fromLabel('g10')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r6'),
+                \Erebot\Module\GoF\Card::fromLabel('y6'),
+                \Erebot\Module\GoF\Card::fromLabel('g6'),
+                \Erebot\Module\GoF\Card::fromLabel('g6')
             ));
             $game->pass();
             $game->pass();
             $game->pass();
 
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r5'),
-                Erebot_Module_GoF_Card::fromLabel('r5')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r2'),
+                \Erebot\Module\GoF\Card::fromLabel('g2')
             ));
             $game->pass();
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('yp'),
-                Erebot_Module_GoF_Card::fromLabel('gp')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('y3'),
+                \Erebot\Module\GoF\Card::fromLabel('g3')
+            ));
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r6'),
+                \Erebot\Module\GoF\Card::fromLabel('y6')
+            ));
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r7'),
+                \Erebot\Module\GoF\Card::fromLabel('g7')
+            ));
+            $game->pass();
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r8'),
+                \Erebot\Module\GoF\Card::fromLabel('g8')
+            ));
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r9'),
+                \Erebot\Module\GoF\Card::fromLabel('g9')
+            ));
+            $game->pass();
+            $game->pass();
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r10'),
+                \Erebot\Module\GoF\Card::fromLabel('g10')
             ));
             $game->pass();
             $game->pass();
             $game->pass();
 
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('y3')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r5'),
+                \Erebot\Module\GoF\Card::fromLabel('r5')
             ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r4')
-            ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('y9')
-            ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('rd')
+            $game->pass();
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('yp'),
+                \Erebot\Module\GoF\Card::fromLabel('gp')
             ));
             $game->pass();
             $game->pass();
             $game->pass();
 
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r1')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('y3')
             ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('g4')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r4')
             ));
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('y7')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('y9')
+            ));
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('rd')
             ));
             $game->pass();
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('g8')
+            $game->pass();
+            $game->pass();
+
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r1')
             ));
-            $end = $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('g10')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('g4')
+            ));
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('y7')
+            ));
+            $game->pass();
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('g8')
+            ));
+            $end = $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('g10')
             ));
             $this->assertEquals(4, $end);
         }
-        catch (Erebot_Module_GoF_InferiorComboException $e) {
+        catch (\Erebot\Module\GoF\InferiorComboException $e) {
             $this->fail("Early exception");
         }
 
-        $game->chooseCard(Erebot_Module_GoF_Card::fromLabel('y2'));
+        $game->chooseCard(\Erebot\Module\GoF\Card::fromLabel('y2'));
 
         // Round #2.
         try {
             $this->assertEquals($playerS, $game->getCurrentPlayer());
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('y4'),
-                Erebot_Module_GoF_Card::fromLabel('g4')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('y4'),
+                \Erebot\Module\GoF\Card::fromLabel('g4')
             ));
 
             $this->assertEquals($playerT, $game->getCurrentPlayer());
-            $game->play(new Erebot_Module_GoF_Combo(
-                Erebot_Module_GoF_Card::fromLabel('r6'),
-                Erebot_Module_GoF_Card::fromLabel('y6')
+            $game->play(new \Erebot\Module\GoF\Combo(
+                \Erebot\Module\GoF\Card::fromLabel('r6'),
+                \Erebot\Module\GoF\Card::fromLabel('y6')
             ));
 
             $this->assertEquals($playerC, $game->getCurrentPlayer());
             $game->pass();
         }
-        catch (Erebot_Module_GoF_InferiorComboException $e) {
+        catch (\Erebot\Module\GoF\InferiorComboException $e) {
             $this->fail("Early exception");
         }
 
         $this->assertEquals($playerG, $game->getCurrentPlayer());
-        $game->play(new Erebot_Module_GoF_Combo(
-            Erebot_Module_GoF_Card::fromLabel('y3'),
-            Erebot_Module_GoF_Card::fromLabel('g3')
+        $game->play(new \Erebot\Module\GoF\Combo(
+            \Erebot\Module\GoF\Card::fromLabel('y3'),
+            \Erebot\Module\GoF\Card::fromLabel('g3')
         ));
     }
 }

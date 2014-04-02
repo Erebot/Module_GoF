@@ -16,13 +16,13 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\GoF;
+
 /**
  * \brief
- *      Raised in various cases where an internal
- *      error has been detected.
+ *      Raised when someone tries to join the
+ *      current game but are already 4 players.
  */
-class   Erebot_Module_GoF_InternalErrorException
-extends Erebot_Module_GoF_Exception
+class EnoughPlayersException extends \Erebot\Module\GoF\Exception
 {
 }
-

@@ -16,13 +16,15 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\GoF;
+
 /**
  * \brief
- *      Raised when someone tries to join the
- *      current game but are already 4 players.
+ *      Raised when a round has ended and the bot
+ *      is waiting for the winner of that round
+ *      to choose one card to exchange with the
+ *      loser of the round.
  */
-class   Erebot_Module_GoF_EnoughPlayersException
-extends Erebot_Module_GoF_Exception
+class WaitingForCardException extends \Erebot\Module\GoF\Exception
 {
 }
-

@@ -16,31 +16,32 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class       Erebot_Module_GoF_Deck_Official
-implements  Erebot_Module_GoF_Deck_Abstract
+namespace Erebot\Module\GoF\Deck;
+
+class Official implements \Erebot\Module\GoF\DeckInterface
 {
-    protected $_cards;
-    protected $_discarded;
+    protected $cards;
+    protected $discarded;
 
     public function __construct()
     {
-        // Shuffle takes care of recreating the deck.
+        // Shuffling the deck actually recreates it.
         $this->shuffle();
     }
 
     public function draw()
     {
-        if (!count($this->_cards))
-            throw new Erebot_Module_GoF_InternalErrorException();
-        return Erebot_Module_GoF_Card::fromLabel(array_shift($this->_cards));
+        if (!count($this->cards)) {
+            throw new \Erebot\Module\GoF\InternalErrorException();
+        }
+        return \Erebot\Module\GoF\Card::fromLabel(array_shift($this->cards));
     }
 
     public function discard(
-        Erebot_Module_GoF_Player   $player,
-        Erebot_Module_GoF_Combo    $combo
-    )
-    {
-        $this->_discarded = array(
+        \Erebot\Module\GoF\Player   $player,
+        \Erebot\Module\GoF\Combo    $combo
+    ) {
+        $this->discarded = array(
             'player'    => $player,
             'combo'     => $combo,
         );
@@ -48,30 +49,30 @@ implements  Erebot_Module_GoF_Deck_Abstract
 
     public function shuffle()
     {
-        $this->_discarded   = NULL;
-        $this->_cards       = array();
+        $this->discarded    = null;
+        $this->cards        = array();
         $colors             = str_split('gyr');
 
         // Add colored cards.
         foreach ($colors as $color) {
             for ($i = 0; $i < 2; $i++) {
-                for ($j = 1; $j <= 10; $j++)
-                    $this->_cards[] = $color.$j;
+                for ($j = 1; $j <= 10; $j++) {
+                    $this->cards[] = $color.$j;
+                }
             }
         }
 
         // Add special cards.
-        $this->_cards[] = 'm1'; // Multi-colored 1
-        $this->_cards[] = 'gp'; // Green phoenix
-        $this->_cards[] = 'yp'; // Yellow phoenix
-        $this->_cards[] = 'rd'; // Red dragon
+        $this->cards[] = 'm1'; // Multi-colored 1
+        $this->cards[] = 'gp'; // Green phoenix
+        $this->cards[] = 'yp'; // Yellow phoenix
+        $this->cards[] = 'rd'; // Red dragon
 
-        shuffle($this->_cards);
+        shuffle($this->cards);
     }
 
     public function getLastDiscard()
     {
-        return $this->_discarded;
+        return $this->discarded;
     }
 }
-

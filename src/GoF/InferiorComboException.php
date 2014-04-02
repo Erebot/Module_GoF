@@ -16,35 +16,35 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\GoF;
+
 /**
  * \brief
  *      Raised when trying to play a combination
  *      that is inferior to the currently leading
  *      one.
  */
-class   Erebot_Module_GoF_InferiorComboException
-extends Erebot_Module_GoF_Exception
+class InferiorComboException extends \Erebot\Module\GoF\Exception
 {
     /// Array of allowed (superior) combinations.
-    protected $_allowed;
+    protected $allowed;
 
-    public function __construct($message = NULL, $code = 0, $allowed = NULL)
+    public function __construct($message = null, $code = 0, $allowed = null)
     {
         parent::__construct($message, $code);
-        $this->_allowed = $allowed;
+        $this->allowed = $allowed;
     }
 
     /**
      * Returns a list of superior combinations
      * that may be played, in known.
      *
-     * \retval list|NULL
+     * \retval list|null
      *      List of superior combinations,
      *      if known.
      */
     public function getAllowedCombo()
     {
-        return $this->_allowed;
+        return $this->allowed;
     }
 }
-
