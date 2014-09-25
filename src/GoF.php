@@ -858,7 +858,7 @@ class GoF extends \Erebot\Module\Base
         }
 
         // Build a combo from those cards.
-        $reflector = new ReflectionClass('\\Erebot\\Module\\GoF\\Combo');
+        $reflector = new \ReflectionClass('\\Erebot\\Module\\GoF\\Combo');
         try {
             $combo = $reflector->newInstanceArgs($cards);
         } catch (\Erebot\Module\GoF\InvalidComboException $e) {
