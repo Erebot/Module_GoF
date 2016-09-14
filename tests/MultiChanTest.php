@@ -80,10 +80,7 @@ extends Erebot_Testenv_Module_TestCase
 
     protected function _mockMessage($chan, $text)
     {
-        $event = $this->getMock(
-            '\\Erebot\\Interfaces\\Event\\ChanText',
-            array(), array(), '', FALSE, FALSE
-        );
+        $event = $this->getMockBuilder('\\Erebot\\Interfaces\\Event\\ChanText')->getMock();
         $event
             ->expects($this->any())
             ->method('getConnection')
