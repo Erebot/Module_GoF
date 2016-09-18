@@ -70,6 +70,17 @@ extends Erebot_Testenv_Module_TestCase
             'TrackerStub',
             array(), '', FALSE, FALSE
         );
+
+        // Mock event matchers.
+        // We use class_alias() because setMockClassName() does not accept namespaces.
+        // See https://github.com/sebastianbergmann/phpunit-mock-objects/issues/134
+        // for more information.
+        $match = $this->getMockBuilder('\\Erebot\\Interfaces\\Event\\Match')->getMock();
+        class_alias(get_class($match), '\\Erebot\\Event\\Match\\All');
+        class_alias(get_class($match), '\\Erebot\\Event\\Match\\Type');
+        class_alias(get_class($match), '\\Erebot\\Event\\Match\\Chan');
+        class_alias(get_class($match), '\\Erebot\\Event\\Match\\TextStatic');
+        class_alias(get_class($match), '\\Erebot\\Event\\Match\\TextWildcard');
     }
 
     public function tearDown()
