@@ -1,0 +1,217 @@
+# French translations for Erebot_Module_GoF package.
+# Copyright (C) 2011-2016, Erebot
+# This file is distributed under the same license as the Erebot_Module_GoF package.
+# Automatically generated, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Erebot_Module_GoF 1.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-29 22:41+0100\n"
+"PO-Revision-Date: 2016-12-29 22:41+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#
+msgid "Usage"
+msgstr ""
+#
+msgid ""
+"This section assumes default values are used for all triggers. Please refer "
+"to :ref:`configuration options <configuration options>` for more information "
+"on how to customize triggers."
+msgstr ""
+#
+msgid ""
+"Also, knowledge of the rules for the Gang of Four game is assumed. The full "
+"rules for the game can be found (in multiple languages) on `Days of Wonder's "
+"website`_."
+msgstr ""
+#
+msgid "Provided commands"
+msgstr ""
+#
+msgid "This module provides the following commands:"
+msgstr ""
+#
+msgid "Commands provided by |project|"
+msgstr ""
+#
+msgid "Command"
+msgstr ""
+#
+msgid "Description"
+msgstr ""
+#
+msgid "``!gof``"
+msgstr ""
+#
+msgid "Start a new Gang of Four game."
+msgstr ""
+#
+msgid "``!gof cancel`` or ``!gof end`` or ``!gof off`` or ``!gof stop``"
+msgstr ""
+#
+msgid ""
+"Stop a currently running Gang of Four game. Can only be used by the person "
+"who started the game in the first place."
+msgstr ""
+#
+msgid "``ca``"
+msgstr ""
+#
+msgid "Display the number of remaining cards in each player's hand."
+msgstr ""
+#
+msgid "``cd``"
+msgstr ""
+#
+msgid "Display the last played (and thus discarded) card."
+msgstr ""
+#
+msgid ":samp:`ch {card}`"
+msgstr ""
+#
+msgid ""
+"Choose a card to give to the loser of the previous round. Can only be used at "
+"the end of a round by the winner of the previous round."
+msgstr ""
+#
+msgid "``jo``"
+msgstr ""
+#
+msgid "Join a currently running Uno game."
+msgstr ""
+#
+msgid "``od``"
+msgstr ""
+#
+msgid "Display playing order."
+msgstr ""
+#
+msgid "``pa``"
+msgstr ""
+#
+msgid "Pass instead of playing."
+msgstr ""
+#
+msgid ":samp:`pl {combo}`"
+msgstr ""
+#
+msgid ""
+"Play the given *combo* of cards (see :ref:`mnemonics` for the syntax used). "
+"Eg. ``pl g1y1`` to play a pair of 1s, containing a \"Green 1\" and a \"Yellow "
+"1\"."
+msgstr ""
+#
+msgid "``sc``"
+msgstr ""
+#
+msgid "Display the score of each player involved in the current game."
+msgstr ""
+#
+msgid "``ti``"
+msgstr ""
+#
+msgid "Display information on how long the current game has been running for."
+msgstr ""
+#
+msgid "``tu``"
+msgstr ""
+#
+msgid "Display the name of the player whose turn it is to play."
+msgstr ""
+#
+msgid "Mnemonics for cards"
+msgstr ""
+#
+msgid ""
+"The general format used to refer to cards is the first letter of the card's "
+"color (in english) followed by the card's figure."
+msgstr ""
+#
+msgid "The following colors are available:"
+msgstr ""
+#
+msgid "**g**\\ reen"
+msgstr ""
+#
+msgid "**y**\\ ellow"
+msgstr ""
+#
+msgid "**r**\\ ed"
+msgstr ""
+#
+msgid "**m**\\ ulti"
+msgstr ""
+#
+msgid "The following figures are available:"
+msgstr ""
+#
+msgid "Numbers from 1 to 10 (inclusive)."
+msgstr ""
+#
+msgid "Phoenixes."
+msgstr ""
+#
+msgid "Dragon."
+msgstr ""
+#
+msgid ""
+"The following table lists a few examples of valid mnemnics with the full name "
+"of the card they refer to:"
+msgstr ""
+#
+msgid "Valid mnemonics for cards"
+msgstr ""
+#
+msgid "Mnemonic"
+msgstr ""
+#
+msgid "Actual card"
+msgstr ""
+#
+msgid "``g1``"
+msgstr ""
+#
+msgid "\"Green 1\""
+msgstr ""
+#
+msgid "``m1``"
+msgstr ""
+#
+msgid "\"Multicolored 1\""
+msgstr ""
+#
+msgid "``r10``"
+msgstr ""
+#
+msgid "\"Red 10\""
+msgstr ""
+#
+msgid "``gp``"
+msgstr ""
+#
+msgid "\"Green Phoenix\""
+msgstr ""
+#
+msgid "``yp``"
+msgstr ""
+#
+msgid "\"Yellow Phoenix\""
+msgstr ""
+#
+msgid "``rd``"
+msgstr ""
+#
+msgid "\"Red Dragon\""
+msgstr ""
+#
+msgid ""
+"Not all combinations of colors and figures are valid. In particular, there is "
+"only one multicolored figure, one red dragon, a green and a yellow phoenix."
+msgstr ""

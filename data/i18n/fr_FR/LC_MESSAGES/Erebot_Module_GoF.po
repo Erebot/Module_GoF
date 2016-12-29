@@ -1,151 +1,185 @@
-#
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Erebot_Module_GoF 0.5.0\n"
+"Project-Id-Version: Erebot_Module_GoF 1.0.x-dev\n"
 "Report-Msgid-Bugs-To: i18n@erebot.net\n"
-"POT-Creation-Date: 2012-05-21 00:13+0200\n"
-"PO-Revision-Date: 2011-04-16 12:24+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: fr_FR\n"
+"POT-Creation-Date: 2016-12-17 22:26+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: François Poirotte <clicky@erebot.net>, 2016\n"
+"Language-Team: French (France) (https://www.transifex.com/erebot/teams/1675/fr_FR/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-#
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+# File: src/GoF.php, line: 476
 msgid "<b><var name=\"admin\"/></b> stopped the game!"
 msgstr "<b><var name=\"admin\"/></b> a arrêté cette partie !"
-#
+
+# File: src/GoF.php, line: 1166
 msgid ""
 "<b><var name=\"nick\"/></b> has got the upper hand and may now start a new "
 "combination"
 msgstr ""
 "<b><var name=\"nick\"/></b> a pris la tête et peut jouer une nouvelle "
 "combinaison"
-#
+
+# File: src/GoF.php, line: 713
 msgid "<b><var name=\"nick\"/></b> joins the game."
 msgstr "<b><var name=\"nick\"/></b> rejoint la partie de <var name=\"logo\"/>."
-#
+
+# File: src/GoF.php, line: 794
 msgid "<b><var name=\"nick\"/></b> passes turn."
 msgstr "<b><var name=\"nick\"/></b> passe son tour."
-#
+
+# File: src/GoF.php, line: 974
 msgid ""
 "<b><var name=\"nick\"/></b> plays <var name=\"type\"/>: <for from=\"cards\" "
 "item=\"card\" separator=\" \"><var name=\"card\"/></for>"
 msgstr ""
 "<b><var name=\"nick\"/></b> joue <var name=\"type\"/> : <for from=\"cards\" "
 "item=\"card\" separator=\" \"><var name=\"card\"/></for>"
-#
+
+# File: src/GoF.php, line: 966
 msgid ""
 "<b><var name=\"nick\"/></b> plays <var name=\"type\"/>: <for from=\"cards\" "
 "item=\"card\" separator=\" \"><var name=\"card\"/></for> - This is <b><var "
 "name=\"nick\"/></b>'s last card!"
 msgstr ""
 "<b><var name=\"nick\"/></b> joue <var name=\"type\"/> : <for from=\"cards\" "
-"item=\"card\" separator=\" \"><var name=\"card\"/></for> - C'est la dernière "
-"carte de <b><var name=\"nick\"/></b> !"
-#
+"item=\"card\" separator=\" \"><var name=\"card\"/></for> - C'est la dernière"
+" carte de <b><var name=\"nick\"/></b> !"
+
+# File: src/GoF.php, line: 1006
 msgid "<b><var name=\"nick\"/></b> wins this round!"
 msgstr "<b><var name=\"nick\"/></b> remporte cette manche !"
-#
+
+# File: src/GoF.php, line: 1000
 msgid ""
 "<b><var name=\"nick\"/></b> wins this round! The next round will start in "
 "<var name=\"delay\"/> seconds."
 msgstr ""
 "<b><var name=\"nick\"/></b> remporte cette manche ! La prochaine manche "
 "débutera dans <var name=\"delay\"/> secondes."
-#
+
+# File: src/GoF.php, line: 1343
 msgid ""
-"<b><var name=\"nick\"/></b>, since there is only 1 card left in <b><var name="
-"\"next_player\"/></b>'s hand, you MUST play your best card or a combination "
-"on this turn!"
+"<b><var name=\"nick\"/></b>, since there is only 1 card left in <b><var "
+"name=\"next_player\"/></b>'s hand, you MUST play your best card or a "
+"combination on this turn!"
 msgstr ""
-"Il n'y a plus qu'une seule carte dans la main de <b><var name=\"next_player\"/"
-"></b>. De ce fait, <b><var name=\"nick\"/></b>, tu DOIS jouer ta meilleure "
-"carte ou une combinaison durant ce tour !"
-#
+"Il n'y a plus qu'une seule carte dans la main de <b><var "
+"name=\"next_player\"/></b>. De ce fait, <b><var name=\"nick\"/></b>, tu DOIS"
+" jouer ta meilleure carte ou une combinaison durant ce tour !"
+
+# File: src/GoF.php, line: 940
 msgid ""
 "<b><var name=\"nick\"/></b>, you cannot play <b><var name=\"type\"/></b> "
 "right now!"
 msgstr ""
-"<b><var name=\"nick\"/></b>, tu ne peux pas jouer <b><var name=\"type\"/></b> "
-"maintenant !"
-#
+"<b><var name=\"nick\"/></b>, tu ne peux pas jouer <b><var "
+"name=\"type\"/></b> maintenant !"
+
+# File: src/GoF.php, line: 1306
 msgid "<b><var name=\"nick\"/></b>: it's your turn sleepyhead!"
 msgstr "<b><var name=\"nick\"/></b> : c'est ton tour tête de linotte !"
-#
+
+# File: src/GoF.php, line: 215
 msgid ""
 "A game managed by <b><var name=\"admin\"/></b> is already in progress here. "
 "Say \"<b><var name=\"trigger\"/></b>\" to join it."
 msgstr ""
 "Une partie gérée par <b><var name=\"admin\"/></b> est déjà en cours. Dites "
 "\"<var name=\"trigger\"/>\" pour rejoindre la partie."
-#
+
+# File: src/GoF.php, line: 231
 msgid ""
-"Bad limit in the configuration file (<var name=\"limit\"/>). The game cannot "
-"start."
+"Bad limit in the configuration file (<var name=\"limit\"/>). The game cannot"
+" start."
 msgstr ""
 "Limite incorrecte dans le fichier de configuration (<var name=\"limit\"/>). "
 "Le jeu ne peut pas démarrer."
-#
+
+# File: src/GoF.php, line: 53
 msgid "Could not register Gang of Four creation trigger"
 msgstr ""
 "Impossible d'enregistrer le déclencheur de création pour le jeu du Gang of "
 "Four"
-#
+
+# File: src/GoF.php, line: 1183
 msgid ""
-"Current discard: <for from=\"cards\" item=\"card\" separator=\" \"><var name="
-"\"card\"/></for> (<var name=\"type\"/> played by <b><var name=\"player\"/></"
-"b>)"
+"Current discard: <for from=\"cards\" item=\"card\" separator=\" \"><var "
+"name=\"card\"/></for> (<var name=\"type\"/> played by <b><var "
+"name=\"player\"/></b>)"
 msgstr ""
-"Défausse : <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card"
-"\"/></for> (<var name=\"type\"/>, par <b><var name=\"player\"/></b>)"
-#
+"Défausse : <for from=\"cards\" item=\"card\" separator=\" \"><var "
+"name=\"card\"/></for> (<var name=\"type\"/>, par <b><var "
+"name=\"player\"/></b>)"
+
+# File: src/GoF.php, line: 650
 msgid ""
-"Exchanges: <b><var name=\"winner\"/></b> receives a <var name=\"received\"/> "
-"and gives a <var name=\"given\"/> to <b><var name=\"loser\"/></b>. <b><var "
+"Exchanges: <b><var name=\"winner\"/></b> receives a <var name=\"received\"/>"
+" and gives a <var name=\"given\"/> to <b><var name=\"loser\"/></b>. <b><var "
 "name=\"winner\"/></b>, you may now start this round."
 msgstr ""
 "Échanges : <b><var name=\"winner\"/></b> reçoit un <var name=\"received\"/> "
 "et donne un <var name=\"given\"/> à <b><var name=\"loser\"/></b>. <b><var "
 "name=\"winner\"/></b>, à toi de commencer cette manche."
-#
+
+# File: src/GoF.php, line: 1127
 msgid ""
-"Hands: <for from=\"hands\" key=\"nick\" item=\"nb_cards\"><b><var name=\"nick"
-"\"/></b>: <var name=\"nb_cards\"/></for>."
+"Hands: <for from=\"hands\" key=\"nick\" item=\"nb_cards\"><b><var "
+"name=\"nick\"/></b>: <var name=\"nb_cards\"/></for>."
 msgstr ""
 "Cartes en main : <for from=\"hands\" key=\"nick\" item=\"nb_cards\"><b><var "
 "name=\"nick\"/></b>: <var name=\"nb_cards\"/></for>."
-#
+
+# File: src/GoF.php, line: 609
+# File: src/GoF.php, line: 849
 msgid "Hmm? What card was that <b><var name=\"nick\"/></b>?"
 msgstr "Hum ? Qu'est-ce que c'est que cette carte <b><var name=\"nick\"/></b> ?"
-#
+
+# File: src/GoF.php, line: 829
+# File: src/GoF.php, line: 866
 msgid "Hmm? What move was that <b><var name=\"nick\"/></b>?"
 msgstr "Hum ? C'est quoi ça <b><var name=\"nick\"/></b> ?"
-#
+
+# File: src/GoF.php, line: 1330
 msgid "It's <b><var name=\"nick\"/></b>'s turn."
 msgstr "C'est au tour de <b><var name=\"nick\"/></b> de jouer."
-#
+
+# File: src/GoF.php, line: 1155
 msgid "No card has been played in this round yet."
 msgstr "Aucune carte n'a été jouée dans cette manche pour le moment."
-#
+
+# File: src/GoF.php, line: 461
 msgid "No game has been started in <var name=\"chan\"/> yet! Nothing to stop."
 msgstr ""
-"Aucune partie n'a été lancée dans <var name=\"chan\"/> pour le moment ! Rien "
-"à arrêter."
-#
+"Aucune partie n'a été lancée dans <var name=\"chan\"/> pour le moment ! Rien"
+" à arrêter."
+
+# File: src/GoF.php, line: 1323
 msgid ""
-"No player dared to raise the heat! It's <b><var name=\"nick\"/></b>'s turn to "
-"play a new combination."
+"No player dared to raise the heat! It's <b><var name=\"nick\"/></b>'s turn "
+"to play a new combination."
 msgstr ""
-"Personne n'a osé surenchérir ! C'est à <b><var name=\"nick\"/></b> de lancer "
-"une nouvelle combinaison."
-#
+"Personne n'a osé surenchérir ! C'est à <b><var name=\"nick\"/></b> de lancer"
+" une nouvelle combinaison."
+
+# File: src/GoF.php, line: 782
 msgid "Now is not the time to pass <b><var name=\"nick\"/></b>!"
 msgstr "Ce n'est pas le moment de passer <b><var name=\"nick\"/></b> !"
-#
+
+# File: src/GoF.php, line: 882
 msgid "Now is not the time to play <b><var name=\"nick\"/></b>!"
 msgstr "Ce n'est pas le moment de jouer <b><var name=\"nick\"/></b> !"
-#
+
+# File: src/GoF.php, line: 428
 msgid ""
 "Ok! A new game has been created in <var name=\"chan\"/>. It will not stop "
 "until someone gets at least <b><var name=\"limit\"/></b> points. Say "
@@ -154,149 +188,174 @@ msgstr ""
 "Ok ! Une nouvelle partie a été créée sur <var name=\"chan\"/>. La partie ne "
 "s'arrêtera pas avant que quelqu'un n'atteigne <b><var name=\"limit\"/></b> "
 "points. Dites \"<b><var name=\"trigger\"/></b>\" pour jouer."
-#
-msgid ""
-"Playing turn: <for from=\"nicks\" item=\"nick\"><b><var name=\"nick\"/></b></"
-"for>."
+
+# File: src/GoF.php, line: 1217
+msgid "Playing turn: <for from=\"nicks\" item=\"nick\"><b><var name=\"nick\"/></b></for>."
 msgstr ""
-"Ordre des tours : <for from=\"nicks\" item=\"nick\"><b><var name=\"nick\"/></"
-"b></for>."
-#
+"Ordre des tours : <for from=\"nicks\" item=\"nick\"><b><var "
+"name=\"nick\"/></b></for>."
+
+# File: src/GoF.php, line: 770
+# File: src/GoF.php, line: 893
 msgid ""
-"Proceed with the card exchange first. Use <b><var name=\"trigger\"/> &lt;"
-"card&gt;</b> to select the &lt;card&gt; to give away."
+"Proceed with the card exchange first. Use <b><var name=\"trigger\"/> "
+"&lt;card&gt;</b> to select the &lt;card&gt; to give away."
 msgstr ""
-"Commence par l'échange de cartes. Utilise <b><var name=\"trigger\"/> &lt;"
-"carte&gt;</b> pour sélectionner la &lt;carte&gt; à donner."
-#
+"Commence par l'échange de cartes. Utilise <b><var name=\"trigger\"/> "
+"&lt;carte&gt;</b> pour sélectionner la &lt;carte&gt; à donner."
+
+# File: src/GoF.php, line: 1242
 msgid ""
-"Scores: <for from=\"scores\" key=\"nick\" item=\"score\"><b><var name=\"nick"
-"\"/></b>: <var name=\"score\"/></for>."
+"Scores: <for from=\"scores\" key=\"nick\" item=\"score\"><b><var "
+"name=\"nick\"/></b>: <var name=\"score\"/></for>."
 msgstr ""
-"Scores : <for from=\"scores\" key=\"nick\" item=\"score\"><b><var name=\"nick"
-"\"/></b>: <var name=\"score\"/></for>."
-#
+"Scores : <for from=\"scores\" key=\"nick\" item=\"score\"><b><var "
+"name=\"nick\"/></b>: <var name=\"score\"/></for>."
+
+# File: src/GoF.php, line: 905
 msgid ""
 "Sorry <b><var name=\"nick\"/></b>, but this is not enough to take the "
 "leadership!"
 msgstr ""
-"Désolé <b><var name=\"nick\"/></b>, mais ce n'est pas suffisant pour prendre "
-"la main !"
-#
+"Désolé <b><var name=\"nick\"/></b>, mais ce n'est pas suffisant pour prendre"
+" la main !"
+
+# File: src/GoF.php, line: 637
 msgid ""
-"Sorry <b><var name=\"nick\"/></b>, you do not have that card! (<var name="
-"\"card\"/>)"
+"Sorry <b><var name=\"nick\"/></b>, you do not have that card! (<var "
+"name=\"card\"/>)"
 msgstr ""
-"Désolé <b><var name=\"nick\"/></b>, mais tu ne disposes pas de cette carte ! "
-"(<var name=\"card\"/>)"
-#
+"Désolé <b><var name=\"nick\"/></b>, mais tu ne disposes pas de cette carte !"
+" (<var name=\"card\"/>)"
+
+# File: src/GoF.php, line: 1398
 msgid "The game has not yet started!"
 msgstr "La partie n'a pas encore débuté !"
-#
+
+# File: src/GoF.php, line: 563
 msgid ""
 "The game starts now. <b><var name=\"starter\"/></b>, you must start this "
 "game. If you have the <var name=\"m1\"/>, you MUST play it (alone or in a "
 "combination)."
 msgstr ""
-"La partie commence. <b><var name=\"starter\"/></b>, c'est ton tour. Si tu as "
-"le <var name=\"m1\"/>, tu DOIS le jouer (seul ou dans une combinaison)."
-#
+"La partie commence. <b><var name=\"starter\"/></b>, c'est ton tour. Si tu as"
+" le <var name=\"m1\"/>, tu DOIS le jouer (seul ou dans une combinaison)."
+
+# File: src/GoF.php, line: 1022
 msgid ""
-"The game was won by <for from=\"winners\" item=\"winner\"><b><var name="
-"\"winner\"/></b></for> with only <b><var name=\"score\"/></b> points after "
-"<var name=\"playtime\"/> and <var name=\"rounds\"/> rounds."
+"The game was won by <for from=\"winners\" item=\"winner\"><b><var "
+"name=\"winner\"/></b></for> with only <b><var name=\"score\"/></b> points "
+"after <var name=\"playtime\"/> and <var name=\"rounds\"/> rounds."
 msgstr ""
-"Cette partie a été remportée par <for from=\"winners\" item=\"winner"
-"\"><b><var name=\"winner\"/></b></for> avec seulement <b><var name=\"score\"/"
-"></b> points, après <var name=\"playtime\"/> de jeu et <var name=\"rounds\"/> "
-"manches."
-#
-# File: src/Erebot/Module/GoF.php, line: 729
+"Cette partie a été remportée par <for from=\"winners\" "
+"item=\"winner\"><b><var name=\"winner\"/></b></for> avec seulement <b><var "
+"name=\"score\"/></b> points, après <var name=\"playtime\"/> de jeu et <var "
+"name=\"rounds\"/> manches."
+
+# File: src/GoF.php, line: 739
 msgid "The game will start in <var name=\"delay\"/>."
 msgstr "La partie commencera dans <var name=\"delay\"/>"
-#
+
+# File: src/GoF.php, line: 1282
 msgid "This game has been running for <var name=\"playtime\"/>."
 msgstr "Cette partie est lancée depuis <var name=\"playtime\"/>."
-#
+
+# File: src/GoF.php, line: 704
 msgid ""
 "This game may only be played by 3-4 players and you cannot join it once it "
 "started."
 msgstr ""
 "Ce jeu ne peut être joué que par 3 à 4 joueurs et il n'est pas possible de "
 "rejoindre la partie une fois celle-ci lancée."
-#
+
+# File: src/GoF.php, line: 544
 msgid ""
-"This is round #<b><var name=\"round\"/></b>, starting after <var name="
-"\"playtime\"/>. <b><var name=\"last_winner\"/></b>, you must now choose a "
-"card to give to <b><var name=\"last_loser\"/></b>. You will receive <var name="
-"\"card\"/>. Please choose with: \"<b><var name=\"trigger\"/></b> &lt;card&gt;"
-"\"."
+"This is round #<b><var name=\"round\"/></b>, starting after <var "
+"name=\"playtime\"/>. <b><var name=\"last_winner\"/></b>, you must now choose"
+" a card to give to <b><var name=\"last_loser\"/></b>. You will receive <var "
+"name=\"card\"/>. Please choose with: \"<b><var name=\"trigger\"/></b> "
+"&lt;card&gt;\"."
 msgstr ""
-"Voici la manche n°<b><var name=\"round\"/></b>, qui démarre après <var name="
-"\"playtime\"/> de jeu. <b><var name=\"last_winner\"/></b>, tu dois choisir "
-"une carte à donner à <b><var name=\"last_loser\"/></b>. En échange, tu "
-"recevras <var name=\"card\"/>. Pour choisir, utilise cette commande : <var "
-"name=\"trigger\"/> &lt;card&gt;."
-#
+"Voici la manche n°<b><var name=\"round\"/></b>, qui démarre après <var "
+"name=\"playtime\"/> de jeu. <b><var name=\"last_winner\"/></b>, tu dois "
+"choisir une carte à donner à <b><var name=\"last_loser\"/></b>. En échange, "
+"tu recevras <var name=\"card\"/>. Pour choisir, utilise cette commande : "
+"<var name=\"trigger\"/> &lt;card&gt;."
+
+# File: src/GoF.php, line: 916
 msgid ""
-"This is the first round and you have the <var name=\"m1\"/> <b><var name="
-"\"nick\"/></b>. You <b>must</b> play it alone or in a combination!"
+"This is the first round and you have the <var name=\"m1\"/> <b><var "
+"name=\"nick\"/></b>. You <b>must</b> play it alone or in a combination!"
 msgstr ""
-"Il s'agit de la première manche et tu as le <var name=\"m1\"/> <b><var name="
-"\"nick\"/></b>. Tu <b>dois</b> le jouer, seul ou dans une combinaison."
-#
+"Il s'agit de la première manche et tu as le <var name=\"m1\"/> <b><var "
+"name=\"nick\"/></b>. Tu <b>dois</b> le jouer, seul ou dans une combinaison."
+
+# File: src/GoF.php, line: 626
 msgid "Uh <b><var name=\"nick\"/></b>? No cards need to be exchanged for now..."
 msgstr ""
-"Hein <b><var name=\"nick\"/></b> ? Aucun échange de cartes ne doit avoir lieu "
-"pour le moment..."
-#
+"Hein <b><var name=\"nick\"/></b> ? Aucun échange de cartes ne doit avoir "
+"lieu pour le moment..."
+
+# File: src/GoF.php, line: 261
 msgid "Unable to register triggers for the game!"
-msgstr ""
-"Impossible d'enregistrer les déclencheurs pour le <var name=\"logo\"/> !"
-#
+msgstr "Impossible d'enregistrer les déclencheurs pour le <var name=\"logo\"/> !"
+
+# File: src/GoF.php, line: 488
 msgid ""
 "Well tried <var name=\"nick\"/>! But only <b><var name=\"admin\"/></b> can "
 "stop this game!"
 msgstr ""
 "Bien essayé <var name=\"nick\"/> ! Mais seul <b><var name=\"admin\"/></b> "
 "peut arrêter cette partie !"
-#
+
+# File: src/GoF.php, line: 687
 msgid "You are already part of that game <b><var name=\"nick\"/></b>!"
 msgstr "Tu es déjà inscrit pour cette partie <b><var name=\"nick\"/></b> !"
-#
+
+# File: src/GoF.php, line: 929
 msgid ""
-"You do not have the cards required for that move <b><var name=\"nick\"/></b>!"
+"You do not have the cards required for that move <b><var "
+"name=\"nick\"/></b>!"
 msgstr ""
-"Tu ne disposes pas des cartes pour cette combinaison <b><var name=\"nick\"/></"
-"b> !"
-#
+"Tu ne disposes pas des cartes pour cette combinaison <b><var "
+"name=\"nick\"/></b> !"
+
+# File: src/GoF.php, line: 1381
 msgid ""
-"Your cards: <for from=\"cards\" item=\"card\" separator=\" \"><var name=\"card"
-"\"/></for>"
+"Your cards: <for from=\"cards\" item=\"card\" separator=\" \"><var "
+"name=\"card\"/></for>"
 msgstr ""
-"Vos cartes : <for from=\"cards\" item=\"card\" separator=\" \"><var name="
-"\"card\"/></for>"
-#
+"Vos cartes : <for from=\"cards\" item=\"card\" separator=\" \"><var "
+"name=\"card\"/></for>"
+
+# File: src/GoF.php, line: 1084
 msgid "a flush"
 msgstr "une couleur"
-#
+
+# File: src/GoF.php, line: 1087
 msgid "a full house"
 msgstr "un full"
-#
+
+# File: src/GoF.php, line: 1093
 msgid "a gang"
 msgstr "un gang"
-#
+
+# File: src/GoF.php, line: 1075
 msgid "a pair"
 msgstr "une paire"
-#
+
+# File: src/GoF.php, line: 1072
 msgid "a single"
 msgstr "une carte seule"
-#
+
+# File: src/GoF.php, line: 1081
 msgid "a straight"
 msgstr "une suite"
-#
+
+# File: src/GoF.php, line: 1090
 msgid "a straight flush"
 msgstr "une quinte flush"
-#
+
+# File: src/GoF.php, line: 1078
 msgid "three of a kind"
 msgstr "un brelan"

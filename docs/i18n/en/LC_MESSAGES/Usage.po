@@ -1,0 +1,296 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011-2016, Erebot
+# This file is distributed under the same license as the Erebot_Module_GoF package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Erebot_Module_GoF 1.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-29 22:41+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+#
+# File: ../src/Usage.rst, line: 10
+msgid "Usage"
+msgstr "Usage"
+#
+# File: ../src/Usage.rst, line: 12
+msgid ""
+"This section assumes default values are used for all triggers. Please refer "
+"to :ref:`configuration options <configuration options>` for more information "
+"on how to customize triggers."
+msgstr ""
+"This section assumes default values are used for all triggers. Please refer "
+"to :ref:`configuration options <configuration options>` for more information "
+"on how to customize triggers."
+#
+# File: ../src/Usage.rst, line: 16
+msgid ""
+"Also, knowledge of the rules for the Gang of Four game is assumed. The full "
+"rules for the game can be found (in multiple languages) on `Days of Wonder's "
+"website`_."
+msgstr ""
+"Also, knowledge of the rules for the Gang of Four game is assumed. The full "
+"rules for the game can be found (in multiple languages) on `Days of Wonder's "
+"website`_."
+#
+# File: ../src/Usage.rst, line: 22
+msgid "Provided commands"
+msgstr "Provided commands"
+#
+# File: ../src/Usage.rst, line: 24
+msgid "This module provides the following commands:"
+msgstr "This module provides the following commands:"
+#
+# File: ../src/Usage.rst, line: 0
+msgid "Commands provided by |project|"
+msgstr "Commands provided by |project|"
+#
+# File: ../src/Usage.rst, line: 29
+msgid "Command"
+msgstr "Command"
+#
+# File: ../src/Usage.rst, line: 29
+msgid "Description"
+msgstr "Description"
+#
+# File: ../src/Usage.rst, line: 31
+msgid "``!gof``"
+msgstr "``!gof``"
+#
+# File: ../src/Usage.rst, line: 31
+msgid "Start a new Gang of Four game."
+msgstr "Start a new Gang of Four game."
+#
+# File: ../src/Usage.rst, line: 33
+msgid "``!gof cancel`` or ``!gof end`` or ``!gof off`` or ``!gof stop``"
+msgstr "``!gof cancel`` or ``!gof end`` or ``!gof off`` or ``!gof stop``"
+#
+# File: ../src/Usage.rst, line: 33
+msgid ""
+"Stop a currently running Gang of Four game. Can only be used by the person "
+"who started the game in the first place."
+msgstr ""
+"Stop a currently running Gang of Four game. Can only be used by the person "
+"who started the game in the first place."
+#
+# File: ../src/Usage.rst, line: 38
+msgid "``ca``"
+msgstr "``ca``"
+#
+# File: ../src/Usage.rst, line: 38
+msgid "Display the number of remaining cards in each player's hand."
+msgstr "Display the number of remaining cards in each player's hand."
+#
+# File: ../src/Usage.rst, line: 41
+msgid "``cd``"
+msgstr "``cd``"
+#
+# File: ../src/Usage.rst, line: 41
+msgid "Display the last played (and thus discarded) card."
+msgstr "Display the last played (and thus discarded) card."
+#
+# File: ../src/Usage.rst, line: 44
+msgid ":samp:`ch {card}`"
+msgstr ":samp:`ch {card}`"
+#
+# File: ../src/Usage.rst, line: 44
+msgid ""
+"Choose a card to give to the loser of the previous round. Can only be used at "
+"the end of a round by the winner of the previous round."
+msgstr ""
+"Choose a card to give to the loser of the previous round. Can only be used at "
+"the end of a round by the winner of the previous round."
+#
+# File: ../src/Usage.rst, line: 49
+msgid "``jo``"
+msgstr "``jo``"
+#
+# File: ../src/Usage.rst, line: 49
+msgid "Join a currently running Uno game."
+msgstr "Join a currently running Uno game."
+#
+# File: ../src/Usage.rst, line: 51
+msgid "``od``"
+msgstr "``od``"
+#
+# File: ../src/Usage.rst, line: 51
+msgid "Display playing order."
+msgstr "Display playing order."
+#
+# File: ../src/Usage.rst, line: 53
+msgid "``pa``"
+msgstr "``pa``"
+#
+# File: ../src/Usage.rst, line: 53
+msgid "Pass instead of playing."
+msgstr "Pass instead of playing."
+#
+# File: ../src/Usage.rst, line: 55
+msgid ":samp:`pl {combo}`"
+msgstr ":samp:`pl {combo}`"
+#
+# File: ../src/Usage.rst, line: 55
+msgid ""
+"Play the given *combo* of cards (see :ref:`mnemonics` for the syntax used). "
+"Eg. ``pl g1y1`` to play a pair of 1s, containing a \"Green 1\" and a \"Yellow "
+"1\"."
+msgstr ""
+"Play the given *combo* of cards (see :ref:`mnemonics` for the syntax used). "
+"Eg. ``pl g1y1`` to play a pair of 1s, containing a \"Green 1\" and a \"Yellow "
+"1\"."
+#
+# File: ../src/Usage.rst, line: 60
+msgid "``sc``"
+msgstr "``sc``"
+#
+# File: ../src/Usage.rst, line: 60
+msgid "Display the score of each player involved in the current game."
+msgstr "Display the score of each player involved in the current game."
+#
+# File: ../src/Usage.rst, line: 63
+msgid "``ti``"
+msgstr "``ti``"
+#
+# File: ../src/Usage.rst, line: 63
+msgid "Display information on how long the current game has been running for."
+msgstr "Display information on how long the current game has been running for."
+#
+# File: ../src/Usage.rst, line: 66
+msgid "``tu``"
+msgstr "``tu``"
+#
+# File: ../src/Usage.rst, line: 66
+msgid "Display the name of the player whose turn it is to play."
+msgstr "Display the name of the player whose turn it is to play."
+#
+# File: ../src/Usage.rst, line: 74
+msgid "Mnemonics for cards"
+msgstr "Mnemonics for cards"
+#
+# File: ../src/Usage.rst, line: 76
+msgid ""
+"The general format used to refer to cards is the first letter of the card's "
+"color (in english) followed by the card's figure."
+msgstr ""
+"The general format used to refer to cards is the first letter of the card's "
+"color (in english) followed by the card's figure."
+#
+# File: ../src/Usage.rst, line: 79
+msgid "The following colors are available:"
+msgstr "The following colors are available:"
+#
+# File: ../src/Usage.rst, line: 81
+msgid "**g**\\ reen"
+msgstr "**g**\\ reen"
+#
+# File: ../src/Usage.rst, line: 82
+msgid "**y**\\ ellow"
+msgstr "**y**\\ ellow"
+#
+# File: ../src/Usage.rst, line: 83
+msgid "**r**\\ ed"
+msgstr "**r**\\ ed"
+#
+# File: ../src/Usage.rst, line: 84
+msgid "**m**\\ ulti"
+msgstr "**m**\\ ulti"
+#
+# File: ../src/Usage.rst, line: 86
+msgid "The following figures are available:"
+msgstr "The following figures are available:"
+#
+# File: ../src/Usage.rst, line: 88
+msgid "Numbers from 1 to 10 (inclusive)."
+msgstr "Numbers from 1 to 10 (inclusive)."
+#
+# File: ../src/Usage.rst, line: 89
+msgid "Phoenixes."
+msgstr "Phoenixes."
+#
+# File: ../src/Usage.rst, line: 90
+msgid "Dragon."
+msgstr "Dragon."
+#
+# File: ../src/Usage.rst, line: 92
+msgid ""
+"The following table lists a few examples of valid mnemnics with the full name "
+"of the card they refer to:"
+msgstr ""
+"The following table lists a few examples of valid mnemnics with the full name "
+"of the card they refer to:"
+#
+# File: ../src/Usage.rst, line: 0
+msgid "Valid mnemonics for cards"
+msgstr "Valid mnemonics for cards"
+#
+# File: ../src/Usage.rst, line: 98
+msgid "Mnemonic"
+msgstr "Mnemonic"
+#
+# File: ../src/Usage.rst, line: 98
+msgid "Actual card"
+msgstr "Actual card"
+#
+# File: ../src/Usage.rst, line: 100
+msgid "``g1``"
+msgstr "``g1``"
+#
+# File: ../src/Usage.rst, line: 100
+msgid "\"Green 1\""
+msgstr "\"Green 1\""
+#
+# File: ../src/Usage.rst, line: 102
+msgid "``m1``"
+msgstr "``m1``"
+#
+# File: ../src/Usage.rst, line: 102
+msgid "\"Multicolored 1\""
+msgstr "\"Multicolored 1\""
+#
+# File: ../src/Usage.rst, line: 104
+msgid "``r10``"
+msgstr "``r10``"
+#
+# File: ../src/Usage.rst, line: 104
+msgid "\"Red 10\""
+msgstr "\"Red 10\""
+#
+# File: ../src/Usage.rst, line: 106
+msgid "``gp``"
+msgstr "``gp``"
+#
+# File: ../src/Usage.rst, line: 106
+msgid "\"Green Phoenix\""
+msgstr "\"Green Phoenix\""
+#
+# File: ../src/Usage.rst, line: 108
+msgid "``yp``"
+msgstr "``yp``"
+#
+# File: ../src/Usage.rst, line: 108
+msgid "\"Yellow Phoenix\""
+msgstr "\"Yellow Phoenix\""
+#
+# File: ../src/Usage.rst, line: 110
+msgid "``rd``"
+msgstr "``rd``"
+#
+# File: ../src/Usage.rst, line: 110
+msgid "\"Red Dragon\""
+msgstr "\"Red Dragon\""
+#
+# File: ../src/Usage.rst, line: 113
+msgid ""
+"Not all combinations of colors and figures are valid. In particular, there is "
+"only one multicolored figure, one red dragon, a green and a yellow phoenix."
+msgstr ""
+"Not all combinations of colors and figures are valid. In particular, there is "
+"only one multicolored figure, one red dragon, a green and a yellow phoenix."

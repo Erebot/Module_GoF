@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011-2016, Erebot
+# This file is distributed under the same license as the Erebot_Module_GoF package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Erebot_Module_GoF 1.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-29 22:41+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/Configuration.rst:10
+msgid "Configuration"
+msgstr ""
+
+#: ../src/Configuration.rst:15
+msgid "Options"
+msgstr ""
+
+#: ../src/Configuration.rst:17
+msgid "This module provides several configuration options."
+msgstr ""
+
+#: ../src/Configuration.rst:0
+msgid "Options for |project|"
+msgstr ""
+
+#: ../src/Configuration.rst:22
+msgid "Name"
+msgstr ""
+
+#: ../src/Configuration.rst:22
+msgid "Type"
+msgstr ""
+
+#: ../src/Configuration.rst:22
+msgid "Default value"
+msgstr ""
+
+#: ../src/Configuration.rst:22
+msgid "Description"
+msgstr ""
+
+#: ../src/Configuration.rst:25
+msgid "|trigger_gof|"
+msgstr ""
+
+#: ../src/Configuration.rst:25
+#: ../src/Configuration.rst:43
+#: ../src/Configuration.rst:47
+#: ../src/Configuration.rst:50
+#: ../src/Configuration.rst:54
+#: ../src/Configuration.rst:58
+#: ../src/Configuration.rst:61
+#: ../src/Configuration.rst:64
+#: ../src/Configuration.rst:67
+#: ../src/Configuration.rst:70
+#: ../src/Configuration.rst:74
+msgid "string"
+msgstr ""
+
+#: ../src/Configuration.rst:25
+msgid "\"gof\""
+msgstr ""
+
+#: ../src/Configuration.rst:25
+msgid "The command to use to start or end a Gang of Four game."
+msgstr ""
+
+#: ../src/Configuration.rst:28
+msgid "limit"
+msgstr ""
+
+#: ../src/Configuration.rst:28
+#: ../src/Configuration.rst:33
+#: ../src/Configuration.rst:38
+msgid "integer"
+msgstr ""
+
+#: ../src/Configuration.rst:28
+msgid "100"
+msgstr ""
+
+#: ../src/Configuration.rst:28
+msgid "The game will stop after this limit is reached. The . player(s) with the lowest score win the game."
+msgstr ""
+
+#: ../src/Configuration.rst:33
+msgid "pause_delay"
+msgstr ""
+
+#: ../src/Configuration.rst:33
+msgid "5"
+msgstr ""
+
+#: ../src/Configuration.rst:33
+msgid "How many seconds does the bot wait after a round ends before it starts the next round."
+msgstr ""
+
+#: ../src/Configuration.rst:38
+msgid "start_delay"
+msgstr ""
+
+#: ../src/Configuration.rst:38
+msgid "20"
+msgstr ""
+
+#: ../src/Configuration.rst:38
+msgid "How many seconds does the bot wait after enough players have joined the game before the game actually starts."
+msgstr ""
+
+#: ../src/Configuration.rst:43
+msgid "|trigger_ca|"
+msgstr ""
+
+#: ../src/Configuration.rst:43
+msgid "\"ca\""
+msgstr ""
+
+#: ../src/Configuration.rst:43
+msgid "The command to use to show how many cards each player has in his hand."
+msgstr ""
+
+#: ../src/Configuration.rst:47
+msgid "|trigger_cd|"
+msgstr ""
+
+#: ../src/Configuration.rst:47
+msgid "\"cd\""
+msgstr ""
+
+#: ../src/Configuration.rst:47
+msgid "The command to use to show the last discarded combo."
+msgstr ""
+
+#: ../src/Configuration.rst:50
+msgid "|trigger_ch|"
+msgstr ""
+
+#: ../src/Configuration.rst:50
+msgid "\"ch\""
+msgstr ""
+
+#: ../src/Configuration.rst:50
+msgid "The command to use to choose a card to give to the loser of the previous round."
+msgstr ""
+
+#: ../src/Configuration.rst:54
+msgid "|trigger_jo|"
+msgstr ""
+
+#: ../src/Configuration.rst:54
+msgid "\"jo\""
+msgstr ""
+
+#: ../src/Configuration.rst:54
+msgid "The command to use to join a game after it has been created."
+msgstr ""
+
+#: ../src/Configuration.rst:58
+msgid "|trigger_od|"
+msgstr ""
+
+#: ../src/Configuration.rst:58
+msgid "\"od\""
+msgstr ""
+
+#: ../src/Configuration.rst:58
+msgid "The command to use to show playing order."
+msgstr ""
+
+#: ../src/Configuration.rst:61
+msgid "|trigger_pa|"
+msgstr ""
+
+#: ../src/Configuration.rst:61
+msgid "\"pa\""
+msgstr ""
+
+#: ../src/Configuration.rst:61
+msgid "The command to use to pass a turn."
+msgstr ""
+
+#: ../src/Configuration.rst:64
+msgid "|trigger_pl|"
+msgstr ""
+
+#: ../src/Configuration.rst:64
+msgid "\"pl\""
+msgstr ""
+
+#: ../src/Configuration.rst:64
+msgid "The command to use to play a combination of cards. [#]_"
+msgstr ""
+
+#: ../src/Configuration.rst:67
+msgid "|trigger_sc|"
+msgstr ""
+
+#: ../src/Configuration.rst:67
+msgid "\"sc\""
+msgstr ""
+
+#: ../src/Configuration.rst:67
+msgid "The command to use to display the current scores."
+msgstr ""
+
+#: ../src/Configuration.rst:70
+msgid "|trigger_ti|"
+msgstr ""
+
+#: ../src/Configuration.rst:70
+msgid "\"ti\""
+msgstr ""
+
+#: ../src/Configuration.rst:70
+msgid "The command to use to show for how long a game has been running."
+msgstr ""
+
+#: ../src/Configuration.rst:74
+msgid "|trigger_tu|"
+msgstr ""
+
+#: ../src/Configuration.rst:74
+msgid "\"tu\""
+msgstr ""
+
+#: ../src/Configuration.rst:74
+msgid "The command to use to show whose player's turn it is."
+msgstr ""
+
+#: ../src/Configuration.rst:79
+msgid "All triggers should be written without any prefixes. Moreover, triggers should only contain alphanumeric characters."
+msgstr ""
+
+#: ../src/Configuration.rst:82
+msgid "Valid combinations include:"
+msgstr ""
+
+#: ../src/Configuration.rst:84
+msgid "a single card, eg. ``g1``"
+msgstr ""
+
+#: ../src/Configuration.rst:85
+msgid "a pair, eg. ``g1y1``"
+msgstr ""
+
+#: ../src/Configuration.rst:86
+msgid "three of a kind, eg. ``g1y1r1``"
+msgstr ""
+
+#: ../src/Configuration.rst:87
+msgid "a straight, eg. ``m1r2y3g4r5``"
+msgstr ""
+
+#: ../src/Configuration.rst:88
+msgid "a flush, eg. ``g1g1g2g2g7``"
+msgstr ""
+
+#: ../src/Configuration.rst:89
+msgid "a full house, eg. ``g1y1r1g2g2``"
+msgstr ""
+
+#: ../src/Configuration.rst:90
+msgid "a straight flush, eg. ``g1g2g3g4g5``"
+msgstr ""
+
+#: ../src/Configuration.rst:91
+msgid "a gang, eg. ``g1g1y1y1`` for the lowest possible gang (a gang of four), up to ``g1g1y1y1r1r1m1`` for the highest gang (a gang of seven)."
+msgstr ""
+
+#: ../src/Configuration.rst:94
+msgid "See the official rules on `Days of Wonder's website`_ for more information on when you may play a given combination."
+msgstr ""
+
+#: ../src/Configuration.rst:99
+msgid "Example"
+msgstr ""
+
+#: ../src/Configuration.rst:101
+msgid "Here, we enable the Gang of Four module at the general configuration level. Therefore, the game will be available on all networks/servers/channels. Of course, you can use a more restrictive configuration file if it suits your needs better."
+msgstr ""
+
