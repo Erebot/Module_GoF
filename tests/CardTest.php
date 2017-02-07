@@ -17,7 +17,7 @@
 */
 
 class   CardTest
-extends PHPUnit_Framework_TestCase
+extends \PHPUnit\Framework\TestCase
 {
     public function testRejectInvalidCards()
     {

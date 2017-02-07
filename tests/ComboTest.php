@@ -17,7 +17,7 @@
 */
 
 class   ComboTest
-extends PHPUnit_Framework_TestCase
+extends \PHPUnit\Framework\TestCase
 {
     public function testAllSinglesDuosTrios()
     {
@@ -473,7 +473,7 @@ extends PHPUnit_Framework_TestCase
 }
 
 class   Erebot_Module_GoF_InvalidCombosTest
-extends PHPUnit_Framework_TestCase
+extends \PHPUnit\Framework\TestCase
 {
     public function invalidCombos()
     {

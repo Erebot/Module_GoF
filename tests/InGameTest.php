@@ -54,7 +54,7 @@ extends \Erebot\Module\GoF\Game
 }
 
 class   InGameTest
-extends PHPUnit_Framework_TestCase
+extends \PHPUnit\Framework\TestCase
 {
     public function testDifferentHandsAfterVictory()
     {
