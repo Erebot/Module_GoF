@@ -56,7 +56,7 @@ class GoF extends \Erebot\Module\Base
             }
 
             $this->creator['handlerCreate'] = new \Erebot\EventHandler(
-                \Erebot\CallableWrapper::wrap(array($this, 'handleCreate')),
+                array($this, 'handleCreate'),
                 new \Erebot\Event\Match\All(
                     new \Erebot\Event\Match\Type(
                         '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -66,7 +66,7 @@ class GoF extends \Erebot\Module\Base
             );
 
             $this->creator['handlerStop'] = new \Erebot\EventHandler(
-                \Erebot\CallableWrapper::wrap(array($this, 'handleStop')),
+                array($this, 'handleStop'),
                 new \Erebot\Event\Match\All(
                     new \Erebot\Event\Match\Type(
                         '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -271,7 +271,7 @@ class GoF extends \Erebot\Module\Base
         $handlerCls = $this->getFactory('!EventHandler');
 
         $infos['handlers']['choose'] = new $handlerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handleChoose')),
+            array($this, 'handleChoose'),
             new \Erebot\Event\Match\All(
                 new \Erebot\Event\Match\Type(
                     '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -285,7 +285,7 @@ class GoF extends \Erebot\Module\Base
         );
 
         $infos['handlers']['join'] = new $handlerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handleJoin')),
+            array($this, 'handleJoin'),
             new \Erebot\Event\Match\All(
                 new \Erebot\Event\Match\Type(
                     '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -299,7 +299,7 @@ class GoF extends \Erebot\Module\Base
         );
 
         $infos['handlers']['pass'] = new $handlerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handlePass')),
+            array($this, 'handlePass'),
             new \Erebot\Event\Match\All(
                 new \Erebot\Event\Match\Type(
                     '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -313,7 +313,7 @@ class GoF extends \Erebot\Module\Base
         );
 
         $infos['handlers']['play'] = new $handlerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handlePlay')),
+            array($this, 'handlePlay'),
             new \Erebot\Event\Match\All(
                 new \Erebot\Event\Match\Type(
                     '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -327,7 +327,7 @@ class GoF extends \Erebot\Module\Base
         );
 
         $infos['handlers']['show_cards'] = new $handlerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handleShowCardsCount')),
+            array($this, 'handleShowCardsCount'),
             new \Erebot\Event\Match\All(
                 new \Erebot\Event\Match\Type(
                     '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -341,7 +341,7 @@ class GoF extends \Erebot\Module\Base
         );
 
         $infos['handlers']['show_discard'] = new $handlerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handleShowDiscard')),
+            array($this, 'handleShowDiscard'),
             new \Erebot\Event\Match\All(
                 new \Erebot\Event\Match\Type(
                     '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -355,7 +355,7 @@ class GoF extends \Erebot\Module\Base
         );
 
         $infos['handlers']['show_order'] = new $handlerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handleShowOrder')),
+            array($this, 'handleShowOrder'),
             new \Erebot\Event\Match\All(
                 new \Erebot\Event\Match\Type(
                     '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -369,7 +369,7 @@ class GoF extends \Erebot\Module\Base
         );
 
         $infos['handlers']['show_scores'] = new $handlerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handleShowScores')),
+            array($this, 'handleShowScores'),
             new \Erebot\Event\Match\All(
                 new \Erebot\Event\Match\Type(
                     '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -383,7 +383,7 @@ class GoF extends \Erebot\Module\Base
         );
 
         $infos['handlers']['show_time'] = new $handlerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handleShowTime')),
+            array($this, 'handleShowTime'),
             new \Erebot\Event\Match\All(
                 new \Erebot\Event\Match\Type(
                     '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -397,7 +397,7 @@ class GoF extends \Erebot\Module\Base
         );
 
         $infos['handlers']['show_turn'] = new $handlerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handleShowTurn')),
+            array($this, 'handleShowTurn'),
             new \Erebot\Event\Match\All(
                 new \Erebot\Event\Match\Type(
                     '\\Erebot\\Interfaces\\Event\\ChanText'
@@ -727,7 +727,7 @@ class GoF extends \Erebot\Module\Base
 
             $timerCls = $this->getFactory('!Timer');
             $infos['timer'] = new $timerCls(
-                \Erebot\CallableWrapper::wrap(array($this, 'startGame')),
+                array($this, 'startGame'),
                 $startDelay,
                 false,
                 array($chan)
@@ -1040,7 +1040,7 @@ class GoF extends \Erebot\Module\Base
             } else {
                 $timerCls = $this->getFactory('!Timer');
                 $infos['timer'] = new $timerCls(
-                    \Erebot\CallableWrapper::wrap(array($this, 'startGame')),
+                    array($this, 'startGame'),
                     $pauseDelay,
                     false,
                     array($chan)
